@@ -1,31 +1,35 @@
-import * as React from 'react';
-
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-fluids';
+import React from 'react';
+import {
+  View,
+  Text,
+  Columns,
+  Rows,
+  FluidsProvider,
+  useTheme,
+} from 'react-native-fluids';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <FluidsProvider>
+      <Example />
+    </FluidsProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
+function Example() {
+  const theme = useTheme();
+  return (
+    <View grows darkBg={theme.color.Stone[900]}>
+      <Rows gap={4} grows align="center" darkBg={theme.color.Stone[950]}>
+        <Text>A</Text>
+        <Text>B</Text>
+        <Text>C</Text>
+      </Rows>
+      <Columns alignX="space-around" alignY="center" gap={4} grows>
+        <Text>1</Text>
+        <Text>2</Text>
+        <Text>3</Text>
+      </Columns>
+    </View>
+  );
+}
