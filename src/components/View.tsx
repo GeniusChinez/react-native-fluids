@@ -14,6 +14,14 @@ export interface ViewProps extends ReactNativeTextProps {
   pt?: keyof typeof Spacing;
   pb?: keyof typeof Spacing;
   py?: keyof typeof Spacing;
+
+  m?: keyof typeof Spacing;
+  mx?: keyof typeof Spacing;
+  ml?: keyof typeof Spacing;
+  mr?: keyof typeof Spacing;
+  mt?: keyof typeof Spacing;
+  mb?: keyof typeof Spacing;
+  my?: keyof typeof Spacing;
 }
 
 export function View(props: ViewProps) {
@@ -28,6 +36,14 @@ export function View(props: ViewProps) {
     pt,
     pb,
     py,
+
+    m,
+    mx,
+    ml,
+    mr,
+    mt,
+    mb,
+    my,
     ...restOfProps
   } = props;
 
@@ -39,6 +55,7 @@ export function View(props: ViewProps) {
     <ReactNativeView
       style={{
         backgroundColor: isDarkMode ? darkBg : bg,
+
         padding: p ? spacing[p] : undefined,
         paddingHorizontal: px ? spacing[px] : undefined,
         paddingLeft: pl ? spacing[pl] : undefined,
@@ -46,6 +63,15 @@ export function View(props: ViewProps) {
         paddingTop: pt ? spacing[pt] : undefined,
         paddingBottom: pb ? spacing[pb] : undefined,
         paddingVertical: py ? spacing[py] : undefined,
+
+        margin: m ? spacing[m] : undefined,
+        marginHorizontal: mx ? spacing[mx] : undefined,
+        marginLeft: ml ? spacing[ml] : undefined,
+        marginRight: mr ? spacing[mr] : undefined,
+        marginTop: mt ? spacing[mt] : undefined,
+        marginBottom: mb ? spacing[mb] : undefined,
+        marginVertical: my ? spacing[my] : undefined,
+
         ...(style as any),
       }}
       {...restOfProps}
