@@ -64,9 +64,9 @@ export function Text(props: TextProps) {
           : theme.fontSize[size || 'base'],
         fontWeight: variant
           ? variant === 'p'
-            ? theme.fontWeight[weight || 'Medium']
+            ? theme.fontWeight[weight || 'Normal']
             : theme.fontWeight[weight || 'Bold']
-          : theme.fontWeight[weight || 'Medium'],
+          : theme.fontWeight[weight || 'Normal'],
         ...(style as any),
       }}
       {...restOfProps}
