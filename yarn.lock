@@ -14766,7 +14766,7 @@ __metadata:
     react-native: 0.73.2
     react-native-builder-bob: ^0.20.0
     release-it: ^15.0.0
-    theme-native: ^0.5.1
+    theme-native: ^0.5.2
     typescript: ^5.0.2
   peerDependencies:
     react: "*"
@@ -16747,13 +16747,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"theme-native@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "theme-native@npm:0.5.1"
+"theme-native@npm:^0.5.2":
+  version: 0.5.2
+  resolution: "theme-native@npm:0.5.2"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: e448f406d944237220c9ec8e0eb954e38e656ce43b150a46a088bf0282659b0d16527693b2ad48808f3ca471f99ff8987fed3d472df545b0f835024baa51fb38
+  checksum: 46789a507f2c8c4e2f79f14279c3720ad286bc8dd35f0356aa8f538d112b05f8023a452385d41952f651b8cd91b1407beb75bcc2691fd9700072435a61edf1fa
   languageName: node
   linkType: hard
 

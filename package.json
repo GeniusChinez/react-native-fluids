@@ -161,6 +161,6 @@
     ]
   },
   "dependencies": {
-    "theme-native": "^0.5.1"
+    "theme-native": "^0.5.2"
   }
 }
