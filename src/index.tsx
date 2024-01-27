@@ -5,3 +5,6 @@ export * from './components/View';
 
 // hooks
 // logic
+
+// re-exports
+export * from 'theme-native';
