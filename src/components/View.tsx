@@ -24,6 +24,10 @@ export interface ViewProps extends ReactNativeTextProps {
   mb?: keyof typeof Spacing;
   my?: keyof typeof Spacing;
 
+  gap?: keyof typeof Spacing;
+  gapx?: keyof typeof Spacing;
+  gapy?: keyof typeof Spacing;
+
   grows?: boolean;
   growsOnly?: boolean;
 }
@@ -51,6 +55,10 @@ export function View(props: ViewProps) {
 
     grows,
     growsOnly,
+
+    gap,
+    gapx,
+    gapy,
 
     ...restOfProps
   } = props;
@@ -82,6 +90,10 @@ export function View(props: ViewProps) {
 
         flex: grows ? 1 : undefined,
         flexGrow: growsOnly ? 1 : undefined,
+
+        gap: gap ? spacing[gap] : undefined,
+        rowGap: gapy ? spacing[gapy] : undefined,
+        columnGap: gapx ? spacing[gapx] : undefined,
 
         ...(style as any),
       }}
