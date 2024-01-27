@@ -8,7 +8,7 @@ A collection of components, hooks, and logic for react native apps!
 npm install react-native-fluids
 ```
 
-## Usage
+<!-- ## Usage
 
 ```js
 import { multiply } from 'react-native-fluids';
@@ -16,7 +16,7 @@ import { multiply } from 'react-native-fluids';
 // ...
 
 const result = await multiply(3, 7);
-```
+``` -->
 
 ## Contributing
 
