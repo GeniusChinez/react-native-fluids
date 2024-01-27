@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View as ReactNativeView } from 'react-native';
 import type { TextProps as ReactNativeTextProps } from 'react-native';
@@ -22,6 +23,9 @@ export interface ViewProps extends ReactNativeTextProps {
   mt?: keyof typeof Spacing;
   mb?: keyof typeof Spacing;
   my?: keyof typeof Spacing;
+
+  grows?: boolean;
+  growsOnly?: boolean;
 }
 
 export function View(props: ViewProps) {
@@ -44,6 +48,10 @@ export function View(props: ViewProps) {
     mt,
     mb,
     my,
+
+    grows,
+    growsOnly,
+
     ...restOfProps
   } = props;
 
@@ -71,6 +79,9 @@ export function View(props: ViewProps) {
         marginTop: mt ? spacing[mt] : undefined,
         marginBottom: mb ? spacing[mb] : undefined,
         marginVertical: my ? spacing[my] : undefined,
+
+        flex: grows ? 1 : undefined,
+        flexGrow: growsOnly ? 1 : undefined,
 
         ...(style as any),
       }}
