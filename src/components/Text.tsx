@@ -17,6 +17,11 @@ export interface TextProps extends ReactNativeTextProps {
   isUnderlined?: boolean;
   isItalic?: boolean;
   isCancelled?: boolean;
+
+  isCenterAligned?: boolean;
+  isLeftAligned?: boolean;
+  isRightAligned?: boolean;
+  isJustified?: boolean;
 }
 
 export const variantSizeMap: Record<TextVariant, keyof typeof FontSize> = {
@@ -41,6 +46,10 @@ export function Text(props: TextProps) {
     isUnderlined,
     isItalic,
     isCancelled,
+    isCenterAligned,
+    isLeftAligned,
+    isRightAligned,
+    isJustified,
     ...restOfProps
   } = props;
   const { isDarkMode } = useTheme();
@@ -52,6 +61,15 @@ export function Text(props: TextProps) {
       style={{
         color: isDarkMode ? darkColor || theme.color.Gray[300] : color,
         fontStyle: isItalic ? 'italic' : 'normal',
+        textAlign: isCenterAligned
+          ? 'center'
+          : isLeftAligned
+          ? 'left'
+          : isRightAligned
+          ? 'right'
+          : isJustified
+          ? 'justify'
+          : 'auto',
         textDecorationLine: isCancelled
           ? isUnderlined
             ? 'underline line-through'
