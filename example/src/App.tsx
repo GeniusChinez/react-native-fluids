@@ -3,8 +3,8 @@ import { Alert } from 'react-native';
 import {
   FluidsProvider,
   Rows,
-  BottomAppbar,
   useLightMode,
+  BottomNavigation,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -25,21 +25,29 @@ function Example() {
 
   return (
     <Rows grows alignY="bottom" darkBg={'black'}>
-      <BottomAppbar
+      <BottomNavigation
         actions={[
           {
-            icon: 'ArrowLeft',
+            icon: 'Home',
             onPress() {
               Alert.alert('Back', 'going back');
             },
+            label: 'Home',
+            isSelected: true,
+          },
+          {
+            icon: 'Users',
+            onPress() {},
+            label: 'People',
           },
           {
             icon: 'QrCode',
             onPress() {},
+            label: 'Qr Codes',
           },
         ]}
         primary={{
-          icon: 'Download',
+          icon: 'Plus',
           onPress() {
             Alert.alert('do it');
           },

@@ -8,6 +8,7 @@ export * from './components/Button';
 export * from './components/ProgressBar';
 export * from './components/LoadingIcon';
 export * from './components/BottomAppbar';
+export * from './components/BottomNavigation';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
