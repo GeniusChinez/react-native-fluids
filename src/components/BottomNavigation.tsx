@@ -112,7 +112,7 @@ export function BottomNavigation(props: BottomNavigationProps) {
         >
           <Button
             icon={primary.icon}
-            shape="square"
+            shape="pill"
             colorVariant={600}
             darkColorVariant={600}
             darkColor={'Primary'}

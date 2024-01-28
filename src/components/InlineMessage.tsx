@@ -22,11 +22,12 @@ export function InlineMessage(props: InlineMessageProps) {
       bg={theme.color[color][100]}
       darkBg={theme.color[color][950]}
       p={4}
+      w={'Full'}
       style={{
         borderRadius: theme.borderRadius.Lg,
       }}
     >
-      <Columns alignY="center" gap={3}>
+      <Columns alignY="center" gap={3} w={'Full'}>
         {!!icon && (
           <View>
             <Icon
@@ -34,7 +35,7 @@ export function InlineMessage(props: InlineMessageProps) {
               color={theme.color[color][700]}
               darkColor={theme.color[color][300]}
               strokeWidth={2}
-              size={23}
+              size={22}
             />
           </View>
         )}

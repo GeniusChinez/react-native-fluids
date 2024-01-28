@@ -67,8 +67,8 @@ function Example() {
         />
       </View>
       <View grows p={3}>
-        <InlineMessage color="Danger">
-          Your trial period is about to expire, my g.
+        <InlineMessage color="Warning">
+          Your trial period is about to end.
         </InlineMessage>
       </View>
       <BottomNavigation
