@@ -50,11 +50,11 @@ export function BottomAppbar(props: BottomAppbarProps) {
         <Button
           icon={primary.icon}
           shape="square"
-          colorVariant={200}
-          darkColorVariant={800}
-          darkColor={'Stone'}
-          textColor={theme.color.Primary[700]}
-          darkTextColor={theme.color.Primary[300]}
+          colorVariant={600}
+          darkColorVariant={600}
+          darkColor={'Primary'}
+          textColor={theme.color.White}
+          darkTextColor={theme.color.White}
           onPress={primary.onPress}
         />
       )}

@@ -63,6 +63,7 @@ export function BottomNavigation(props: BottomNavigationProps) {
             <Rows alignX="center" alignY="center">
               <View
                 bg={action.isSelected ? theme.color.Gray[200] : undefined}
+                darkBg={action.isSelected ? theme.color.Gray[800] : undefined}
                 px={4}
                 py={1.5}
                 style={{
@@ -71,6 +72,11 @@ export function BottomNavigation(props: BottomNavigationProps) {
               >
                 <Icon
                   name={action.icon}
+                  darkColor={
+                    action.isSelected
+                      ? theme.color.Primary[400]
+                      : theme.color.Gray[400]
+                  }
                   color={
                     action.isSelected
                       ? theme.color.Primary[700]
@@ -80,6 +86,11 @@ export function BottomNavigation(props: BottomNavigationProps) {
               </View>
               <Text
                 size="sm"
+                darkColor={
+                  action.isSelected
+                    ? theme.color.Primary[400]
+                    : theme.color.Gray[400]
+                }
                 color={
                   action.isSelected
                     ? theme.color.Primary[700]
@@ -102,11 +113,11 @@ export function BottomNavigation(props: BottomNavigationProps) {
           <Button
             icon={primary.icon}
             shape="square"
-            colorVariant={200}
-            darkColorVariant={800}
-            darkColor={'Stone'}
-            textColor={theme.color.Primary[700]}
-            darkTextColor={theme.color.Primary[300]}
+            colorVariant={600}
+            darkColorVariant={600}
+            darkColor={'Primary'}
+            textColor={theme.color.White}
+            darkTextColor={theme.color.White}
             onPress={primary.onPress}
           />
         </Rows>
