@@ -42,6 +42,9 @@ export interface ButtonProps extends TouchableOpacityProps {
 
   isDisabled?: boolean;
   isLoading?: boolean;
+
+  isCompact?: boolean;
+  isVeryCompact?: boolean;
 }
 
 export function Button(props: ButtonProps) {
@@ -63,6 +66,8 @@ export function Button(props: ButtonProps) {
     disabled,
     isDisabled = disabled,
     isLoading,
+    isCompact,
+    isVeryCompact,
     ...restOfProps
   } = props;
 
@@ -114,8 +119,13 @@ export function Button(props: ButtonProps) {
       {...restOfProps}
       disabled={isDisabled || isLoading}
       style={{
-        height: theme.fontSize[textSize || 'md'] * 3.3,
-        width: isIconButton ? theme.fontSize[textSize || 'md'] * 3.3 : '100%',
+        height:
+          theme.fontSize[textSize || 'md'] *
+          (isCompact ? 2.5 : isVeryCompact ? 2 : 3.3),
+        width: isIconButton
+          ? theme.fontSize[textSize || 'md'] *
+            (isCompact ? 2.5 : isVeryCompact ? 2 : 3.3)
+          : '100%',
         opacity: isDisabled || isLoading ? 0.7 : 1,
         borderWidth: theme.borderWidth.Default,
         borderColor: isOutlineButton ? color : theme.color.Transparent,

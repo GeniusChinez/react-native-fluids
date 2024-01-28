@@ -31,18 +31,15 @@ function Example() {
     <Rows grows alignY="space-between" darkBg={'black'}>
       <View>
         <TopAppbar
-          // textColor={theme.color.Gray[700]}
-          // bg={theme.color.Gray[100]}
-          isDark
-          bg={theme.color.Primary[600]}
-          textColor={theme.color.White}
+          textColor={theme.color.Gray[700]}
+          bg={theme.color.Gray[100]}
           layout={{
-            type: 'large',
+            type: 'small',
             leadingIcon: {
               icon: 'Menu',
             },
             headline: 'Grayson Banes',
-            subheadline: '+123123123123',
+            // subheadline: '+123123123123',
             trailingIcons: [
               {
                 icon: 'Camera',

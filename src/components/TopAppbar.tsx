@@ -107,6 +107,7 @@ function CenterAlignedTopAppbarContent(
       </Rows>
       <Rows
         alignX="right"
+        pr={2}
         style={{
           flexBasis: theme.width[14],
         }}
@@ -173,7 +174,7 @@ function SmallTopAppbarContent(props: SmallTopAppbarContentProps) {
       </Rows>
 
       {!!trailingIcons && (
-        <Columns alignX="right">
+        <Columns alignX="right" gap={1} pr={2}>
           {trailingIcons.map((trailingIcon, trailingIconIndex) => (
             <Button
               key={trailingIconIndex}
@@ -182,6 +183,7 @@ function SmallTopAppbarContent(props: SmallTopAppbarContentProps) {
               textColor={textColor}
               darkTextColor={darkTextColor}
               variant="ghost"
+              isCompact
             />
           ))}
         </Columns>
@@ -228,7 +230,7 @@ function MediumTopAppbarContent(props: MediumTopAppbarContentProps) {
         </Rows>
 
         {!!trailingIcons && (
-          <Columns alignX="right">
+          <Columns alignX="right" gap={1} pr={2}>
             {trailingIcons.map((trailingIcon, trailingIconIndex) => (
               <Button
                 key={trailingIconIndex}
@@ -237,6 +239,7 @@ function MediumTopAppbarContent(props: MediumTopAppbarContentProps) {
                 textColor={textColor}
                 darkTextColor={darkTextColor}
                 variant="ghost"
+                isCompact
               />
             ))}
           </Columns>
@@ -295,7 +298,7 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
         </Rows>
 
         {!!trailingIcons && (
-          <Columns alignX="right">
+          <Columns alignX="right" gap={1} pr={2}>
             {trailingIcons.map((trailingIcon, trailingIconIndex) => (
               <Button
                 key={trailingIconIndex}
@@ -304,6 +307,7 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
                 textColor={textColor}
                 darkTextColor={darkTextColor}
                 variant="ghost"
+                isCompact
               />
             ))}
           </Columns>
