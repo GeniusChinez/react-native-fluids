@@ -1,6 +1,6 @@
 {
   "name": "react-native-fluids",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "A collection of components, hooks, and logic for react native apps!",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
