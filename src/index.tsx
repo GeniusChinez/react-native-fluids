@@ -10,6 +10,7 @@ export * from './components/LoadingIcon';
 export * from './components/BottomAppbar';
 export * from './components/BottomNavigation';
 export * from './components/TopAppbar';
+export * from './components/ActionContextProvider';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

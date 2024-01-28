@@ -26,6 +26,21 @@ export default function App() {
 function Example() {
   useLightMode();
   const theme = useTheme();
+  /**
+   * - Tabs
+   * - Carousel
+   * - TextField
+   * - SelectField
+   * - ActionContextProvider
+   * - DateField
+   * - Menu
+   * - Screen
+   * - InlineMessage (error, success, info, warning, etc)
+   * - Bullet
+   * - Stepper
+   * - Rating
+   * - ...
+   */
 
   return (
     <Rows grows alignY="space-between" darkBg={'black'}>
