@@ -28,7 +28,6 @@ function Example() {
   useDeviceTheme();
   const theme = useTheme();
   /**
-   * - InlineMessage (error, success, info, warning, etc)
    * - Rating
    * - Bullet
    * - Screen
@@ -66,7 +65,7 @@ function Example() {
           }}
         />
       </View>
-      <View grows p={3}>
+      <View grows p={3} gap={4} w={'Full'}>
         <InlineMessage color="Warning">
           Your trial period is about to end.
         </InlineMessage>

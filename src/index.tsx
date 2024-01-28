@@ -12,6 +12,7 @@ export * from './components/BottomNavigation';
 export * from './components/TopAppbar';
 export * from './components/ActionContextProvider';
 export * from './components/InlineMessage';
+export * from './components/Rating';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
