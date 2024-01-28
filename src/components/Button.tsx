@@ -127,11 +127,12 @@ export function Button(props: ButtonProps) {
             : isDarkMode
             ? darkColor
             : color,
-        borderRadius: isIconButton
-          ? theme.borderRadius.Full
-          : shape === 'pill'
-          ? theme.borderRadius['3xl']
-          : theme.borderRadius.Lg,
+        borderRadius:
+          shape === 'pill'
+            ? isIconButton
+              ? theme.borderRadius.Full
+              : theme.borderRadius['3xl']
+            : theme.borderRadius.Lg,
       }}
     >
       <Columns px={6} alignX="center" alignY="center" grows gap={2}>
