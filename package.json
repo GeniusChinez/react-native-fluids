@@ -29,6 +29,7 @@
     "example": "yarn workspace react-native-fluids-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
+    "fix": "eslint \"**/*.{js,ts,tsx}\" --fix",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
     "prepare": "bob build",
@@ -60,6 +61,7 @@
     "@types/jest": "^28.1.2",
     "@types/react": "~17.0.21",
     "@types/react-native": "0.70.0",
+    "@types/react-native-vector-icons": "^6.4.18",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
     "eslint": "^8.4.1",
@@ -161,6 +163,8 @@
     ]
   },
   "dependencies": {
-    "theme-native": "^0.5.2"
+    "lucide-react-native": "^0.316.0",
+    "react-native-svg": "^14.1.0",
+    "theme-native": "^0.6.0"
   }
 }

@@ -2,7 +2,7 @@
 import React from 'react';
 import { View as ReactNativeView } from 'react-native';
 import type { TextProps as ReactNativeTextProps } from 'react-native';
-import { Spacing, useTheme } from 'theme-native';
+import { Height, Spacing, Width, useTheme } from 'theme-native';
 
 export interface ViewProps extends ReactNativeTextProps {
   bg?: string;
@@ -27,6 +27,9 @@ export interface ViewProps extends ReactNativeTextProps {
   gap?: keyof typeof Spacing;
   gapx?: keyof typeof Spacing;
   gapy?: keyof typeof Spacing;
+
+  w?: keyof typeof Width;
+  h?: keyof typeof Height;
 
   grows?: boolean;
   growsOnly?: boolean;
@@ -60,12 +63,15 @@ export function View(props: ViewProps) {
     gapx,
     gapy,
 
+    w,
+    h,
+
     ...restOfProps
   } = props;
 
   const theme = useTheme();
 
-  const { isDarkMode, spacing } = theme;
+  const { isDarkMode, spacing, width, height } = theme;
 
   return (
     <ReactNativeView
@@ -94,6 +100,9 @@ export function View(props: ViewProps) {
         gap: gap ? spacing[gap] : undefined,
         rowGap: gapy ? spacing[gapy] : undefined,
         columnGap: gapx ? spacing[gapx] : undefined,
+
+        width: w ? width[w] : undefined,
+        height: h ? height[h] : undefined,
 
         ...(style as any),
       }}

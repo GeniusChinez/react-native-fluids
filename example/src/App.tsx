@@ -1,16 +1,21 @@
 import React from 'react';
 import {
   View,
-  Text,
-  Columns,
-  Rows,
   FluidsProvider,
   useTheme,
+  Button,
+  useLightMode,
+  Columns,
+  Rows,
 } from 'react-native-fluids';
 
 export default function App() {
   return (
-    <FluidsProvider>
+    <FluidsProvider
+      colorAliases={{
+        Primary: 'Orange',
+      }}
+    >
       <Example />
     </FluidsProvider>
   );
@@ -18,17 +23,27 @@ export default function App() {
 
 function Example() {
   const theme = useTheme();
+
+  useLightMode();
+  // useDarkMode();
+
   return (
-    <View grows darkBg={theme.color.Stone[900]}>
-      <Rows gap={4} grows align="center" darkBg={theme.color.Stone[950]}>
-        <Text>A</Text>
-        <Text>B</Text>
-        <Text>C</Text>
-      </Rows>
-      <Columns alignX="space-around" alignY="center" gap={4} grows>
-        <Text>1</Text>
-        <Text>2</Text>
-        <Text>3</Text>
+    <View grows>
+      <Columns
+        gap={4}
+        grows
+        alignX="center"
+        alignY="center"
+        darkBg={theme.color.Stone[900]}
+      >
+        <Rows gap={2} w={'5/6'}>
+          <Button icon="UserPlus" shape="pill" variant="solid">
+            Create Account
+          </Button>
+          <Button shape="pill" variant="outline" color="Primary">
+            Log In
+          </Button>
+        </Rows>
       </Columns>
     </View>
   );
