@@ -7,6 +7,7 @@ export * from './components/Columns';
 export * from './components/Button';
 export * from './components/ProgressBar';
 export * from './components/LoadingIcon';
+export * from './components/BottomAppbar';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

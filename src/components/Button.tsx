@@ -133,7 +133,13 @@ export function Button(props: ButtonProps) {
             : theme.borderRadius.Lg,
       }}
     >
-      <Columns px={6} alignX="center" alignY="center" grows gap={2}>
+      <Columns
+        px={isIconButton ? undefined : 6}
+        alignX="center"
+        alignY="center"
+        grows
+        gap={2}
+      >
         {isLoading && (
           <LoadingIcon
             color={finalTextColor}
@@ -145,7 +151,7 @@ export function Button(props: ButtonProps) {
           <Icon
             name={icon}
             color={finalTextColor}
-            strokeWidth={isGhostButton ? 3 : undefined}
+            strokeWidth={isGhostButton ? 2.5 : undefined}
             size={
               textSize
                 ? theme.fontSize[textSize] * (isIconButton ? 1.4 : 1.2)
@@ -196,7 +202,7 @@ export function Button(props: ButtonProps) {
           <Icon
             name={icon}
             color={finalTextColor}
-            strokeWidth={isGhostButton ? 3 : undefined}
+            strokeWidth={isGhostButton ? 2.5 : undefined}
             size={
               textSize
                 ? theme.fontSize[textSize] * (isIconButton ? 1.4 : 1.2)
