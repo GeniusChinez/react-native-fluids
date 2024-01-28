@@ -14848,6 +14848,7 @@ __metadata:
     react: 18.2.0
     react-native: 0.73.2
     react-native-builder-bob: ^0.20.0
+    react-native-safe-area-context: ^4.8.2
     react-native-svg: ^14.1.0
     release-it: ^15.0.0
     theme-native: ^0.6.0
@@ -14857,6 +14858,16 @@ __metadata:
     react-native: "*"
   languageName: unknown
   linkType: soft
+
+"react-native-safe-area-context@npm:^4.8.2":
+  version: 4.8.2
+  resolution: "react-native-safe-area-context@npm:4.8.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 929eaa5ee522f712e7bfabd0f22908f033918d030c932ddf6a83e4315bc781f7aa44e315806dc8130f75619f09951f3237082f720f4fa65a6670469886cf9735
+  languageName: node
+  linkType: hard
 
 "react-native-svg@npm:^14.1.0":
   version: 14.1.0

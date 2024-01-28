@@ -5,6 +5,9 @@ import {
   Rows,
   useLightMode,
   BottomNavigation,
+  TopAppbar,
+  useTheme,
+  View,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -22,9 +25,35 @@ export default function App() {
 
 function Example() {
   useLightMode();
+  const theme = useTheme();
 
   return (
-    <Rows grows alignY="bottom" darkBg={'black'}>
+    <Rows grows alignY="space-between" darkBg={'black'}>
+      <View>
+        <TopAppbar
+          // textColor={theme.color.Gray[700]}
+          // bg={theme.color.Gray[100]}
+          isDark
+          bg={theme.color.Primary[600]}
+          textColor={theme.color.White}
+          layout={{
+            type: 'large',
+            leadingIcon: {
+              icon: 'Menu',
+            },
+            headline: 'Grayson Banes',
+            subheadline: '+123123123123',
+            trailingIcons: [
+              {
+                icon: 'Camera',
+              },
+              {
+                icon: 'User',
+              },
+            ],
+          }}
+        />
+      </View>
       <BottomNavigation
         actions={[
           {

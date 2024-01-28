@@ -164,6 +164,7 @@
   },
   "dependencies": {
     "lucide-react-native": "^0.316.0",
+    "react-native-safe-area-context": "^4.8.2",
     "react-native-svg": "^14.1.0",
     "theme-native": "^0.6.0"
   }
