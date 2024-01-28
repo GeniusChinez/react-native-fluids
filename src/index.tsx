@@ -13,6 +13,7 @@ export * from './components/TopAppbar';
 export * from './components/ActionContextProvider';
 export * from './components/InlineMessage';
 export * from './components/Rating';
+export * from './components/BulletPoint';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

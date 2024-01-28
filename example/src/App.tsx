@@ -9,6 +9,7 @@ import {
   View,
   InlineMessage,
   useDeviceTheme,
+  BulletPoint,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -69,6 +70,9 @@ function Example() {
         <InlineMessage color="Warning">
           Your trial period is about to end.
         </InlineMessage>
+        <BulletPoint>Download the software</BulletPoint>
+        <BulletPoint>Install the software</BulletPoint>
+        <BulletPoint>Use the software</BulletPoint>
       </View>
       <BottomNavigation
         actions={[
