@@ -11,6 +11,7 @@ export * from './components/BottomAppbar';
 export * from './components/BottomNavigation';
 export * from './components/TopAppbar';
 export * from './components/ActionContextProvider';
+export * from './components/InlineMessage';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

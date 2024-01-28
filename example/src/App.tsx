@@ -3,11 +3,12 @@ import { Alert } from 'react-native';
 import {
   FluidsProvider,
   Rows,
-  useLightMode,
   BottomNavigation,
   TopAppbar,
   useTheme,
   View,
+  InlineMessage,
+  useDeviceTheme,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -24,21 +25,20 @@ export default function App() {
 }
 
 function Example() {
-  useLightMode();
+  useDeviceTheme();
   const theme = useTheme();
   /**
-   * - Tabs
-   * - Carousel
+   * - InlineMessage (error, success, info, warning, etc)
+   * - Rating
+   * - Bullet
+   * - Screen
    * - TextField
    * - SelectField
-   * - ActionContextProvider
-   * - DateField
-   * - Menu
-   * - Screen
-   * - InlineMessage (error, success, info, warning, etc)
-   * - Bullet
    * - Stepper
-   * - Rating
+   * - Tabs
+   * - Carousel
+   * - Menu
+   * - DateField
    * - ...
    */
 
@@ -65,6 +65,11 @@ function Example() {
             ],
           }}
         />
+      </View>
+      <View grows p={3}>
+        <InlineMessage color="Danger">
+          Your trial period is about to expire, my g.
+        </InlineMessage>
       </View>
       <BottomNavigation
         actions={[
