@@ -3,24 +3,35 @@ import React from 'react';
 import { View, type ViewProps } from './View';
 
 export interface RowsProps extends ViewProps {
-  align?: 'top' | 'center' | 'bottom' | 'space-between' | 'space-around';
+  alignY?: 'top' | 'center' | 'bottom' | 'space-between' | 'space-around';
+  alignX?: 'left' | 'center' | 'right' | 'space-between' | 'space-around';
 }
 
 export function Rows(props: RowsProps) {
-  const { align, style, children, ...viewProps } = props;
+  const { alignY, alignX, style, children, ...viewProps } = props;
   return (
     <View
       {...viewProps}
       style={{
         flexDirection: 'column',
         justifyContent:
-          align === 'center'
+          alignY === 'center'
             ? 'center'
-            : align === 'bottom'
+            : alignY === 'bottom'
             ? 'flex-end'
-            : align === 'space-around'
+            : alignY === 'space-around'
             ? 'space-around'
-            : align === 'space-between'
+            : alignY === 'space-between'
+            ? 'space-between'
+            : 'flex-start',
+        alignItems:
+          alignX === 'center'
+            ? 'center'
+            : alignX === 'right'
+            ? 'flex-end'
+            : alignX === 'space-around'
+            ? 'space-around'
+            : alignX === 'space-between'
             ? 'space-between'
             : 'flex-start',
         ...(style as any),

@@ -115,9 +115,7 @@ export function Button(props: ButtonProps) {
       disabled={isDisabled || isLoading}
       style={{
         height: theme.fontSize[textSize || 'md'] * 3.3,
-        width: isIconButton
-          ? theme.fontSize[textSize || 'md'] * 3.3
-          : undefined,
+        width: isIconButton ? theme.fontSize[textSize || 'md'] * 3.3 : '100%',
         opacity: isDisabled || isLoading ? 0.7 : 1,
         borderWidth: theme.borderWidth.Default,
         borderColor: isOutlineButton ? color : theme.color.Transparent,
@@ -148,7 +146,11 @@ export function Button(props: ButtonProps) {
             name={icon}
             color={finalTextColor}
             strokeWidth={isGhostButton ? 3 : undefined}
-            size={textSize ? theme.fontSize[textSize] * 1.2 : undefined}
+            size={
+              textSize
+                ? theme.fontSize[textSize] * (isIconButton ? 1.4 : 1.2)
+                : undefined
+            }
           />
         )}
         {!(isLoading && !!loadingText) && (
@@ -195,7 +197,11 @@ export function Button(props: ButtonProps) {
             name={icon}
             color={finalTextColor}
             strokeWidth={isGhostButton ? 3 : undefined}
-            size={textSize ? theme.fontSize[textSize] * 1.2 : undefined}
+            size={
+              textSize
+                ? theme.fontSize[textSize] * (isIconButton ? 1.4 : 1.2)
+                : undefined
+            }
           />
         )}
       </Columns>
