@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import {
   View,
   FluidsProvider,
@@ -43,6 +44,7 @@ function Example() {
           <Button shape="pill" variant="outline" color="Primary">
             Log In
           </Button>
+          <Button icon="Plus" onPress={() => Alert.alert('Hie')} />
         </Rows>
       </Columns>
     </View>

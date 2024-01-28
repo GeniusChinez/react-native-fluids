@@ -63,6 +63,7 @@ export function Button(props: ButtonProps) {
     disabled,
     isDisabled = disabled,
     isLoading,
+    ...restOfProps
   } = props;
 
   const theme = useTheme();
@@ -70,6 +71,7 @@ export function Button(props: ButtonProps) {
 
   const isGhostButton = useMemo(() => variant === 'ghost', [variant]);
   const isOutlineButton = useMemo(() => variant === 'outline', [variant]);
+  const isIconButton = useMemo(() => !children && !text, [children, text]);
 
   const color = useMemo(() => {
     if (typeof theme.color[color_] === 'string') {
@@ -109,9 +111,13 @@ export function Button(props: ButtonProps) {
 
   return (
     <TouchableOpacity
+      {...restOfProps}
       disabled={isDisabled || isLoading}
       style={{
         height: theme.fontSize[textSize || 'md'] * 3.3,
+        width: isIconButton
+          ? theme.fontSize[textSize || 'md'] * 3.3
+          : undefined,
         opacity: isDisabled || isLoading ? 0.7 : 1,
         borderWidth: theme.borderWidth.Default,
         borderColor: isOutlineButton ? color : theme.color.Transparent,
@@ -121,8 +127,11 @@ export function Button(props: ButtonProps) {
             : isDarkMode
             ? darkColor
             : color,
-        borderRadius:
-          shape === 'pill' ? theme.borderRadius['3xl'] : theme.borderRadius.Lg,
+        borderRadius: isIconButton
+          ? theme.borderRadius.Full
+          : shape === 'pill'
+          ? theme.borderRadius['3xl']
+          : theme.borderRadius.Lg,
       }}
     >
       <Columns px={6} alignX="center" alignY="center" grows gap={2}>
