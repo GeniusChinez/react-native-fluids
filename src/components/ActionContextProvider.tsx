@@ -53,6 +53,10 @@ export function useFormError() {
   const { formError } = useActionContext();
   return formError;
 }
+export function useFieldErrors() {
+  const { fieldErrors } = useActionContext();
+  return fieldErrors;
+}
 
 export function useIsSubmitting() {
   const { isSubmitting } = useActionContext();

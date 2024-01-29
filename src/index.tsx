@@ -14,11 +14,17 @@ export * from './components/ActionContextProvider';
 export * from './components/InlineMessage';
 export * from './components/Rating';
 export * from './components/BulletPoint';
+export * from './components/TextField';
+export * from './components/FormError';
+export * from './components/FormPrimaryButton';
+export * from './components/FormButton';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
 
 // logic
+export * from './logic/core.validations';
+export * from './logic/strings';
 
 // re-exports
 export * from 'theme-native';

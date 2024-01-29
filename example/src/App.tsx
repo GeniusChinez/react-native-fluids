@@ -7,9 +7,12 @@ import {
   TopAppbar,
   useTheme,
   View,
-  InlineMessage,
   useDeviceTheme,
-  BulletPoint,
+  TextField,
+  ActionContextProvider,
+  FormError,
+  FormPrimaryButton,
+  FormButton,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -30,10 +33,9 @@ function Example() {
   const theme = useTheme();
   /**
    * - Rating
-   * - Bullet
-   * - Screen
    * - TextField
    * - SelectField
+   * - Screen
    * - Stepper
    * - Tabs
    * - Carousel
@@ -66,14 +68,26 @@ function Example() {
           }}
         />
       </View>
-      <View grows p={3} gap={4} w={'Full'}>
-        <InlineMessage color="Warning">
-          Your trial period is about to end.
-        </InlineMessage>
-        <BulletPoint>Download the software</BulletPoint>
-        <BulletPoint>Install the software</BulletPoint>
-        <BulletPoint>Use the software</BulletPoint>
-      </View>
+      <Rows grows p={3} gap={4} w={'Full'} alignY="center">
+        <View w={'Full'} gap={3}>
+          <ActionContextProvider isSubmitting={false}>
+            <TextField
+              name="email"
+              label="Email"
+              placeholder="Enter Your Email"
+              required
+            />
+            <FormError />
+            <FormPrimaryButton text="Log In" loadingText="Validating..." />
+            <FormButton
+              colorVariant={200}
+              textColor={theme.color.Primary[700]}
+              color={'Secondary'}
+              text="Create Account"
+            />
+          </ActionContextProvider>
+        </View>
+      </Rows>
       <BottomNavigation
         actions={[
           {
