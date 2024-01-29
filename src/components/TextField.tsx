@@ -55,6 +55,7 @@ export function TextField(props: TextFieldProps) {
         rowGap: 4,
       }}
       grows={grows}
+      w="Full"
     >
       {label && (
         <Text

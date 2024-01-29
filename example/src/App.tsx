@@ -14,6 +14,7 @@ import {
   FormButton,
   SelectField,
   useLightMode,
+  FieldList,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -70,35 +71,37 @@ function Example() {
       <Rows grows p={3} gap={4} w={'Full'} alignY="center">
         <View w={'Full'} gap={3}>
           <ActionContextProvider isSubmitting={false}>
-            <TextField
-              name="email"
-              label="Email"
-              placeholder="Enter Your Email"
-              required
-            />
-            <SelectField
-              name="choose"
-              label="Choose"
-              placeholder="Select Country"
-              options={[
-                {
-                  label: 'First',
-                  value: '1',
-                  key: 1,
-                },
-                {
-                  label: 'Second',
-                  value: '2',
-                  key: 2,
-                },
-                {
-                  label: 'Third',
-                  value: '3',
-                  key: 3,
-                },
-              ]}
-              required
-            />
+            <FieldList>
+              <TextField
+                name="email"
+                label="Email"
+                placeholder="Enter Your Email"
+                required
+              />
+              <SelectField
+                name="choose"
+                label="Choose"
+                placeholder="Select Country"
+                options={[
+                  {
+                    label: 'First',
+                    value: '1',
+                    key: 1,
+                  },
+                  {
+                    label: 'Second',
+                    value: '2',
+                    key: 2,
+                  },
+                  {
+                    label: 'Third',
+                    value: '3',
+                    key: 3,
+                  },
+                ]}
+                required
+              />
+            </FieldList>
             <FormError />
             <FormPrimaryButton text="Log In" loadingText="Validating..." />
             <FormButton
