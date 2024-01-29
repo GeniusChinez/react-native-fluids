@@ -15,7 +15,6 @@ export interface TextFieldProps extends TextInputProps {
   customRef?: React.RefObject<TextInput>;
   label?: string | undefined;
   className?: string;
-  large?: boolean;
   notify?: (value: string) => void;
   required?: boolean;
   disabled?: boolean;
@@ -30,11 +29,8 @@ export function TextField(props: TextFieldProps) {
     customRef,
     label,
     placeholder,
-    // type,
     editable = true,
     disabled,
-    // className,
-    // large,
     notify,
     onChangeText: onChange,
     helper,
@@ -50,22 +46,6 @@ export function TextField(props: TextFieldProps) {
   const id = providedId || name;
 
   const [text, setText] = useState(value);
-
-  // useEffect(() => {
-  //   if (notify) {
-  //     notify(text);
-  //   }
-  // }, [notify, text]);
-
-  // const handleChange = useCallback(
-  //   (newText: string) => {
-  //     setText(newText);
-  //     if (onChange) {
-  //       onChange(newText);
-  //     }
-  //   },
-  //   [onChange],
-  // );
 
   return (
     <View
