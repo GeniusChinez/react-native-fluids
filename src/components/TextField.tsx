@@ -98,10 +98,10 @@ export function TextField(props: TextFieldProps) {
           isDarkMode
             ? errors?.length
               ? theme.color.Danger[400]
-              : theme.color.Slate[500]
+              : theme.color.Gray[500]
             : errors?.length
             ? theme.color.Danger[500]
-            : undefined
+            : theme.color.Gray[500]
         }
         style={{
           width: '100%',

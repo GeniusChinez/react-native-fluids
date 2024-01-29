@@ -3343,6 +3343,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-picker/picker@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "@react-native-picker/picker@npm:2.6.1"
+  peerDependencies:
+    react: ">=16"
+    react-native: ">=0.57"
+  checksum: a8c58d5d945350b70fd8b5d66dfe97dd04641277db7c702912d8c41ae4da94cfef8b0b73bfa493adfdee8f089af6e0316872c3ee61a4efc18528e6e25a5452bc
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.73.1, @react-native/assets-registry@npm:~0.73.1":
   version: 0.73.1
   resolution: "@react-native/assets-registry@npm:0.73.1"
@@ -11931,6 +11941,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isequal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: da27515dc5230eb1140ba65ff8de3613649620e8656b19a6270afe4866b7bd461d9ba2ac8a48dcc57f7adac4ee80e1de9f965d89d4d81a0ad52bb3eec2609644
+  languageName: node
+  linkType: hard
+
 "lodash.isfunction@npm:^3.0.9":
   version: 3.0.9
   resolution: "lodash.isfunction@npm:3.0.9"
@@ -14831,6 +14848,7 @@ __metadata:
   dependencies:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
+    "@react-native-picker/picker": ^2.6.1
     "@react-native/eslint-config": ^0.72.2
     "@release-it/conventional-changelog": ^5.0.0
     "@types/jest": ^28.1.2
@@ -14848,6 +14866,7 @@ __metadata:
     react: 18.2.0
     react-native: 0.73.2
     react-native-builder-bob: ^0.20.0
+    react-native-picker-select: ^9.0.1
     react-native-ratings: ^8.1.0
     react-native-safe-area-context: ^4.8.2
     react-native-svg: ^14.1.0
@@ -14860,6 +14879,17 @@ __metadata:
     react-native: "*"
   languageName: unknown
   linkType: soft
+
+"react-native-picker-select@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "react-native-picker-select@npm:9.0.1"
+  dependencies:
+    lodash.isequal: ^4.5.0
+  peerDependencies:
+    "@react-native-picker/picker": ^2.4.0
+  checksum: df6e2dc7a99ceec4bf27cdc06c7858c81f39c26a0a9a72054b37b049bf471e54b26f8a860588eabce5024e6ed557c4643a546ebbaa1c85d68aec6fae2a2ab9bd
+  languageName: node
+  linkType: hard
 
 "react-native-ratings@npm:^8.1.0":
   version: 8.1.0

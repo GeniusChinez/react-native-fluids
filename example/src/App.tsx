@@ -7,12 +7,13 @@ import {
   TopAppbar,
   useTheme,
   View,
-  useDeviceTheme,
   TextField,
   ActionContextProvider,
   FormError,
   FormPrimaryButton,
   FormButton,
+  SelectField,
+  useLightMode,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -29,12 +30,10 @@ export default function App() {
 }
 
 function Example() {
-  useDeviceTheme();
+  useLightMode();
   const theme = useTheme();
   /**
    * - Rating
-   * - TextField
-   * - SelectField
    * - Screen
    * - Stepper
    * - Tabs
@@ -77,12 +76,37 @@ function Example() {
               placeholder="Enter Your Email"
               required
             />
+            <SelectField
+              name="choose"
+              label="Choose"
+              placeholder="Select Country"
+              options={[
+                {
+                  label: 'First',
+                  value: '1',
+                  key: 1,
+                },
+                {
+                  label: 'Second',
+                  value: '2',
+                  key: 2,
+                },
+                {
+                  label: 'Third',
+                  value: '3',
+                  key: 3,
+                },
+              ]}
+              required
+            />
             <FormError />
             <FormPrimaryButton text="Log In" loadingText="Validating..." />
             <FormButton
               colorVariant={200}
+              darkColorVariant={800}
               textColor={theme.color.Primary[700]}
               color={'Secondary'}
+              darkColor={'Gray'}
               text="Create Account"
             />
           </ActionContextProvider>

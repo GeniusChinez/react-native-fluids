@@ -18,6 +18,7 @@ export * from './components/TextField';
 export * from './components/FormError';
 export * from './components/FormPrimaryButton';
 export * from './components/FormButton';
+export * from './components/SelectField';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
