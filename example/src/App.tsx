@@ -6,7 +6,6 @@ import {
   BottomNavigation,
   TopAppbar,
   useTheme,
-  View,
   TextField,
   SelectField,
   useLightMode,
@@ -42,78 +41,74 @@ function Example() {
 
   return (
     <Rows grows alignY="space-between" darkBg={'black'}>
-      <View>
-        <TopAppbar
-          textColor={theme.color.Gray[700]}
-          bg={theme.color.Gray[100]}
-          layout={{
-            type: 'small',
-            leadingIcon: {
-              icon: 'Menu',
+      <TopAppbar
+        textColor={theme.color.Gray[700]}
+        bg={theme.color.Gray[100]}
+        layout={{
+          type: 'large',
+          leadingIcon: {
+            icon: 'Menu',
+          },
+          headline: 'Grayson Banes',
+          subheadline: '+123123123123',
+          trailingIcons: [
+            {
+              icon: 'Camera',
             },
-            headline: 'Grayson Banes',
-            // subheadline: '+123123123123',
-            trailingIcons: [
-              {
-                icon: 'Camera',
-              },
-              {
-                icon: 'User',
-              },
-            ],
-          }}
-        />
-      </View>
+            {
+              icon: 'User',
+            },
+          ],
+        }}
+      />
       <Rows growsOnly p={3} gap={4} alignY="center">
-        <View w={'Full'} gap={3}>
-          <Form
-            // isSubmitting
-            primary={{
-              text: 'Log In',
-              loadingText: 'Validating...',
-            }}
-            actions={[
+        <Form
+          // isSubmitting
+          primary={{
+            text: 'Log In',
+            loadingText: 'Validating...',
+          }}
+          actions={[
+            {
+              colorVariant: 200,
+              darkColorVariant: 800,
+              textColor: theme.color.Primary[700],
+              color: 'Secondary',
+              darkColor: 'Gray',
+              text: 'Create Account',
+            },
+          ]}
+        >
+          <TextField
+            name="email"
+            label="Email"
+            placeholder="Enter Your Email"
+            required
+          />
+          <SelectField
+            name="choose"
+            label="Choose"
+            placeholder="Select Country"
+            options={[
               {
-                colorVariant: 200,
-                darkColorVariant: 800,
-                textColor: theme.color.Primary[700],
-                color: 'Secondary',
-                darkColor: 'Gray',
-                text: 'Create Account',
+                label: 'First',
+                value: '1',
+                key: 1,
+              },
+              {
+                label: 'Second',
+                value: '2',
+                key: 2,
+              },
+              {
+                label: 'Third',
+                value: '3',
+                key: 3,
               },
             ]}
-          >
-            <TextField
-              name="email"
-              label="Email"
-              placeholder="Enter Your Email"
-              required
-            />
-            <SelectField
-              name="choose"
-              label="Choose"
-              placeholder="Select Country"
-              options={[
-                {
-                  label: 'First',
-                  value: '1',
-                  key: 1,
-                },
-                {
-                  label: 'Second',
-                  value: '2',
-                  key: 2,
-                },
-                {
-                  label: 'Third',
-                  value: '3',
-                  key: 3,
-                },
-              ]}
-              required
-            />
-          </Form>
-        </View>
+            required
+          />
+        </Form>
       </Rows>
       <BottomNavigation
         actions={[

@@ -7,6 +7,8 @@ import { Rows } from './Rows';
 import { Columns } from './Columns';
 import { Button } from './Button';
 import type { IconType } from './Icon';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 export type AppbarIcon = {
   icon: IconType;
@@ -203,7 +205,7 @@ function MediumTopAppbarContent(props: MediumTopAppbarContentProps) {
   } = props;
 
   return (
-    <Rows>
+    <Rows w={'Auto'}>
       <Columns
         grows
         alignY="center"
@@ -271,7 +273,7 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
   } = props;
 
   return (
-    <Rows>
+    <Rows w={'Auto'}>
       <Columns
         grows
         alignY="center"
@@ -340,15 +342,21 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
   );
 }
 
+const isIos = Platform.OS === 'ios';
+
 export function TopAppbar(props: TopAppbarProps) {
   const theme = useTheme();
 
   const { isDark, bg = theme.color.Gray[100], darkBg, layout } = props;
+  const insets = useSafeAreaInsets();
 
   return (
     <Rows
       bg={bg}
       darkBg={darkBg}
+      style={{
+        paddingTop: isIos ? insets.top : 0,
+      }}
       w={'Full'}
       h={layout.type === 'medium' ? 24 : layout.type === 'large' ? 32 : 16}
       alignY="bottom"
