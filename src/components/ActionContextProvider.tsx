@@ -20,9 +20,9 @@ export const ActionContext = createContext<ContextProps>({
   isSubmitting: false,
 });
 
-type Props = PropsWithChildren<ContextProps>;
+export type ActionContextProviderProps = PropsWithChildren<ContextProps>;
 
-export function ActionContextProvider(props: Props) {
+export function ActionContextProvider(props: ActionContextProviderProps) {
   const { children, ...restOfProps } = props;
   return (
     <ActionContext.Provider value={restOfProps}>

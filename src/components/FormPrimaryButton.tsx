@@ -3,9 +3,9 @@ import { useIsSubmitting } from './ActionContextProvider';
 import { type ButtonProps } from './Button';
 import { FormButton } from './FormButton';
 
-interface Props extends ButtonProps {}
+export interface FormPrimaryButtonProps extends ButtonProps {}
 
-export function FormPrimaryButton(props: Props) {
+export function FormPrimaryButton(props: FormPrimaryButtonProps) {
   const { text, loadingText, ...restOfProps } = props;
   const isSubmitting = useIsSubmitting();
 

@@ -8,13 +8,9 @@ import {
   useTheme,
   View,
   TextField,
-  ActionContextProvider,
-  FormError,
-  FormPrimaryButton,
-  FormButton,
   SelectField,
   useLightMode,
-  FieldList,
+  Form,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -68,51 +64,55 @@ function Example() {
           }}
         />
       </View>
-      <Rows grows p={3} gap={4} w={'Full'} alignY="center">
+      <Rows growsOnly p={3} gap={4} alignY="center">
         <View w={'Full'} gap={3}>
-          <ActionContextProvider isSubmitting={false}>
-            <FieldList>
-              <TextField
-                name="email"
-                label="Email"
-                placeholder="Enter Your Email"
-                required
-              />
-              <SelectField
-                name="choose"
-                label="Choose"
-                placeholder="Select Country"
-                options={[
-                  {
-                    label: 'First',
-                    value: '1',
-                    key: 1,
-                  },
-                  {
-                    label: 'Second',
-                    value: '2',
-                    key: 2,
-                  },
-                  {
-                    label: 'Third',
-                    value: '3',
-                    key: 3,
-                  },
-                ]}
-                required
-              />
-            </FieldList>
-            <FormError />
-            <FormPrimaryButton text="Log In" loadingText="Validating..." />
-            <FormButton
-              colorVariant={200}
-              darkColorVariant={800}
-              textColor={theme.color.Primary[700]}
-              color={'Secondary'}
-              darkColor={'Gray'}
-              text="Create Account"
+          <Form
+            // isSubmitting
+            primary={{
+              text: 'Log In',
+              loadingText: 'Validating...',
+            }}
+            actions={[
+              {
+                colorVariant: 200,
+                darkColorVariant: 800,
+                textColor: theme.color.Primary[700],
+                color: 'Secondary',
+                darkColor: 'Gray',
+                text: 'Create Account',
+              },
+            ]}
+          >
+            <TextField
+              name="email"
+              label="Email"
+              placeholder="Enter Your Email"
+              required
             />
-          </ActionContextProvider>
+            <SelectField
+              name="choose"
+              label="Choose"
+              placeholder="Select Country"
+              options={[
+                {
+                  label: 'First',
+                  value: '1',
+                  key: 1,
+                },
+                {
+                  label: 'Second',
+                  value: '2',
+                  key: 2,
+                },
+                {
+                  label: 'Third',
+                  value: '3',
+                  key: 3,
+                },
+              ]}
+              required
+            />
+          </Form>
         </View>
       </Rows>
       <BottomNavigation

@@ -11,6 +11,7 @@ export function Rows(props: RowsProps) {
   const { alignY, alignX, style, children, ...viewProps } = props;
   return (
     <View
+      w={'Full'}
       {...viewProps}
       style={{
         flexDirection: 'column',

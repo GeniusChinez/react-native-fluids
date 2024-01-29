@@ -20,6 +20,8 @@ export * from './components/FormPrimaryButton';
 export * from './components/FormButton';
 export * from './components/SelectField';
 export * from './components/FieldList';
+export * from './components/FormLayout';
+export * from './components/Form';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
