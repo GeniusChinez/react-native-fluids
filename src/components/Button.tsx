@@ -48,11 +48,11 @@ export interface ButtonProps extends TouchableOpacityProps {
 }
 
 export function Button(props: ButtonProps) {
+  const theme = useTheme();
+
   const {
     text,
     loadingText,
-    textColor,
-    darkTextColor,
     textSize = 'base',
     children,
     shape = 'pill',
@@ -60,9 +60,13 @@ export function Button(props: ButtonProps) {
     iconPos = 'left',
     variant = 'solid',
     color: color_ = 'Primary',
-    darkColor: darkColor_,
-    colorVariant = 600,
-    darkColorVariant = 600,
+    colorVariant = color_ !== 'Primary' ? 200 : 600,
+    darkColorVariant = color_ !== 'Primary' ? 800 : 600,
+    textColor = color_ === 'Primary'
+      ? theme.color.White
+      : theme.color[color_ === 'Secondary' ? 'Primary' : color_][700],
+    darkTextColor,
+    darkColor: darkColor_ = color_ === 'Secondary' ? 'Gray' : color_,
     disabled,
     isDisabled = disabled,
     isLoading,
@@ -71,7 +75,6 @@ export function Button(props: ButtonProps) {
     ...restOfProps
   } = props;
 
-  const theme = useTheme();
   const { isDarkMode } = theme;
 
   const isGhostButton = useMemo(() => variant === 'ghost', [variant]);

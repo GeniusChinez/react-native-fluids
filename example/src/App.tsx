@@ -70,11 +70,7 @@ function Example() {
           }}
           actions={[
             {
-              colorVariant: 200,
-              darkColorVariant: 800,
-              textColor: theme.color.Primary[700],
               color: 'Secondary',
-              darkColor: 'Gray',
               text: 'Create Account',
             },
           ]}

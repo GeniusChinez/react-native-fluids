@@ -287,6 +287,7 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
           style={{
             flexBasis: theme.width[14],
           }}
+          grows
         >
           {!!leadingIcon && (
             <Button
@@ -298,9 +299,8 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
             />
           )}
         </Rows>
-
         {!!trailingIcons && (
-          <Columns alignX="right" gap={1} pr={2}>
+          <Columns alignX="right" gap={1} pr={2} grows>
             {trailingIcons.map((trailingIcon, trailingIconIndex) => (
               <Button
                 key={trailingIconIndex}
