@@ -5,18 +5,22 @@ import { View, type ViewProps } from './View';
 import { useTheme } from 'theme-native';
 
 export type SurfaceProps = {} & (
-  | ({ type: 'rows' } & RowsProps)
-  | ({ type: 'columns' } & ColumnsProps)
-  | ({ type: 'normal' } & ViewProps)
+  | ({ rows: true } & RowsProps)
+  | ({ columns: true } & ColumnsProps)
+  | ViewProps
 );
 
 export function Surface(props: SurfaceProps) {
-  const { type, ...restOfProps } = props;
+  const { rows, columns, ...restOfProps } = props as {
+    rows?: boolean;
+    columns?: boolean;
+  } & SurfaceProps;
+
   const theme = useTheme();
 
   return (
     <>
-      {type === 'columns' && (
+      {columns && (
         <Columns
           p={3}
           bg={theme.color.Gray[100]}
@@ -25,7 +29,7 @@ export function Surface(props: SurfaceProps) {
           {...(restOfProps as ColumnsProps)}
         />
       )}
-      {type === 'rows' && (
+      {rows && (
         <Rows
           p={3}
           bg={theme.color.Gray[100]}
@@ -34,7 +38,7 @@ export function Surface(props: SurfaceProps) {
           {...(restOfProps as RowsProps)}
         />
       )}
-      {type === 'normal' && (
+      {!(rows || columns) && (
         <View
           p={3}
           bg={theme.color.Gray[100]}

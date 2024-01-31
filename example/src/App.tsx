@@ -3,7 +3,6 @@ import React from 'react';
 import { Alert } from 'react-native';
 import {
   FluidsProvider,
-  Rows,
   BottomNavigation,
   TopAppbar,
   useTheme,
@@ -14,6 +13,7 @@ import {
   View,
   Stepper,
   useKeyboard,
+  Box,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -31,7 +31,7 @@ export default function App() {
 
 function ExampleScreen2() {
   return (
-    <Rows p={3} gap={4} alignY="center">
+    <Box rows p={3} gap={4} alignY="center">
       <Form
         // isSubmitting
         primary={{
@@ -75,7 +75,7 @@ function ExampleScreen2() {
           required
         />
       </Form>
-    </Rows>
+    </Box>
   );
 }
 

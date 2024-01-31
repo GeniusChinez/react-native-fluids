@@ -26,6 +26,7 @@ export * from './components/Carousel';
 export * from './components/Tabs';
 export * from './components/Stepper';
 export * from './components/Surface';
+export * from './components/Box';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
