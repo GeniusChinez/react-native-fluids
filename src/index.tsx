@@ -23,6 +23,7 @@ export * from './components/FieldList';
 export * from './components/FormLayout';
 export * from './components/Form';
 export * from './components/Carousel';
+export * from './components/Tabs';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

@@ -171,6 +171,7 @@
     "react-native-reanimated": "^3.6.2",
     "react-native-safe-area-context": "^4.8.2",
     "react-native-svg": "^14.1.0",
+    "react-native-tab-view": "^3.5.2",
     "theme-native": "^0.6.0",
     "zod": "^3.22.4"
   }
