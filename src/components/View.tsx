@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import { View as ReactNativeView } from 'react-native';
-import type { TextProps as ReactNativeTextProps } from 'react-native';
+import React, { type ComponentProps } from 'react';
+import { Animated } from 'react-native';
+// import { View as ReactNativeView } from 'react-native';
+// import type { ViewProps as ReactNativeTextProps } from 'react-native';
 import { Height, Spacing, Width, useTheme } from 'theme-native';
 
-export interface ViewProps extends ReactNativeTextProps {
+export interface ViewProps extends ComponentProps<typeof Animated.View> {
   bg?: string;
   darkBg?: string;
 
@@ -74,7 +75,7 @@ export function View(props: ViewProps) {
   const { isDarkMode, spacing, width, height } = theme;
 
   return (
-    <ReactNativeView
+    <Animated.View
       style={{
         backgroundColor: isDarkMode ? darkBg : bg,
 

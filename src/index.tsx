@@ -22,9 +22,11 @@ export * from './components/SelectField';
 export * from './components/FieldList';
 export * from './components/FormLayout';
 export * from './components/Form';
+export * from './components/Carousel';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
+export * from './hooks/useKeyboard';
 
 // logic
 export * from './logic/core.validations';

@@ -1,14 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Alert } from 'react-native';
+import { Alert, Image } from 'react-native';
 import {
   FluidsProvider,
   Rows,
   BottomNavigation,
   TopAppbar,
   useTheme,
-  TextField,
-  SelectField,
   useLightMode,
+  Carousel,
+  SelectField,
+  TextField,
   Form,
 } from 'react-native-fluids';
 
@@ -33,7 +35,6 @@ function Example() {
    * - Screen
    * - Stepper
    * - Tabs
-   * - Carousel
    * - Menu
    * - DateField
    * - ...
@@ -61,7 +62,7 @@ function Example() {
           ],
         }}
       />
-      <Rows growsOnly p={3} gap={4} alignY="center">
+      {/* <Rows growsOnly p={3} gap={4} alignY="center">
         <Form
           // isSubmitting
           primary={{
@@ -105,7 +106,88 @@ function Example() {
             required
           />
         </Form>
-      </Rows>
+      </Rows> */}
+      <Carousel
+        // showButtons
+        showIndicators
+        items={[
+          {
+            type: 'normal',
+            label: 'First Wave',
+            description:
+              'hjgfjhgf jgh jh jhf jghdf jhfgd jghd jhgd dghj hgd hgjd hgd hdg jghd',
+          },
+          {
+            type: 'normal',
+            label: 'Second Wave',
+            image: 'https://picsum.photos/536/354',
+          },
+          {
+            type: 'raw',
+            children: (
+              <Image
+                source={{
+                  uri: 'https://picsum.photos/536/354',
+                }}
+                style={{
+                  flexGrow: 1,
+                }}
+                resizeMode="cover"
+              />
+            ),
+          },
+          {
+            type: 'raw',
+            children: (
+              <Rows growsOnly p={3} gap={4} alignY="center">
+                <Form
+                  // isSubmitting
+                  primary={{
+                    text: 'Log In',
+                    loadingText: 'Validating...',
+                  }}
+                  actions={[
+                    {
+                      color: 'Secondary',
+                      text: 'Create Account',
+                    },
+                  ]}
+                >
+                  <TextField
+                    name="email"
+                    label="Email"
+                    placeholder="Enter Your Email"
+                    required
+                  />
+                  <SelectField
+                    name="choose"
+                    label="Choose"
+                    placeholder="Select Country"
+                    options={[
+                      {
+                        label: 'First',
+                        value: '1',
+                        key: 1,
+                      },
+                      {
+                        label: 'Second',
+                        value: '2',
+                        key: 2,
+                      },
+                      {
+                        label: 'Third',
+                        value: '3',
+                        key: 3,
+                      },
+                    ]}
+                    required
+                  />
+                </Form>
+              </Rows>
+            ),
+          },
+        ]}
+      />
       <BottomNavigation
         actions={[
           {
