@@ -49,7 +49,7 @@ export function BottomAppbar(props: BottomAppbarProps) {
       {!!primary && (
         <Button
           icon={primary.icon}
-          shape="square"
+          shape="pill"
           colorVariant={600}
           darkColorVariant={600}
           darkColor={'Primary'}
