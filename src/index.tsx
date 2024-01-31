@@ -24,6 +24,7 @@ export * from './components/FormLayout';
 export * from './components/Form';
 export * from './components/Carousel';
 export * from './components/Tabs';
+export * from './components/Stepper';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

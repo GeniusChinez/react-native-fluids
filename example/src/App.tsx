@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Alert, Image } from 'react-native';
+import { Alert } from 'react-native';
 import {
   FluidsProvider,
   Rows,
@@ -8,12 +8,12 @@ import {
   TopAppbar,
   useTheme,
   useLightMode,
-  Carousel,
   SelectField,
   TextField,
   Form,
-  Tabs,
   View,
+  Stepper,
+  useKeyboard,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -29,89 +29,53 @@ export default function App() {
   );
 }
 
-function ExampleScreen1() {
+function ExampleScreen2() {
   return (
-    <Carousel
-      // showButtons
-      showIndicators
-      items={[
-        {
-          type: 'normal',
-          label: 'First Wave',
-          description:
-            'hjgfjhgf jgh jh jhf jghdf jhfgd jghd jhgd dghj hgd hgjd hgd hdg jghd',
-        },
-        {
-          type: 'normal',
-          label: 'Second Wave',
-          image: 'https://picsum.photos/536/354',
-        },
-        {
-          type: 'raw',
-          children: (
-            <Image
-              source={{
-                uri: 'https://picsum.photos/536/354',
-              }}
-              style={{
-                flexGrow: 1,
-              }}
-              resizeMode="cover"
-            />
-          ),
-        },
-        {
-          type: 'raw',
-          children: (
-            <Rows growsOnly p={3} gap={4} alignY="center">
-              <Form
-                // isSubmitting
-                primary={{
-                  text: 'Log In',
-                  loadingText: 'Validating...',
-                }}
-                actions={[
-                  {
-                    color: 'Secondary',
-                    text: 'Create Account',
-                  },
-                ]}
-              >
-                <TextField
-                  name="email"
-                  label="Email"
-                  placeholder="Enter Your Email"
-                  required
-                />
-                <SelectField
-                  name="choose"
-                  label="Choose"
-                  placeholder="Select Country"
-                  options={[
-                    {
-                      label: 'First',
-                      value: '1',
-                      key: 1,
-                    },
-                    {
-                      label: 'Second',
-                      value: '2',
-                      key: 2,
-                    },
-                    {
-                      label: 'Third',
-                      value: '3',
-                      key: 3,
-                    },
-                  ]}
-                  required
-                />
-              </Form>
-            </Rows>
-          ),
-        },
-      ]}
-    />
+    <Rows p={3} gap={4} alignY="center">
+      <Form
+        // isSubmitting
+        primary={{
+          text: 'Log In',
+          loadingText: 'Validating...',
+        }}
+        actions={[
+          {
+            color: 'Secondary',
+            text: 'Create Account',
+          },
+        ]}
+      >
+        <TextField
+          name="email"
+          label="Email"
+          placeholder="Enter Your Email"
+          required
+        />
+        <SelectField
+          name="choose"
+          label="Choose"
+          placeholder="Select Country"
+          options={[
+            {
+              label: 'First',
+              value: '1',
+              key: 1,
+            },
+            {
+              label: 'Second',
+              value: '2',
+              key: 2,
+            },
+            {
+              label: 'Third',
+              value: '3',
+              key: 3,
+            },
+          ]}
+          required
+        />
+      </Form>
+    </Rows>
   );
 }
 
@@ -119,20 +83,22 @@ function Example() {
   useLightMode();
   const theme = useTheme();
   /**
+   * - Stepper
+   *
    * - Rating
    * - Screen
-   * - Stepper
-   * - Tabs
    * - Menu
    * - DateField
    * - ...
    */
+  const keyboard = useKeyboard();
 
   return (
     <>
       <TopAppbar
         textColor={theme.color.Gray[700]}
         bg={theme.color.Gray[100]}
+        darkBg="black"
         layout={{
           type: 'small',
           leadingIcon: {
@@ -195,7 +161,7 @@ function Example() {
           />
         </Form>
       </Rows> */}
-      <View grows style={{ zIndex: 1001 }}>
+      {/* <View grows style={{ zIndex: 1001 }}>
         <Tabs
           tabs={[
             {
@@ -208,35 +174,63 @@ function Example() {
             },
           ]}
         />
-      </View>
-      <BottomNavigation
-        actions={[
-          {
-            icon: 'Home',
-            onPress() {
-              Alert.alert('Back', 'going back');
+      </View> */}
+      <View grows style={{ zIndex: 1001 }} p={2} darkBg="black">
+        <Stepper
+          steps={[
+            {
+              title: 'First Step',
+              subtitle: 'subtitle, bro',
+              content: <ExampleScreen2 />,
             },
-            label: 'Home',
-            isSelected: true,
-          },
-          {
-            icon: 'Users',
-            onPress() {},
-            label: 'People',
-          },
-          {
-            icon: 'QrCode',
-            onPress() {},
-            label: 'Qr Codes',
-          },
-        ]}
-        primary={{
-          icon: 'Plus',
-          onPress() {
-            Alert.alert('do it');
-          },
-        }}
-      />
+            {
+              title: 'Second Step',
+              subtitle: 'subtitle, bro',
+              content: <ExampleScreen2 />,
+            },
+            {
+              title: 'Third Step',
+              subtitle: 'subtitle, bro',
+              content: <ExampleScreen2 />,
+            },
+            {
+              title: 'Fourth Step',
+              subtitle: 'subtitle, bro',
+              content: <ExampleScreen2 />,
+            },
+          ]}
+        />
+      </View>
+      {!keyboard.shown && (
+        <BottomNavigation
+          actions={[
+            {
+              icon: 'Home',
+              onPress() {
+                Alert.alert('Back', 'going back');
+              },
+              label: 'Home',
+              isSelected: true,
+            },
+            {
+              icon: 'Users',
+              onPress() {},
+              label: 'People',
+            },
+            {
+              icon: 'QrCode',
+              onPress() {},
+              label: 'Qr Codes',
+            },
+          ]}
+          primary={{
+            icon: 'Plus',
+            onPress() {
+              Alert.alert('do it');
+            },
+          }}
+        />
+      )}
     </>
   );
 }
