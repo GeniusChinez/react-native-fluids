@@ -3,7 +3,7 @@ import React, { type ComponentProps } from 'react';
 import { Animated } from 'react-native';
 // import { View as ReactNativeView } from 'react-native';
 // import type { ViewProps as ReactNativeTextProps } from 'react-native';
-import { Height, Spacing, Width, useTheme } from 'theme-native';
+import { BorderRadius, Height, Spacing, Width, useTheme } from 'theme-native';
 
 export interface ViewProps extends ComponentProps<typeof Animated.View> {
   bg?: string;
@@ -34,6 +34,8 @@ export interface ViewProps extends ComponentProps<typeof Animated.View> {
 
   grows?: boolean;
   growsOnly?: boolean;
+
+  rounded?: keyof typeof BorderRadius;
 }
 
 export function View(props: ViewProps) {
@@ -67,12 +69,14 @@ export function View(props: ViewProps) {
     w,
     h,
 
+    rounded,
+
     ...restOfProps
   } = props;
 
   const theme = useTheme();
 
-  const { isDarkMode, spacing, width, height } = theme;
+  const { isDarkMode, spacing, width, height, borderRadius } = theme;
 
   return (
     <Animated.View
@@ -104,6 +108,8 @@ export function View(props: ViewProps) {
 
         width: w ? width[w] : undefined,
         height: h ? height[h] : undefined,
+
+        borderRadius: rounded ? borderRadius[rounded] : undefined,
 
         ...(style as any),
       }}

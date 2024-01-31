@@ -83,12 +83,14 @@ function Example() {
   useLightMode();
   const theme = useTheme();
   /**
-   * - Stepper
+   * - Screen
+   * - [implement a searchbox-lead topbar (like playstore)]
+   * - Surface (rounded borders, grey, padding)
    *
    * - Rating
-   * - Screen
    * - Menu
    * - DateField
+   * - Checkbox
    * - ...
    */
   const keyboard = useKeyboard();
@@ -100,20 +102,20 @@ function Example() {
         bg={theme.color.Gray[100]}
         darkBg="black"
         layout={{
-          type: 'small',
+          type: 'center-aligned',
           leadingIcon: {
-            icon: 'Menu',
+            icon: 'ArrowLeft',
           },
-          headline: 'Grayson Banes',
+          headline: 'Create Account',
           // subheadline: '+123123123123',
-          trailingIcons: [
-            {
-              icon: 'Camera',
-            },
-            {
-              icon: 'User',
-            },
-          ],
+          // trailingIcons: [
+          //   {
+          //     icon: 'Camera',
+          //   },
+          //   {
+          //     icon: 'User',
+          //   },
+          // ],
         }}
       />
       {/* <Rows growsOnly p={3} gap={4} alignY="center">
