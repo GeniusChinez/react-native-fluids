@@ -8,6 +8,9 @@ A collection of components, hooks, and logic for react native apps!
 npm install react-native-fluids
 ```
 
+## Documentation
+Currently being written. Coming soon!
+
 <!-- ## Usage
 
 ```js
