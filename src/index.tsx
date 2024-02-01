@@ -28,6 +28,7 @@ export * from './components/Stepper';
 export * from './components/Surface';
 export * from './components/Box';
 export * from './components/Screen';
+export * from './components/CheckboxField';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

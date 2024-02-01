@@ -13,6 +13,7 @@ import {
   Box,
   useScreen,
   Screen,
+  CheckboxField,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -73,6 +74,7 @@ function ExampleScreen2() {
           ]}
           required
         />
+        <CheckboxField name="remember" label="Remember me?" />
       </Form>
     </Box>
   );
