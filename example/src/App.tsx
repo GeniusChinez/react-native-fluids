@@ -15,6 +15,7 @@ import {
   Screen,
   CheckboxField,
   Text,
+  DateField,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -57,6 +58,12 @@ function ExampleScreen2() {
           placeholder="Enter Your Email"
           required
         />
+        <DateField
+          name="date"
+          label="Date Of Birth"
+          placeholder="Choose Date of Birth"
+          required
+        />
         <SelectField
           name="choose"
           label="Choose"
@@ -90,8 +97,6 @@ function Example() {
   useLightMode();
   const theme = useTheme();
   /**
-   * - Menu
-   * - DateField
    * - Code Input
    * - ...
    */

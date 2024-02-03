@@ -3481,6 +3481,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/datetimepicker@npm:7.6.1":
+  version: 7.6.1
+  resolution: "@react-native-community/datetimepicker@npm:7.6.1"
+  dependencies:
+    invariant: ^2.2.4
+  checksum: 163d3e25b90ff5bfd734df89da0cb85c9550f84f5b8273d4d806a3702d6ad163bea58253e19534fa2ab1bb424d9079e2bfe9c2e7e6a6783610f477c35e980104
+  languageName: node
+  linkType: hard
+
 "@react-native-picker/picker@npm:^2.6.1":
   version: 2.6.1
   resolution: "@react-native-picker/picker@npm:2.6.1"
@@ -7183,7 +7192,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.8.15":
+"dayjs@npm:^1.11.10, dayjs@npm:^1.8.15":
   version: 1.11.10
   resolution: "dayjs@npm:1.11.10"
   checksum: a6b5a3813b8884f5cd557e2e6b7fa569f4c5d0c97aca9558e38534af4f2d60daafd3ff8c2000fed3435cfcec9e805bcebd99f90130c6d1c5ef524084ced588c4
@@ -13089,6 +13098,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"momentjs@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "momentjs@npm:2.0.0"
+  checksum: 797a481a8566f8b2fdd18cdd77678ec1db410df2faef71d24e63cadfc21fe775cb05f4994ebe918646318fdbc9f20a66989a9c25b9464dc69efdb47cc1d512d6
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -15044,6 +15060,7 @@ __metadata:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
     "@expo/webpack-config": 19.0.1
+    "@react-native-community/datetimepicker": 7.6.1
     "@react-native-picker/picker": ^2.6.1
     "@react-native/eslint-config": ^0.72.2
     "@release-it/conventional-changelog": ^5.0.0
@@ -15052,6 +15069,7 @@ __metadata:
     "@types/react-native": 0.70.0
     "@types/react-native-vector-icons": ^6.4.18
     commitlint: ^17.0.2
+    dayjs: ^1.11.10
     del-cli: ^5.0.0
     eslint: ^8.4.1
     eslint-config-prettier: ^8.5.0
@@ -15059,12 +15077,13 @@ __metadata:
     expo: 50.0.5
     jest: ^28.1.1
     lucide-react-native: ^0.316.0
+    momentjs: ^2.0.0
     prettier: ^2.0.5
     react: 18.2.0
     react-native: 0.73.2
     react-native-builder-bob: ^0.20.0
     react-native-gesture-handler: ^2.14.1
-    react-native-pager-view: ^6.2.3
+    react-native-pager-view: 6.2.3
     react-native-picker-select: ^9.0.1
     react-native-ratings: ^8.1.0
     react-native-reanimated: ^3.6.2
@@ -15098,7 +15117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-pager-view@npm:^6.2.3":
+"react-native-pager-view@npm:6.2.3":
   version: 6.2.3
   resolution: "react-native-pager-view@npm:6.2.3"
   peerDependencies:

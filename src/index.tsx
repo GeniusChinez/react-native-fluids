@@ -30,6 +30,7 @@ export * from './components/Box';
 export * from './components/Screen';
 export * from './components/CheckboxField';
 export * from './components/MenuLayout';
+export * from './components/DateField';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

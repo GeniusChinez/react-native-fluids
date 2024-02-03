@@ -8,7 +8,7 @@ import { Columns } from './Columns';
 import { Button } from './Button';
 import type { IconType } from './Icon';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Platform } from 'react-native';
+// import { Platform } from 'react-native';
 
 export type AppbarIcon = {
   icon: IconType;
@@ -342,7 +342,7 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
   );
 }
 
-const isIos = Platform.OS === 'ios';
+// const isIos = Platform.OS === 'ios';
 
 export function TopAppbar(props: TopAppbarProps) {
   const theme = useTheme();
@@ -355,7 +355,8 @@ export function TopAppbar(props: TopAppbarProps) {
       bg={bg}
       darkBg={darkBg}
       style={{
-        paddingTop: isIos ? insets.top : 0,
+        // paddingTop: isIos ? insets.top : 0,
+        paddingTop: insets.top,
       }}
       w={'Full'}
       h={layout.type === 'medium' ? 24 : layout.type === 'large' ? 32 : 16}
