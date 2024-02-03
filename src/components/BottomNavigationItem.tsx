@@ -9,6 +9,7 @@ import type { ButtonProps } from './Button';
 import { Icon, type IconType } from './Icon';
 import { useBottomSheetTrigger } from '../hooks/useBottomSheetTrigger';
 import { SheetMenu } from './SheetMenu';
+import { BlankSheet } from './BlankSheet';
 
 export interface BottomNavigationAction extends ButtonProps {
   icon: IconType;
@@ -16,15 +17,17 @@ export interface BottomNavigationAction extends ButtonProps {
   isSelected?: boolean;
   onPress?: () => void;
   menu?: ButtonProps['menu'];
+  sheet?: ButtonProps['sheet'];
 }
 
 export interface BottomNavigationItemProps extends BottomNavigationAction {}
 
 export function BottomNavigationItem(props: BottomNavigationItemProps) {
-  const { isSelected, label, menu } = props;
+  const { isSelected, label, menu, sheet } = props;
 
   const theme = useTheme();
   const menuBottomSheet = useBottomSheetTrigger();
+  const bottomSheet = useBottomSheetTrigger();
 
   return (
     <>
@@ -38,6 +41,10 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
         onPress={() => {
           if (menu) {
             menuBottomSheet.open();
+          }
+
+          if (sheet) {
+            bottomSheet.open();
           }
         }}
       >
@@ -75,6 +82,7 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
         </Rows>
       </TouchableOpacity>
       {!!menu && <SheetMenu {...menu} sheetRef={menuBottomSheet.ref} />}
+      {!!sheet && <BlankSheet {...sheet} sheetRef={bottomSheet.ref} />}
     </>
   );
 }

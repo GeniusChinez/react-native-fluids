@@ -8,6 +8,7 @@ import { Icon, type IconType } from './Icon';
 import { LoadingIcon } from './LoadingIcon';
 import { SheetMenu, type SheetMenuProps } from './SheetMenu';
 import { useBottomSheetTrigger } from '../hooks/useBottomSheetTrigger';
+import { BlankSheet, type BlankSheetProps } from './BlankSheet';
 
 export type ButtonVariant = 'solid' | 'outline' | 'ghost';
 export type ColorVariant =
@@ -49,6 +50,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   isVeryCompact?: boolean;
 
   menu?: SheetMenuProps;
+  sheet?: BlankSheetProps;
 }
 
 export function Button(props: ButtonProps) {
@@ -77,6 +79,7 @@ export function Button(props: ButtonProps) {
     isCompact,
     isVeryCompact,
     menu,
+    sheet,
     ...restOfProps
   } = props;
 
@@ -123,6 +126,7 @@ export function Button(props: ButtonProps) {
   }, [color, darkColor, darkTextColor, isDarkMode, textColor, variant]);
 
   const { ref: menuBottomSheet, open: openMenu } = useBottomSheetTrigger();
+  const { ref: bottomSheet, open: openSheet } = useBottomSheetTrigger();
 
   return (
     <>
@@ -160,6 +164,10 @@ export function Button(props: ButtonProps) {
 
           if (menu) {
             openMenu();
+          }
+
+          if (sheet) {
+            openSheet();
           }
         }}
       >
@@ -243,6 +251,7 @@ export function Button(props: ButtonProps) {
         </Columns>
       </TouchableOpacity>
       {!!menu && <SheetMenu {...menu} sheetRef={menuBottomSheet} />}
+      {!!sheet && <BlankSheet {...sheet} sheetRef={bottomSheet} />}
     </>
   );
 }

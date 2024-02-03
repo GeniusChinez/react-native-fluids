@@ -14,6 +14,7 @@ import {
   useScreen,
   Screen,
   CheckboxField,
+  Text,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -44,12 +45,8 @@ function ExampleScreen2() {
           {
             color: 'Secondary',
             text: 'Create Account',
-            menu: {
-              items: [
-                {
-                  label: 'Cilck me',
-                },
-              ],
+            sheet: {
+              children: <Text>bro thinks he's Hikaru</Text>,
             },
           },
         ]}
@@ -134,6 +131,9 @@ function Example() {
           icon: 'Users',
           onPress() {},
           label: 'People',
+          sheet: {
+            children: <Text>bro thinks he's Hikaru</Text>,
+          },
         },
         {
           icon: 'Menu',
