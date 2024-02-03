@@ -44,6 +44,13 @@ function ExampleScreen2() {
           {
             color: 'Secondary',
             text: 'Create Account',
+            menu: {
+              items: [
+                {
+                  label: 'Cilck me',
+                },
+              ],
+            },
           },
         ]}
       >

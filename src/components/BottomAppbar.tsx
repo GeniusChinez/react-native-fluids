@@ -1,14 +1,13 @@
 import React from 'react';
 import { useTheme } from 'theme-native';
 
-import { Button } from './Button';
+import { Button, type ButtonProps } from './Button';
 import { Columns } from './Columns';
 import type { IconType } from './Icon';
 
-type Action = {
+interface Action extends ButtonProps {
   icon: IconType;
-  onPress?: () => void;
-};
+}
 
 export interface BottomAppbarProps {
   actions?: Action[];
@@ -34,28 +33,26 @@ export function BottomAppbar(props: BottomAppbarProps) {
       <Columns alignX="left" alignY="center" gap={0.5}>
         {actions?.map((action, actionIndex) => (
           <Button
+            {...action}
             key={actionIndex}
-            icon={action.icon}
             variant="solid"
             darkColor={'Stone'}
             colorVariant={200}
             darkColorVariant={800}
             textColor={theme.color.Gray[700]}
             color={'Gray'}
-            onPress={action.onPress}
           />
         ))}
       </Columns>
       {!!primary && (
         <Button
-          icon={primary.icon}
+          {...primary}
           shape="pill"
           colorVariant={600}
           darkColorVariant={600}
           darkColor={'Primary'}
           textColor={theme.color.White}
           darkTextColor={theme.color.White}
-          onPress={primary.onPress}
         />
       )}
     </Columns>
