@@ -4,22 +4,15 @@ import { useTheme } from 'theme-native';
 
 import { Button } from './Button';
 import { Columns } from './Columns';
-import { Icon, type IconType } from './Icon';
-import { Text } from './Text';
 import { Rows } from './Rows';
-import { TouchableOpacity } from 'react-native';
-import { View } from './View';
-
-type Action = {
-  icon: IconType;
-  label: string;
-  isSelected?: boolean;
-  onPress?: () => void;
-};
+import {
+  BottomNavigationItem,
+  type BottomNavigationAction,
+} from './BottomNavigationItem';
 
 export interface BottomNavigationProps {
-  actions?: Action[];
-  primary?: Omit<Action, 'label'>;
+  actions?: BottomNavigationAction[];
+  primary?: Omit<BottomNavigationAction, 'label'>;
 }
 
 export function BottomNavigation(props: BottomNavigationProps) {
@@ -40,67 +33,7 @@ export function BottomNavigation(props: BottomNavigationProps) {
     >
       <Columns alignX="left" alignY="center" gap={0.5} grows>
         {actions?.map((action, actionIndex) => (
-          // <Button
-          //   key={actionIndex}
-          //   icon={action.icon}
-          //   variant="solid"
-          //   darkColor={'Stone'}
-          //   colorVariant={200}
-          //   darkColorVariant={800}
-          //   textColor={theme.color.Gray[700]}
-          //   color={'Gray'}
-          //   onPress={action.onPress}
-          // />
-          <TouchableOpacity
-            key={actionIndex}
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Rows alignX="center" alignY="center">
-              <View
-                bg={action.isSelected ? theme.color.Gray[200] : undefined}
-                darkBg={action.isSelected ? theme.color.Gray[800] : undefined}
-                px={4}
-                py={1.5}
-                style={{
-                  borderRadius: theme.borderRadius['2xl'],
-                }}
-              >
-                <Icon
-                  name={action.icon}
-                  darkColor={
-                    action.isSelected
-                      ? theme.color.Primary[400]
-                      : theme.color.Gray[400]
-                  }
-                  color={
-                    action.isSelected
-                      ? theme.color.Primary[700]
-                      : theme.color.Gray[700]
-                  }
-                />
-              </View>
-              <Text
-                size="sm"
-                darkColor={
-                  action.isSelected
-                    ? theme.color.Primary[400]
-                    : theme.color.Gray[400]
-                }
-                color={
-                  action.isSelected
-                    ? theme.color.Primary[700]
-                    : theme.color.Gray[700] // maybe lower the opacity if inactive?
-                }
-              >
-                {action.label}
-              </Text>
-            </Rows>
-          </TouchableOpacity>
+          <BottomNavigationItem {...action} key={actionIndex} />
         ))}
       </Columns>
       {!!primary && (
@@ -111,6 +44,7 @@ export function BottomNavigation(props: BottomNavigationProps) {
           alignX="right"
         >
           <Button
+            {...primary}
             icon={primary.icon}
             shape="pill"
             colorVariant={600}

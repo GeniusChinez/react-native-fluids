@@ -14,6 +14,7 @@ export function Separator(props: SeparatorProps) {
 
   const instanceOf = (
     <View
+      w={'Full'}
       bg={theme.color.Gray[200]}
       darkBg="rgba(255,255,255,0.1)"
       {...props}

@@ -30,6 +30,8 @@ export default function App() {
 }
 
 function ExampleScreen2() {
+  // const theme = useTheme();
+
   return (
     <Box rows p={3} gap={4} alignY="center">
       <Form
@@ -84,14 +86,9 @@ function Example() {
   useLightMode();
   const theme = useTheme();
   /**
-   * - Screen
-   * - [implement a searchbox-lead topbar (like playstore)]
-
-   *
-   * - Rating
    * - Menu
    * - DateField
-   * - Checkbox
+   * - Code Input
    * - ...
    */
   const screen = useScreen({
@@ -116,31 +113,149 @@ function Example() {
         // ],
       },
     },
-    bottomAppbar: {
+    bottomNavigation: {
       actions: [
         {
           icon: 'Home',
           onPress() {
             Alert.alert('Back', 'going back');
           },
-          // label: 'Home',
-          // isSelected: true,
+          label: 'Home',
+          isSelected: true,
         },
         {
           icon: 'Users',
           onPress() {},
-          // label: 'People',
+          label: 'People',
         },
         {
-          icon: 'QrCode',
-          onPress() {},
-          // label: 'Qr Codes',
+          icon: 'Menu',
+          label: 'More',
+          menu: {
+            items: [
+              {
+                label: 'Freeze',
+                icon: {
+                  name: 'IceCream',
+                },
+                iconPos: 'right',
+              },
+              {
+                label: 'Freeze',
+                icon: {
+                  name: 'IceCream',
+                },
+                iconPos: 'right',
+              },
+              {
+                label: 'Delete',
+                icon: {
+                  name: 'Trash',
+                  color: 'red',
+                },
+                labelProps: {
+                  color: 'red',
+                },
+                iconPos: 'right',
+              },
+            ],
+          },
         },
       ],
       primary: {
-        icon: 'Plus',
-        onPress() {
-          Alert.alert('do it');
+        icon: 'Menu',
+        menu: {
+          height: 400,
+          groups: [
+            {
+              label: 'Saving',
+              items: [
+                {
+                  label: 'Save',
+                  icon: {
+                    name: 'Save',
+                  },
+                  // iconPos: 'right',
+                },
+                {
+                  label: 'Save All',
+                  icon: {
+                    name: 'SaveAll',
+                  },
+                  // iconPos: 'right',
+                },
+              ],
+            },
+            {
+              label: 'Dangerous',
+              items: [
+                {
+                  label: 'Freeze',
+                  icon: {
+                    name: 'IceCream',
+                  },
+                  iconPos: 'right',
+                },
+                {
+                  label: 'Delete',
+                  icon: {
+                    name: 'Trash',
+                    color: 'red',
+                  },
+                  labelProps: {
+                    color: 'red',
+                  },
+                  iconPos: 'right',
+                },
+              ],
+            },
+            {
+              label: 'Dangerous',
+              items: [
+                {
+                  label: 'Freeze',
+                  icon: {
+                    name: 'IceCream',
+                  },
+                  iconPos: 'right',
+                },
+                {
+                  label: 'Delete',
+                  icon: {
+                    name: 'Trash',
+                    color: 'red',
+                  },
+                  labelProps: {
+                    color: 'red',
+                  },
+                  iconPos: 'right',
+                },
+              ],
+            },
+            {
+              label: 'Dangerous',
+              items: [
+                {
+                  label: 'Freeze',
+                  icon: {
+                    name: 'IceCream',
+                  },
+                  iconPos: 'right',
+                },
+                {
+                  label: 'Delete',
+                  icon: {
+                    name: 'Trash',
+                    color: 'red',
+                  },
+                  labelProps: {
+                    color: 'red',
+                  },
+                  iconPos: 'right',
+                },
+              ],
+            },
+          ],
         },
       },
     },

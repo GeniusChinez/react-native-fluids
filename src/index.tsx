@@ -29,6 +29,7 @@ export * from './components/Surface';
 export * from './components/Box';
 export * from './components/Screen';
 export * from './components/CheckboxField';
+export * from './components/MenuLayout';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
@@ -37,6 +38,7 @@ export * from './hooks/useScreen';
 export * from './hooks/useTopAppbar';
 export * from './hooks/useBottomAppbar';
 export * from './hooks/useBottomNavigation';
+export * from './hooks/useBottomSheetTrigger';
 
 // logic
 export * from './logic/core.validations';

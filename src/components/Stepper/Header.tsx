@@ -72,7 +72,7 @@ export function StepperHeader(props: StepperHeaderProps) {
                   ? theme.color.Primary[600]
                   : isDarkMode
                   ? theme.color.Gray[800]
-                  : theme.color.Gray[300],
+                  : theme.color.Gray[200],
             }}
             onPress={() => {
               // if (activeStep > index) {
@@ -82,7 +82,7 @@ export function StepperHeader(props: StepperHeaderProps) {
           >
             <Text size="sm">
               {activeStep > index ? (
-                <Icon name="Check" size={18} color={'white'} />
+                <Icon name="Check" size={20} color={'white'} />
               ) : (
                 `${index + 1}`
               )}
