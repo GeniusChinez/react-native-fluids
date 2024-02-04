@@ -31,6 +31,8 @@ export * from './components/Screen';
 export * from './components/CheckboxField';
 export * from './components/MenuLayout';
 export * from './components/DateField';
+export * from './components/CodeInput';
+export * from './components/CodeField';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';

@@ -16,6 +16,7 @@ import {
   CheckboxField,
   Text,
   DateField,
+  CodeField,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -32,8 +33,6 @@ export default function App() {
 }
 
 function ExampleScreen2() {
-  // const theme = useTheme();
-
   return (
     <Box rows p={3} gap={4} alignY="center">
       <Form
@@ -62,6 +61,13 @@ function ExampleScreen2() {
           name="date"
           label="Date Of Birth"
           placeholder="Choose Date of Birth"
+          required
+        />
+        <CodeField
+          name="pin"
+          label="Enter PIN"
+          length={4}
+          hiddenInput
           required
         />
         <SelectField
