@@ -364,15 +364,16 @@ export function TopAppbar(props: TopAppbarProps) {
       style={{
         // paddingTop: isIos ? insets.top : 0,
         paddingTop: insets.top,
-        height:
-          layout.type === 'medium'
-            ? theme.height[24]
-            : layout.type === 'large'
-            ? theme.height[32]
-            : theme.height[16],
+        // height:
+        //   layout.type === 'medium'
+        //     ? theme.height[24]
+        //     : layout.type === 'large'
+        //     ? theme.height[32]
+        //     : theme.height[16],
       }}
       w={'Full'}
       h={layout.type === 'medium' ? 28 : layout.type === 'large' ? 36 : 20}
+      // h={layout.type === 'medium' ? 24 : layout.type === 'large' ? 32 : 16}
       alignY="bottom"
     >
       <StatusBar
