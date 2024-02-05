@@ -3,7 +3,6 @@ import { Alert } from 'react-native';
 import {
   FluidsProvider,
   useTheme,
-  useLightMode,
   SelectField,
   TextField,
   Form,
@@ -16,6 +15,8 @@ import {
   CodeField,
   AnswerPicker,
   Rows,
+  View,
+  useLightMode,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -278,9 +279,22 @@ function Example() {
   useLightMode();
   return (
     <Screen {...screen}>
-      <Rows alignY="bottom" grows p={4}>
+      <Rows alignY="center" grows p={4} gap={10} alignX="center">
+        <View style={{ maxWidth: '80%' }}>
+          <Text
+            color={theme.color.Gray[500]}
+            weight="Bold"
+            size="xl"
+            isCenterAligned
+          >
+            What do you do when you say something gay:
+          </Text>
+        </View>
         <AnswerPicker
-          layout="columns"
+          // incorrect
+          // correct
+          layout="rows"
+          alignAnswers="center"
           handleChange={(x) => Alert.alert(x)}
           options={[
             {

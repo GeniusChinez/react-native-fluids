@@ -4,6 +4,9 @@ import { Text } from './Text';
 import { Box } from './Box';
 import { useTheme } from 'theme-native';
 import { TouchableOpacity } from 'react-native';
+import { Columns } from './Columns';
+import { Icon } from './Icon';
+import { View } from './View';
 
 export interface AnswerOptionProps extends PropsWithChildren<{}> {
   layout: 'rows' | 'columns';
@@ -11,6 +14,8 @@ export interface AnswerOptionProps extends PropsWithChildren<{}> {
   isSelected?: boolean;
   handleSelect?: () => void;
   alignText?: 'center' | 'left';
+  incorrect?: boolean;
+  correct?: boolean;
 }
 export function AnswerOption(props: AnswerOptionProps) {
   const {
@@ -20,6 +25,8 @@ export function AnswerOption(props: AnswerOptionProps) {
     isSelected = false,
     handleSelect,
     alignText,
+    correct,
+    incorrect,
   } = props;
   const theme = useTheme();
   const { isDarkMode } = theme;
@@ -32,16 +39,32 @@ export function AnswerOption(props: AnswerOptionProps) {
         borderWidth: theme.borderWidth[2],
         borderColor: isDarkMode
           ? isSelected
-            ? theme.color.Primary[500]
+            ? correct
+              ? theme.color.Success[500]
+              : incorrect
+              ? theme.color.Danger[500]
+              : theme.color.Primary[500]
             : theme.color.Gray[500]
           : isSelected
-          ? theme.color.Primary[500]
+          ? correct
+            ? theme.color.Success[600]
+            : incorrect
+            ? theme.color.Danger[500]
+            : theme.color.Primary[500]
           : theme.color.Gray[300],
         padding: theme.spacing[4],
         borderRadius: theme.borderRadius.Md,
         backgroundColor: isSelected
           ? isDarkMode
-            ? theme.color.Primary[950]
+            ? correct
+              ? theme.color.Success[950]
+              : incorrect
+              ? theme.color.Danger[950]
+              : theme.color.Primary[950]
+            : correct
+            ? theme.color.Success[50]
+            : incorrect
+            ? theme.color.Danger[50]
             : theme.color.Primary[50]
           : 'transparent',
         flexDirection: 'row',
@@ -50,19 +73,59 @@ export function AnswerOption(props: AnswerOptionProps) {
       }}
       onPress={handleSelect}
     >
-      {typeof children === 'string' ? (
-        <Text
-          darkColor={
-            isSelected ? theme.color.Primary[300] : theme.color.Gray[400]
-          }
-          color={isSelected ? theme.color.Primary[700] : theme.color.Gray[700]}
-          isCenterAligned={alignText === 'center'}
-        >
-          {children}
-        </Text>
-      ) : (
-        children
-      )}
+      <Columns
+        alignX="space-between"
+        gap={3}
+        w={alignText === 'left' ? 'Full' : undefined}
+      >
+        <View grows={alignText !== 'center'}>
+          {typeof children === 'string' ? (
+            <Text
+              weight={isSelected ? 'Bold' : 'Normal'}
+              darkColor={isSelected ? theme.color.White : theme.color.Gray[400]}
+              color={
+                isSelected
+                  ? correct
+                    ? theme.color.Success[600]
+                    : incorrect
+                    ? theme.color.Danger[600]
+                    : theme.color.Primary[700]
+                  : theme.color.Gray[700]
+              }
+              isCenterAligned={alignText === 'center'}
+            >
+              {children}
+            </Text>
+          ) : (
+            children
+          )}
+        </View>
+        {(incorrect || correct) && isSelected && (
+          <Icon
+            strokeWidth={3}
+            darkColor={
+              isSelected
+                ? correct
+                  ? theme.color.Success[300]
+                  : incorrect
+                  ? theme.color.Danger[200]
+                  : theme.color.Primary[300]
+                : theme.color.Gray[400]
+            }
+            color={
+              isSelected
+                ? correct
+                  ? theme.color.Success[600]
+                  : incorrect
+                  ? theme.color.Danger[600]
+                  : theme.color.Primary[700]
+                : theme.color.Gray[700]
+            }
+            name={correct ? 'Check' : 'X'}
+            size={22}
+          />
+        )}
+      </Columns>
     </TouchableOpacity>
   );
 }
@@ -74,6 +137,8 @@ export interface AnswerPickerProps {
   defaultOption?: string;
   options: { label: string; value: string }[];
   handleChange?: (v: string) => void;
+  incorrect?: boolean;
+  correct?: boolean;
 }
 export function AnswerPicker(props: AnswerPickerProps) {
   const {
@@ -82,6 +147,8 @@ export function AnswerPicker(props: AnswerPickerProps) {
     options,
     handleChange,
     alignAnswers,
+    correct,
+    incorrect,
   } = props;
   const [selectedOption, setSelectedOption] = useState(defaultOption);
 
@@ -112,6 +179,10 @@ export function AnswerPicker(props: AnswerPickerProps) {
               handleChange(option.value);
             }
           }}
+          incorrect={
+            (incorrect && selectedOption === option.value) || undefined
+          }
+          correct={(correct && selectedOption === option.value) || undefined}
         >
           {option.label}
         </AnswerOption>
