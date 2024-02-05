@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { Alert } from 'react-native';
 import {
@@ -8,8 +7,6 @@ import {
   SelectField,
   TextField,
   Form,
-  View,
-  Stepper,
   Box,
   useScreen,
   Screen,
@@ -17,6 +14,8 @@ import {
   Text,
   DateField,
   CodeField,
+  AnswerPicker,
+  Rows,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -32,7 +31,7 @@ export default function App() {
   );
 }
 
-function ExampleScreen2() {
+export function ExampleScreen2() {
   return (
     <Box rows p={3} gap={4} alignY="center">
       <Form
@@ -100,7 +99,6 @@ function ExampleScreen2() {
 }
 
 function Example() {
-  useLightMode();
   const theme = useTheme();
   /**
    * - Code Input
@@ -109,8 +107,6 @@ function Example() {
   const screen = useScreen({
     topAppbar: {
       textColor: theme.color.Gray[700],
-      bg: theme.color.Gray[100],
-      darkBg: 'black',
       layout: {
         type: 'center-aligned',
         leadingIcon: {
@@ -279,9 +275,30 @@ function Example() {
     },
   });
 
+  useLightMode();
   return (
     <Screen {...screen}>
-      <View grows style={{ zIndex: 1001 }} p={2} darkBg="black">
+      <Rows alignY="bottom" grows p={4}>
+        <AnswerPicker
+          layout="columns"
+          handleChange={(x) => Alert.alert(x)}
+          options={[
+            {
+              label: 'Continue',
+              value: 'first',
+            },
+            {
+              label: 'Pause',
+              value: 'second',
+            },
+            {
+              label: 'Neither',
+              value: 'third',
+            },
+          ]}
+        />
+      </Rows>
+      {/* <View grows style={{ zIndex: 1001 }} p={2} darkBg='black'>
         <Stepper
           steps={[
             {
@@ -306,7 +323,7 @@ function Example() {
             },
           ]}
         />
-      </View>
+      </View> */}
     </Screen>
   );
 }

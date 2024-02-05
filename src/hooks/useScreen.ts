@@ -22,6 +22,7 @@ export function useScreen(args: Args) {
       topAppbar,
       bottomAppbar,
       bottomNavigation,
+      darkBg: 'black',
     }),
     [bottomAppbar, bottomNavigation, topAppbar]
   );

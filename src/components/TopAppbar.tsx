@@ -148,13 +148,13 @@ function SmallTopAppbarContent(props: SmallTopAppbarContentProps) {
       w={'Full'}
       gap={1}
     >
-      <Rows
-        alignX="left"
-        style={{
-          flexBasis: theme.width[14],
-        }}
-      >
-        {!!leadingIcon && (
+      {!!leadingIcon && (
+        <Rows
+          alignX="left"
+          style={{
+            flexBasis: theme.width[14],
+          }}
+        >
           <Button
             icon={leadingIcon.icon}
             onPress={leadingIcon.onPress}
@@ -162,8 +162,8 @@ function SmallTopAppbarContent(props: SmallTopAppbarContentProps) {
             darkTextColor={darkTextColor}
             variant="ghost"
           />
-        )}
-      </Rows>
+        </Rows>
+      )}
       <Rows grows alignX="left" alignY="center">
         <Text
           size={'lg'}
@@ -214,13 +214,13 @@ function MediumTopAppbarContent(props: MediumTopAppbarContentProps) {
         w={'Full'}
         gap={1}
       >
-        <Rows
-          alignX="left"
-          style={{
-            flexBasis: theme.width[14],
-          }}
-        >
-          {!!leadingIcon && (
+        {!!leadingIcon && (
+          <Rows
+            alignX="left"
+            style={{
+              flexBasis: theme.width[14],
+            }}
+          >
             <Button
               icon={leadingIcon.icon}
               onPress={leadingIcon.onPress}
@@ -228,8 +228,8 @@ function MediumTopAppbarContent(props: MediumTopAppbarContentProps) {
               darkTextColor={darkTextColor}
               variant="ghost"
             />
-          )}
-        </Rows>
+          </Rows>
+        )}
 
         {!!trailingIcons && (
           <Columns alignX="right" gap={1} pr={2}>
@@ -347,8 +347,15 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
 export function TopAppbar(props: TopAppbarProps) {
   const theme = useTheme();
 
-  const { isDark, bg = theme.color.Gray[100], darkBg, layout } = props;
+  const {
+    isDark,
+    bg = theme.color.Gray[100],
+    darkBg = theme.color.Stone[900],
+    layout,
+  } = props;
   const insets = useSafeAreaInsets();
+
+  const { isDarkMode } = theme;
 
   return (
     <Rows
@@ -357,14 +364,20 @@ export function TopAppbar(props: TopAppbarProps) {
       style={{
         // paddingTop: isIos ? insets.top : 0,
         paddingTop: insets.top,
+        height:
+          layout.type === 'medium'
+            ? theme.height[24]
+            : layout.type === 'large'
+            ? theme.height[32]
+            : theme.height[16],
       }}
       w={'Full'}
-      h={layout.type === 'medium' ? 24 : layout.type === 'large' ? 32 : 16}
+      // h={layout.type === 'medium' ? 24 : layout.type === 'large' ? 32 : 16}
       alignY="bottom"
     >
       <StatusBar
-        backgroundColor={bg}
-        barStyle={isDark ? 'light-content' : 'dark-content'}
+        backgroundColor={isDarkMode ? darkBg : bg}
+        barStyle={isDark || isDarkMode ? 'light-content' : 'dark-content'}
       />
       {layout?.type === 'center-aligned' && (
         <CenterAlignedTopAppbarContent {...props} {...layout} />

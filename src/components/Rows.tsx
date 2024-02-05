@@ -4,7 +4,13 @@ import { View, type ViewProps } from './View';
 
 export interface RowsProps extends ViewProps {
   alignY?: 'top' | 'center' | 'bottom' | 'space-between' | 'space-around';
-  alignX?: 'left' | 'center' | 'right' | 'space-between' | 'space-around';
+  alignX?:
+    | 'left'
+    | 'center'
+    | 'right'
+    | 'space-between'
+    | 'space-around'
+    | 'stretch';
 }
 
 export function Rows(props: RowsProps) {
@@ -34,6 +40,8 @@ export function Rows(props: RowsProps) {
             ? 'space-around'
             : alignX === 'space-between'
             ? 'space-between'
+            : alignX === 'stretch'
+            ? 'stretch'
             : 'flex-start',
         ...(style as any),
       }}

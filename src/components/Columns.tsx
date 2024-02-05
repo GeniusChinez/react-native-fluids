@@ -4,7 +4,7 @@ import { View, type ViewProps } from './View';
 
 export interface ColumnsProps extends ViewProps {
   alignX?: 'left' | 'center' | 'right' | 'space-between' | 'space-around';
-  alignY?: 'top' | 'center' | 'bottom';
+  alignY?: 'top' | 'center' | 'bottom' | 'stretch';
 }
 
 export function Columns(props: ColumnsProps) {
@@ -29,6 +29,8 @@ export function Columns(props: ColumnsProps) {
             ? 'center'
             : alignY === 'bottom'
             ? 'flex-end'
+            : alignY === 'stretch'
+            ? 'stretch'
             : 'flex-start',
         ...(style as any),
       }}

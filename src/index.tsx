@@ -33,6 +33,7 @@ export * from './components/MenuLayout';
 export * from './components/DateField';
 export * from './components/CodeInput';
 export * from './components/CodeField';
+export * from './components/AnswerPicker';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
