@@ -372,7 +372,7 @@ export function TopAppbar(props: TopAppbarProps) {
             : theme.height[16],
       }}
       w={'Full'}
-      // h={layout.type === 'medium' ? 24 : layout.type === 'large' ? 32 : 16}
+      h={layout.type === 'medium' ? 28 : layout.type === 'large' ? 36 : 20}
       alignY="bottom"
     >
       <StatusBar
