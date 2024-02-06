@@ -31,6 +31,8 @@ export function Screen(props: ScreenProps) {
     <>
       {!!topAppbar && <TopAppbar {...topAppbar} />}
       <View
+        bg="white"
+        darkBg="black"
         grows
         {...restOfProps}
         style={{
