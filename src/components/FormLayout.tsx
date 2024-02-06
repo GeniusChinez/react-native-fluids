@@ -38,7 +38,7 @@ export function FormLayout(props: FormLayoutProps) {
       <FieldList {...fieldListProps}>{children}</FieldList>
       {showFormError && <FormError />}
       {!!actions && (
-        <Rows gap={3} {...actionsContainerProps}>
+        <Rows gap={2} {...actionsContainerProps}>
           {actions}
         </Rows>
       )}
