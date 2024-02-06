@@ -23,7 +23,7 @@ export interface BottomNavigationAction extends ButtonProps {
 export interface BottomNavigationItemProps extends BottomNavigationAction {}
 
 export function BottomNavigationItem(props: BottomNavigationItemProps) {
-  const { isSelected, label, menu, sheet } = props;
+  const { isSelected, label, menu, sheet, onPress } = props;
 
   const theme = useTheme();
   const menuBottomSheet = useBottomSheetTrigger();
@@ -39,6 +39,10 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
           justifyContent: 'center',
         }}
         onPress={() => {
+          if (onPress) {
+            onPress();
+          }
+
           if (menu) {
             menuBottomSheet.open();
           }
