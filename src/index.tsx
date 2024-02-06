@@ -34,6 +34,7 @@ export * from './components/DateField';
 export * from './components/CodeInput';
 export * from './components/CodeField';
 export * from './components/AnswerPicker';
+export * from './components/PlatformSpecific';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
