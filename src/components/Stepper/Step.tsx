@@ -23,8 +23,8 @@ export function StepperStep(props: StepperStepProps) {
 
   return (
     <ScrollView
-      style={{
-        flex: 1,
+      contentContainerStyle={{
+        flexGrow: 1,
       }}
     >
       <View
