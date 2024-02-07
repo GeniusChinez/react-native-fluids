@@ -41,8 +41,8 @@ export function Screen(props: ScreenProps) {
           }}
         >
           <View
-            bg="white"
-            darkBg="black"
+            // bg="white"
+            // darkBg="black"
             grows
             {...restOfProps}
             style={{
