@@ -35,6 +35,7 @@ export * from './components/CodeInput';
 export * from './components/CodeField';
 export * from './components/AnswerPicker';
 export * from './components/PlatformSpecific';
+export * from './components/BottomSheetsProvider';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
