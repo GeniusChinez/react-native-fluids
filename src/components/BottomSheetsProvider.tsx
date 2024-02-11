@@ -72,11 +72,12 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
     (props_: any) => (
       <BottomSheetBackdrop
         {...props_}
+        onPress={() => close()}
         disappearsOnIndex={-1}
         appearsOnIndex={1}
       />
     ),
-    []
+    [close]
   );
 
   const hardwareBackPressCustom = useCallback(() => {
