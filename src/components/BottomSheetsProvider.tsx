@@ -99,11 +99,6 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
             ? theme.color.Stone[800]
             : theme.color.White,
         }}
-        containerStyle={{
-          backgroundColor: isDarkMode
-            ? theme.color.Stone[800]
-            : theme.color.White,
-        }}
         ref={ref}
         index={-1}
         enablePanDownToClose
