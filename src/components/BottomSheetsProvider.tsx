@@ -8,7 +8,6 @@ import {
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { useTheme } from 'theme-native';
 import { useHijackBack } from '../hooks/useHijackBack';
-import { View } from './View';
 
 export type BottomSheetArgs = {
   height?: number;
@@ -81,11 +80,6 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
     [close]
   );
 
-  const renderBackground = useCallback(
-    (bgProps: any) => <View {...bgProps} />,
-    []
-  );
-
   // ...
   const enableBack = useCallback(() => {
     return !isOpen;
@@ -117,7 +111,6 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
         enablePanDownToClose
         snapPoints={['1%', `${height || 50}%`]}
         backdropComponent={renderBackdrop}
-        backgroundComponent={renderBackground}
         onChange={(pos) => {
           if (pos === 0) {
             close();
