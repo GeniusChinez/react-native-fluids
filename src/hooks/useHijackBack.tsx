@@ -5,10 +5,11 @@ export interface HijackBackProps {
   disabled?: boolean;
   enableIf?: () => boolean;
   ifNotEnabled?: () => void;
+  ifEnabled?: () => void;
 }
 
 export function useHijackBack(props: HijackBackProps) {
-  const { enableIf, disabled, ifNotEnabled } = props;
+  const { enableIf, disabled, ifNotEnabled, ifEnabled } = props;
 
   const hardwareBackPressCustom = useCallback(() => {
     if (disabled) {
@@ -17,6 +18,10 @@ export function useHijackBack(props: HijackBackProps) {
 
     if (enableIf) {
       if (enableIf()) {
+        if (ifEnabled) {
+          ifEnabled();
+          return true;
+        }
         return false;
       }
       if (ifNotEnabled) {
@@ -27,7 +32,7 @@ export function useHijackBack(props: HijackBackProps) {
 
     // to disable default, return true
     return false;
-  }, [disabled, enableIf, ifNotEnabled]);
+  }, [disabled, enableIf, ifEnabled, ifNotEnabled]);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', hardwareBackPressCustom);

@@ -1,12 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useStepper } from './Context';
 import { useTheme } from 'theme-native';
 import { View } from '../View';
 import { Text } from '../Text';
 import { Button } from '../Button';
 import { ScrollView } from 'react-native';
-import { BackHandler } from 'react-native';
+import { useHijackBack } from '../../hooks/useHijackBack';
 
 export interface StepperStepProps {
   title?: string;
@@ -24,27 +24,18 @@ export function StepperStep(props: StepperStepProps) {
   const theme = useTheme();
   const { goForward, isFirstStep, goBackward } = useStepper();
 
-  const hardwareBackPressCustom = useCallback(() => {
-    if (!isFirstStep) {
-      goBackward();
-      return true;
-    }
-    if (onBack) {
-      onBack();
+  const enableBack = useCallback(() => {
+    if (isFirstStep) {
       return true;
     }
     return false;
-  }, [goBackward, isFirstStep, onBack]);
+  }, [isFirstStep]);
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', hardwareBackPressCustom);
-    return () => {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        hardwareBackPressCustom
-      );
-    };
-  }, [hardwareBackPressCustom]);
+  useHijackBack({
+    enableIf: enableBack,
+    ifEnabled: onBack,
+    ifNotEnabled: goBackward,
+  });
 
   return (
     <ScrollView
