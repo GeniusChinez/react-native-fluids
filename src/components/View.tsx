@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { type ComponentProps } from 'react';
-import { Animated } from 'react-native';
+import Animated from 'react-native-reanimated';
 // import { View as ReactNativeView } from 'react-native';
 // import type { ViewProps as ReactNativeTextProps } from 'react-native';
 import { BorderRadius, Height, Spacing, Width, useTheme } from 'theme-native';
