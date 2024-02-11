@@ -45,6 +45,7 @@ export * from './hooks/useScreen';
 export * from './hooks/useTopAppbar';
 export * from './hooks/useBottomAppbar';
 export * from './hooks/useBottomNavigation';
+export * from './hooks/useHijackBack';
 
 // logic
 export * from './logic/core.validations';

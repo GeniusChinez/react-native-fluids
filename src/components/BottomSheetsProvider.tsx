@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   createContext,
   useMemo,
@@ -7,7 +7,7 @@ import {
 } from 'react';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { useTheme } from 'theme-native';
-import { BackHandler } from 'react-native';
+import { useHijackBack } from '../hooks/useHijackBack';
 
 export type BottomSheetArgs = {
   height?: number;
@@ -80,23 +80,14 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
     [close]
   );
 
-  const hardwareBackPressCustom = useCallback(() => {
-    if (isOpen) {
-      close();
-      return true;
-    }
-    return false;
-  }, [close, isOpen]);
+  const enableBack = useCallback(() => {
+    return !isOpen;
+  }, [isOpen]);
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', hardwareBackPressCustom);
-    return () => {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        hardwareBackPressCustom
-      );
-    };
-  }, [hardwareBackPressCustom]);
+  useHijackBack({
+    enableIf: enableBack,
+    ifNotEnabled: close,
+  });
 
   return (
     <BottomSheetsContext.Provider value={value}>
@@ -104,6 +95,11 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
       <BottomSheet
         style={{
           padding: theme.spacing[2],
+          backgroundColor: isDarkMode
+            ? theme.color.Stone[800]
+            : theme.color.White,
+        }}
+        containerStyle={{
           backgroundColor: isDarkMode
             ? theme.color.Stone[800]
             : theme.color.White,
