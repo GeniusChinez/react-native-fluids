@@ -14,7 +14,6 @@ export interface BottomNavigationAction extends ButtonProps {
   icon: IconType;
   label: string;
   isSelected?: boolean;
-  onPress?: () => void;
   menu?: ButtonProps['menu'];
   sheet?: ButtonProps['sheet'];
 }
@@ -22,7 +21,7 @@ export interface BottomNavigationAction extends ButtonProps {
 export interface BottomNavigationItemProps extends BottomNavigationAction {}
 
 export function BottomNavigationItem(props: BottomNavigationItemProps) {
-  const { isSelected, label, menu, sheet, onPress } = props;
+  const { isSelected, label, menu, sheet, onPress, onPressIn } = props;
 
   const theme = useTheme();
   const sheets = useBottomSheets();
@@ -36,9 +35,13 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-        onPress={() => {
+        onPressIn={(e) => {
           if (onPress) {
-            onPress();
+            onPress(e);
+          }
+
+          if (onPressIn) {
+            onPressIn(e);
           }
 
           if (menu) {
