@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   createContext,
   useMemo,
@@ -7,6 +7,7 @@ import {
 } from 'react';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { useTheme } from 'theme-native';
+import { BackHandler } from 'react-native';
 
 export type BottomSheetArgs = {
   height?: number;
@@ -28,8 +29,11 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
   const { children } = props;
 
   const ref = useRef<BottomSheet>(null);
+
   const [content, setContent] = useState<any>(null);
   const [height, setHeight] = useState(50);
+
+  const isOpen = useMemo(() => !!content, [content]);
 
   const close = useCallback(() => {
     if (ref?.current) {
@@ -75,6 +79,24 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
     []
   );
 
+  const hardwareBackPressCustom = useCallback(() => {
+    if (isOpen) {
+      close();
+      return true;
+    }
+    return false;
+  }, [close, isOpen]);
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', hardwareBackPressCustom);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        hardwareBackPressCustom
+      );
+    };
+  }, [hardwareBackPressCustom]);
+
   return (
     <BottomSheetsContext.Provider value={value}>
       {children}
@@ -90,6 +112,11 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
         enablePanDownToClose
         snapPoints={['1%', `${height || 50}%`]}
         backdropComponent={renderBackdrop}
+        onChange={(pos) => {
+          if (pos === 0) {
+            close();
+          }
+        }}
         animateOnMount
         detached
       >
