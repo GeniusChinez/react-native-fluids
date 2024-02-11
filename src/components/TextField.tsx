@@ -8,6 +8,7 @@ import type { TextInputProps } from 'react-native';
 import { useTheme } from 'theme-native';
 import { View } from './View';
 import { Text } from './Text';
+import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 
 export interface TextFieldProps extends TextInputProps {
   name: string;
@@ -20,6 +21,7 @@ export interface TextFieldProps extends TextInputProps {
   disabled?: boolean;
   helper?: string;
   grows?: boolean;
+  isBottomSheetInput?: boolean;
 }
 
 export function TextField(props: TextFieldProps) {
@@ -35,6 +37,7 @@ export function TextField(props: TextFieldProps) {
     onChangeText: onChange,
     helper,
     grows,
+    isBottomSheetInput,
     ...restOfProps
   } = props;
 
@@ -46,6 +49,7 @@ export function TextField(props: TextFieldProps) {
   const id = providedId || name;
 
   const [text, setText] = useState(value);
+  const InputComponent = isBottomSheetInput ? BottomSheetTextInput : TextInput;
 
   return (
     <View
@@ -78,9 +82,9 @@ export function TextField(props: TextFieldProps) {
           )}
         </Text>
       )}
-      <TextInput
+      <InputComponent
         id={id}
-        ref={customRef}
+        ref={isBottomSheetInput ? (undefined as any) : customRef}
         placeholder={placeholder || label}
         editable={editable && !disabled && !isSubmitting}
         value={text}
