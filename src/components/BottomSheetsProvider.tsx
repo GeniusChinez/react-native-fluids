@@ -33,6 +33,7 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
 
   const close = useCallback(() => {
     if (ref?.current) {
+      setContent(null);
       ref?.current.close();
     }
   }, [ref]);
