@@ -1,50 +1,24 @@
-/* eslint-disable react-native/no-inline-styles */
-import { useTheme } from 'theme-native';
-import React, { useMemo, type RefObject, type PropsWithChildren } from 'react';
-import { BottomSheet, type BottomSheetRef } from 'react-native-sheet';
-import { useRef } from 'react';
+/* eslint-disable eslint-comments/no-unlimited-disable */
+import React, { type PropsWithChildren, useCallback } from 'react';
 import { BottomSheetsProvider } from './BottomSheetsProvider';
-import { ScrollView } from 'react-native';
+import { useBottomSheets } from './BottomSheetsProvider';
 
 export interface BlankSheetProps extends PropsWithChildren<{}> {
   height?: number;
-  sheetRef?: RefObject<BottomSheetRef>;
 }
 
-export function BlankSheet(props: BlankSheetProps) {
-  const { height = 200, sheetRef, children } = props;
+export function BlankSheet__(props: BlankSheetProps) {
+  const { height = 50, children } = props;
 
-  const theme = useTheme();
-  const { isDarkMode } = theme;
+  const sheets = useBottomSheets();
 
-  const bottomSheetRef = useRef<BottomSheetRef>(null);
+  // eslint-disable-next-line
+  const open = useCallback(() => {
+    sheets.open({
+      height,
+      content: children,
+    });
+  }, [children, height, sheets]);
 
-  const ref = useMemo(() => sheetRef || bottomSheetRef, [sheetRef]);
-
-  return (
-    <BottomSheet
-      height={height || 200}
-      ref={ref}
-      sheetStyle={{
-        padding: theme.spacing[2],
-        backgroundColor: isDarkMode
-          ? theme.color.Stone[800]
-          : theme.color.White,
-      }}
-      backdropClosesSheet
-    >
-      <BottomSheetsProvider customRef={ref}>
-        <ScrollView
-          style={{
-            flex: 1,
-          }}
-          contentContainerStyle={{
-            paddingBottom: theme.spacing[12],
-          }}
-        >
-          {children}
-        </ScrollView>
-      </BottomSheetsProvider>
-    </BottomSheet>
-  );
+  return <BottomSheetsProvider>{children}</BottomSheetsProvider>;
 }

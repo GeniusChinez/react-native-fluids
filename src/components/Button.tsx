@@ -6,9 +6,8 @@ import { FontSize, useTheme } from 'theme-native';
 import { Columns } from './Columns';
 import { Icon, type IconType } from './Icon';
 import { LoadingIcon } from './LoadingIcon';
-import { SheetMenu, type SheetMenuProps } from './SheetMenu';
-import { useBottomSheetTrigger } from '../hooks/useBottomSheetTrigger';
-import { BlankSheet, type BlankSheetProps } from './BlankSheet';
+import { MenuLayout, type MenuLayoutProps } from './MenuLayout';
+import { useBottomSheets } from './BottomSheetsProvider';
 
 export type ButtonVariant = 'solid' | 'outline' | 'ghost';
 export type ColorVariant =
@@ -49,12 +48,13 @@ export interface ButtonProps extends TouchableOpacityProps {
   isCompact?: boolean;
   isVeryCompact?: boolean;
 
-  menu?: SheetMenuProps;
-  sheet?: BlankSheetProps;
+  menu?: { height?: number } & MenuLayoutProps;
+  sheet?: { height?: number; children: React.ReactNode };
 }
 
 export function Button(props: ButtonProps) {
   const theme = useTheme();
+  const sheets = useBottomSheets();
 
   const {
     text,
@@ -125,9 +125,6 @@ export function Button(props: ButtonProps) {
     return 'white';
   }, [color, darkColor, darkTextColor, isDarkMode, textColor, variant]);
 
-  const { ref: menuBottomSheet, open: openMenu } = useBottomSheetTrigger();
-  const { ref: bottomSheet, open: openSheet } = useBottomSheetTrigger();
-
   return (
     <>
       <TouchableOpacity
@@ -163,11 +160,17 @@ export function Button(props: ButtonProps) {
           }
 
           if (menu) {
-            openMenu();
+            sheets.open({
+              height: menu.height || 50,
+              content: <MenuLayout {...menu}>{menu.children}</MenuLayout>,
+            });
           }
 
           if (sheet) {
-            openSheet();
+            sheets.open({
+              height: sheet.height || 50,
+              content: sheet.children,
+            });
           }
         }}
       >
@@ -250,8 +253,8 @@ export function Button(props: ButtonProps) {
           )}
         </Columns>
       </TouchableOpacity>
-      {!!menu && <SheetMenu {...menu} sheetRef={menuBottomSheet} />}
-      {!!sheet && <BlankSheet {...sheet} sheetRef={bottomSheet} />}
+      {/* {!!menu && <SheetMenu {...menu} sheetRef={menuBottomSheet} />} */}
+      {/* {!!sheet && <BlankSheet {...sheet} sheetRef={bottomSheet} />} */}
     </>
   );
 }

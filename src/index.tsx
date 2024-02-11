@@ -44,7 +44,6 @@ export * from './hooks/useScreen';
 export * from './hooks/useTopAppbar';
 export * from './hooks/useBottomAppbar';
 export * from './hooks/useBottomNavigation';
-export * from './hooks/useBottomSheetTrigger';
 
 // logic
 export * from './logic/core.validations';
