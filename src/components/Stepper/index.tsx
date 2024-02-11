@@ -11,10 +11,11 @@ export interface StepperProps {
   defaultStep?: number;
   steps: StepperStepProps[];
   renderProvider?: boolean;
+  onBack?: () => void;
 }
 
 export function Stepper(props: StepperProps) {
-  const { steps, defaultStep, renderProvider = true } = props;
+  const { steps, defaultStep, renderProvider = true, onBack } = props;
   const theme = useTheme();
 
   const stuff = (
@@ -28,7 +29,7 @@ export function Stepper(props: StepperProps) {
       }}
     >
       <StepperHeader steps={steps} />
-      <StepperBody steps={steps} />
+      <StepperBody steps={steps} onBack={onBack} />
     </ScrollView>
   );
 

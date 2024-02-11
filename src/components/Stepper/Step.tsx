@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useStepper } from './Context';
 import { useTheme } from 'theme-native';
 import { View } from '../View';
 import { Text } from '../Text';
 import { Button } from '../Button';
 import { ScrollView } from 'react-native';
+import { BackHandler } from 'react-native';
 
 export interface StepperStepProps {
   title?: string;
@@ -13,13 +14,37 @@ export interface StepperStepProps {
   showContinueButton?: boolean;
   isSkippable?: boolean;
   content?: React.ReactNode;
+  onBack?: () => void;
 }
 
 export function StepperStep(props: StepperStepProps) {
-  const { title, subtitle, content, showContinueButton, isSkippable } = props;
+  const { title, subtitle, content, showContinueButton, isSkippable, onBack } =
+    props;
 
   const theme = useTheme();
-  const { goForward } = useStepper();
+  const { goForward, isFirstStep, goBackward } = useStepper();
+
+  const hardwareBackPressCustom = useCallback(() => {
+    if (!isFirstStep) {
+      goBackward();
+      return true;
+    }
+    if (onBack) {
+      onBack();
+      return true;
+    }
+    return false;
+  }, [goBackward, isFirstStep, onBack]);
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', hardwareBackPressCustom);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        hardwareBackPressCustom
+      );
+    };
+  }, [hardwareBackPressCustom]);
 
   return (
     <ScrollView
