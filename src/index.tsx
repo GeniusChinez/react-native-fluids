@@ -36,6 +36,7 @@ export * from './components/CodeField';
 export * from './components/AnswerPicker';
 export * from './components/PlatformSpecific';
 export * from './components/BottomSheetsProvider';
+export * from './hooks/useAskConfirmation';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
