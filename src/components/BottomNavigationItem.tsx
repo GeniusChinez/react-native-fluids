@@ -54,7 +54,6 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
 
           if (sheet) {
             sheets.open({
-              scrollable: true,
               height: sheet.height || 50,
               content: sheet.children,
             });

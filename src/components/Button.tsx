@@ -169,7 +169,6 @@ export function Button(props: ButtonProps) {
 
           if (sheet) {
             sheets.open({
-              scrollable: true,
               height: sheet.height || 50,
               content: sheet.children,
             });
