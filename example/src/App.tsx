@@ -180,7 +180,7 @@ function Example() {
       primary: {
         icon: 'Menu',
         menu: {
-          height: 40,
+          height: 50,
           groups: [
             {
               label: 'Saving',

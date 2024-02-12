@@ -46,6 +46,7 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
 
           if (menu) {
             sheets.open({
+              scrollable: true,
               height: menu.height || 50,
               content: <MenuLayout {...menu}>{menu.children}</MenuLayout>,
             });
@@ -53,6 +54,7 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
 
           if (sheet) {
             sheets.open({
+              scrollable: true,
               height: sheet.height || 50,
               content: sheet.children,
             });

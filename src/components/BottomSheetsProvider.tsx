@@ -5,12 +5,18 @@ import {
   type PropsWithChildren,
   useCallback,
 } from 'react';
-import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetScrollView,
+} from '@gorhom/bottom-sheet';
 import { useTheme } from 'theme-native';
 import { useHijackBack } from '../hooks/useHijackBack';
+import { View } from './View';
+import { Dimensions } from 'react-native';
 
 export type BottomSheetArgs = {
   height?: number;
+  scrollable?: boolean;
   content: React.ReactNode;
 };
 
@@ -32,12 +38,14 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
 
   const [content, setContent] = useState<any>(null);
   const [height, setHeight] = useState(50);
+  const [scrollable, setScrollable] = useState(false);
 
   const isOpen = useMemo(() => !!content, [content]);
 
   const close = useCallback(() => {
     if (ref?.current) {
       setContent(null);
+      setScrollable(false);
       ref?.current.close();
     }
   }, [ref]);
@@ -50,6 +58,7 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
 
       setContent(args.content);
       setHeight(args.height || 50);
+      setScrollable(args.scrollable || false);
 
       ref.current.expand();
     },
@@ -118,7 +127,15 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
         }}
         animateOnMount
       >
-        {content}
+        {scrollable ? (
+          <BottomSheetScrollView>
+            <View style={{ height: Dimensions.get('screen').height }}>
+              {content}
+            </View>
+          </BottomSheetScrollView>
+        ) : (
+          content
+        )}
       </BottomSheet>
     </BottomSheetsContext.Provider>
   );

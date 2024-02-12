@@ -162,12 +162,14 @@ export function Button(props: ButtonProps) {
           if (menu) {
             sheets.open({
               height: menu.height || 50,
+              scrollable: true,
               content: <MenuLayout {...menu}>{menu.children}</MenuLayout>,
             });
           }
 
           if (sheet) {
             sheets.open({
+              scrollable: true,
               height: sheet.height || 50,
               content: sheet.children,
             });
