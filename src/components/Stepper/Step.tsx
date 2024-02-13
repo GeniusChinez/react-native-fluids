@@ -1,12 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useStepper } from './Context';
 import { useTheme } from 'theme-native';
 import { View } from '../View';
 import { Text } from '../Text';
 import { Button } from '../Button';
 import { ScrollView } from 'react-native';
-import { useHijackBack } from '../../hooks/useHijackBack';
 
 export interface StepperStepProps {
   title?: string;
@@ -14,29 +13,13 @@ export interface StepperStepProps {
   showContinueButton?: boolean;
   isSkippable?: boolean;
   content?: React.ReactNode;
-  onBack?: () => void;
 }
 
 export function StepperStep(props: StepperStepProps) {
-  const { title, subtitle, content, showContinueButton, isSkippable, onBack } =
-    props;
+  const { title, subtitle, content, showContinueButton, isSkippable } = props;
 
   const theme = useTheme();
-  const { goForward, isFirstStep, goBackward } = useStepper();
-
-  const enableBack = useCallback(() => {
-    if (isFirstStep) {
-      return true;
-    }
-    return false;
-  }, [isFirstStep]);
-
-  useHijackBack({
-    enableIf: enableBack,
-    ifEnabled: onBack,
-    ifNotEnabled: goBackward,
-  });
-
+  const { goForward } = useStepper();
   return (
     <ScrollView
       contentContainerStyle={{

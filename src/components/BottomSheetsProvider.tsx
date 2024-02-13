@@ -10,7 +10,6 @@ import BottomSheet, {
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 import { useTheme } from 'theme-native';
-import { useHijackBack } from '../hooks/useHijackBack';
 import { View } from './View';
 import { Dimensions } from 'react-native';
 
@@ -39,8 +38,6 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
   const [content, setContent] = useState<any>(null);
   const [height, setHeight] = useState(50);
   const [scrollable, setScrollable] = useState(false);
-
-  const isOpen = useMemo(() => !!content, [content]);
 
   const close = useCallback(() => {
     if (ref?.current) {
@@ -88,16 +85,6 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
     ),
     [close]
   );
-
-  // ...
-  const enableBack = useCallback(() => {
-    return !isOpen;
-  }, [isOpen]);
-
-  useHijackBack({
-    enableIf: enableBack,
-    ifNotEnabled: close,
-  });
 
   return (
     <BottomSheetsContext.Provider value={value}>
