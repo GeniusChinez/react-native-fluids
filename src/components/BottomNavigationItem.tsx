@@ -48,7 +48,12 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
             sheets.open({
               scrollable: true,
               height: menu.height || 50,
-              content: <MenuLayout {...menu}>{menu.children}</MenuLayout>,
+              content: (
+                <MenuLayout {...menu}>
+                  {menu.children}
+                  {menu.inject}
+                </MenuLayout>
+              ),
             });
           }
 

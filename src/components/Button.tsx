@@ -48,7 +48,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   isCompact?: boolean;
   isVeryCompact?: boolean;
 
-  menu?: { height?: number } & MenuLayoutProps;
+  menu?: { height?: number; inject?: React.ReactNode } & MenuLayoutProps;
   sheet?: { height?: number; children: React.ReactNode };
 }
 
@@ -163,7 +163,12 @@ export function Button(props: ButtonProps) {
             sheets.open({
               height: menu.height || 50,
               scrollable: true,
-              content: <MenuLayout {...menu}>{menu.children}</MenuLayout>,
+              content: (
+                <MenuLayout {...menu}>
+                  {menu.children}
+                  {menu.inject}
+                </MenuLayout>
+              ),
             });
           }
 
