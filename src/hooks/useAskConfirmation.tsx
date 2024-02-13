@@ -14,10 +14,12 @@ export interface AskConfirmationArgs {
   subtitle?: string;
   confirmButtonProps?: ButtonProps;
   cancelButtonProps?: ButtonProps;
+  inject?: React.ReactNode;
 }
 
 export function useAskConfirmation(args: AskConfirmationArgs) {
-  const { title, subtitle, confirmButtonProps, cancelButtonProps } = args;
+  const { title, subtitle, confirmButtonProps, cancelButtonProps, inject } =
+    args;
 
   const sheets = useBottomSheets();
   const theme = useTheme();
@@ -52,6 +54,7 @@ export function useAskConfirmation(args: AskConfirmationArgs) {
             >
               {subtitle || 'Use the buttons below to confirm'}
             </Text>
+            {inject}
           </Rows>
           <Box gap={2} rows>
             <Button
@@ -82,6 +85,7 @@ export function useAskConfirmation(args: AskConfirmationArgs) {
   }, [
     cancelButtonProps,
     confirmButtonProps,
+    inject,
     sheets,
     subtitle,
     theme.color.Gray,
