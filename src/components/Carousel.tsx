@@ -16,6 +16,7 @@ import { Dimensions } from 'react-native';
 import { Columns } from './Columns';
 import { Rows } from './Rows';
 import { useKeyboard } from '../hooks/useKeyboard';
+import { CarouselProvider } from './CarouselProvider';
 
 export interface ItemProps extends PropsWithChildren<{}> {
   image?: string;
@@ -73,194 +74,212 @@ export function Carousel(props: CarouselProps) {
   const keyboard = useKeyboard();
 
   return (
-    <Rows growsOnly>
-      <View
-        grows
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          // flexGrow: 1,
-        }}
-      >
-        {!!showButtons && !isFirstItem && !keyboard.shown && (
-          <TouchableOpacity
-            onPress={() => {
-              if (currentIndex > 0) {
-                pagerRef.current?.setPage(currentIndex - 1);
-              }
-            }}
-            disabled={isFirstItem}
-            style={{
-              paddingHorizontal: theme.spacing[2],
-              paddingVertical: theme.spacing[10],
-              // backgroundColor: theme.color.Transparent,
-              backgroundColor: theme.color.Stone[800],
-              borderRadius: theme.borderRadius.Md,
-              // opacity: isFirstItem ? 0.4 : 1,
-              opacity: 0.4,
-              position: 'absolute',
-              left: 0,
-              zIndex: 1000,
-            }}
-          >
-            <Icon
-              size={28}
-              // color={theme.color.Primary[400]}
-              color={theme.color.White}
-              name="ChevronLeft"
-            />
-          </TouchableOpacity>
-        )}
+    <CarouselProvider
+      page={currentIndex}
+      gotoPrevPage={() => {
+        if (currentIndex > 0) {
+          pagerRef.current?.setPage(currentIndex - 1);
+        }
+      }}
+      gotoNextPage={() => {
+        if (currentIndex < items.length - 1) {
+          pagerRef.current?.setPage(currentIndex + 1);
+        }
+      }}
+      isFirstPage={currentIndex === 0}
+      isLastPage={currentIndex === items.length - 1}
+    >
+      <Rows growsOnly>
         <View
           grows
           style={{
-            zIndex: 0,
+            flexDirection: 'row',
+            alignItems: 'center',
+            // flexGrow: 1,
           }}
         >
-          <PagerView
-            style={{ flex: 1 }}
-            ref={pagerRef}
-            initialPage={initialPage}
-            onPageSelected={(e) => {
-              setCurrentIndex(e.nativeEvent.position);
-              if (handleChange) {
-                handleChange(e.nativeEvent.position);
-              }
+          {!!showButtons && !isFirstItem && !keyboard.shown && (
+            <TouchableOpacity
+              onPress={() => {
+                if (currentIndex > 0) {
+                  pagerRef.current?.setPage(currentIndex - 1);
+                }
+              }}
+              disabled={isFirstItem}
+              style={{
+                paddingHorizontal: theme.spacing[2],
+                paddingVertical: theme.spacing[10],
+                // backgroundColor: theme.color.Transparent,
+                backgroundColor: theme.color.Stone[800],
+                borderRadius: theme.borderRadius.Md,
+                // opacity: isFirstItem ? 0.4 : 1,
+                opacity: 0.4,
+                position: 'absolute',
+                left: 0,
+                zIndex: 1000,
+              }}
+            >
+              <Icon
+                size={28}
+                // color={theme.color.Primary[400]}
+                color={theme.color.White}
+                name="ChevronLeft"
+              />
+            </TouchableOpacity>
+          )}
+          <View
+            grows
+            style={{
+              zIndex: 0,
             }}
           >
-            {items.map((card, cardIndex) => (
-              <View growsOnly key={cardIndex}>
-                {card.type === 'normal' && (
-                  <View
-                    grows
-                    style={{
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: theme.spacing[3],
-                    }}
-                  >
-                    {!!card.image && (
-                      <View>
-                        <Image
-                          source={{
-                            uri: card.image,
-                          }}
-                          style={{
-                            height: Dimensions.get('window').width * 0.7,
-                            width: Dimensions.get('window').width * 0.7,
-                          }}
-                          resizeMode="contain"
-                          alt={card.label}
-                        />
-                      </View>
-                    )}
+            <PagerView
+              style={{ flex: 1 }}
+              ref={pagerRef}
+              initialPage={initialPage}
+              onPageSelected={(e) => {
+                setCurrentIndex(e.nativeEvent.position);
+                if (handleChange) {
+                  handleChange(e.nativeEvent.position);
+                }
+              }}
+            >
+              {items.map((card, cardIndex) => (
+                <View growsOnly key={cardIndex}>
+                  {card.type === 'normal' && (
                     <View
+                      grows
                       style={{
                         flexDirection: 'column',
-                        gap: theme.spacing[2],
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: theme.spacing[3],
                       }}
                     >
-                      {!!card.label && card.label.length > 1 && (
-                        <Text
-                          style={{
-                            textAlign: 'center',
-                            fontWeight: theme.fontWeight.Bold,
-                            color: theme.color.Text,
-                          }}
-                        >
-                          {card.label}
-                        </Text>
-                      )}
-                      {!!card.description && (
-                        <View
-                          style={{
-                            gap: theme.spacing[2],
-                          }}
-                        >
-                          {card.description
-                            .split('\n')
-                            .filter((x) => x.length > 1)
-                            .map((line, lineIndex) => (
-                              <Text
-                                key={lineIndex}
-                                style={{
-                                  textAlign: 'center',
-                                  color: theme.color.Slate[600],
-                                }}
-                              >
-                                {line}
-                              </Text>
-                            ))}
+                      {!!card.image && (
+                        <View>
+                          <Image
+                            source={{
+                              uri: card.image,
+                            }}
+                            style={{
+                              height: Dimensions.get('window').width * 0.7,
+                              width: Dimensions.get('window').width * 0.7,
+                            }}
+                            resizeMode="contain"
+                            alt={card.label}
+                          />
                         </View>
                       )}
+                      <View
+                        style={{
+                          flexDirection: 'column',
+                          gap: theme.spacing[2],
+                        }}
+                      >
+                        {!!card.label && card.label.length > 1 && (
+                          <Text
+                            style={{
+                              textAlign: 'center',
+                              fontWeight: theme.fontWeight.Bold,
+                              color: theme.color.Text,
+                            }}
+                          >
+                            {card.label}
+                          </Text>
+                        )}
+                        {!!card.description && (
+                          <View
+                            style={{
+                              gap: theme.spacing[2],
+                            }}
+                          >
+                            {card.description
+                              .split('\n')
+                              .filter((x) => x.length > 1)
+                              .map((line, lineIndex) => (
+                                <Text
+                                  key={lineIndex}
+                                  style={{
+                                    textAlign: 'center',
+                                    color: theme.color.Slate[600],
+                                  }}
+                                >
+                                  {line}
+                                </Text>
+                              ))}
+                          </View>
+                        )}
+                      </View>
+                      {card.children}
                     </View>
-                    {card.children}
-                  </View>
-                )}
-                {card.type === 'raw' && card.children}
-              </View>
-            ))}
-          </PagerView>
+                  )}
+                  {card.type === 'raw' && card.children}
+                </View>
+              ))}
+            </PagerView>
+          </View>
+          {!!showButtons && !isLastItem && !keyboard.shown && (
+            <TouchableOpacity
+              onPress={() => {
+                if (currentIndex < items.length - 1) {
+                  pagerRef.current?.setPage(currentIndex + 1);
+                }
+              }}
+              disabled={isLastItem}
+              style={{
+                paddingHorizontal: theme.spacing[2],
+                paddingVertical: theme.spacing[10],
+                // backgroundColor: theme.color.Transparent,
+                backgroundColor: theme.color.Stone[800],
+                borderRadius: theme.borderRadius.Md,
+                // opacity: isLastItem ? 0.4 : 1,
+                opacity: 0.4,
+                position: 'absolute',
+                right: 0,
+                zIndex: 1000,
+              }}
+            >
+              <Icon
+                size={28}
+                // color={theme.color.Primary[400]}
+                color={theme.color.White}
+                name="ChevronRight"
+              />
+            </TouchableOpacity>
+          )}
         </View>
-        {!!showButtons && !isLastItem && !keyboard.shown && (
-          <TouchableOpacity
-            onPress={() => {
-              if (currentIndex < items.length - 1) {
-                pagerRef.current?.setPage(currentIndex + 1);
-              }
-            }}
-            disabled={isLastItem}
+        {!!showIndicators && !keyboard.shown && (
+          <Columns
+            gap={2}
+            alignX="center"
+            w={'Full'}
+            py={4}
             style={{
-              paddingHorizontal: theme.spacing[2],
-              paddingVertical: theme.spacing[10],
-              // backgroundColor: theme.color.Transparent,
-              backgroundColor: theme.color.Stone[800],
-              borderRadius: theme.borderRadius.Md,
-              // opacity: isLastItem ? 0.4 : 1,
-              opacity: 0.4,
               position: 'absolute',
-              right: 0,
-              zIndex: 1000,
+              bottom: 0,
             }}
           >
-            <Icon
-              size={28}
-              // color={theme.color.Primary[400]}
-              color={theme.color.White}
-              name="ChevronRight"
-            />
-          </TouchableOpacity>
+            {items.map((_item, index) => (
+              <Icon
+                name={index === currentIndex ? 'CircleDot' : 'Circle'}
+                size={16}
+                key={index}
+                color={
+                  index === currentIndex
+                    ? indicatorCurrentColor
+                    : indicatorColor
+                }
+                darkColor={
+                  index === currentIndex
+                    ? indicatorCurrentDarkColor
+                    : indicatorDarkColor
+                }
+              />
+            ))}
+          </Columns>
         )}
-      </View>
-      {!!showIndicators && !keyboard.shown && (
-        <Columns
-          gap={2}
-          alignX="center"
-          w={'Full'}
-          py={4}
-          style={{
-            position: 'absolute',
-            bottom: 0,
-          }}
-        >
-          {items.map((_item, index) => (
-            <Icon
-              name={index === currentIndex ? 'CircleDot' : 'Circle'}
-              size={16}
-              key={index}
-              color={
-                index === currentIndex ? indicatorCurrentColor : indicatorColor
-              }
-              darkColor={
-                index === currentIndex
-                  ? indicatorCurrentDarkColor
-                  : indicatorDarkColor
-              }
-            />
-          ))}
-        </Columns>
-      )}
-    </Rows>
+      </Rows>
+    </CarouselProvider>
   );
 }

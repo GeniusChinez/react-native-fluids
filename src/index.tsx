@@ -37,7 +37,7 @@ export * from './components/CodeField';
 export * from './components/AnswerPicker';
 export * from './components/PlatformSpecific';
 export * from './components/BottomSheetsProvider';
-export * from './hooks/useAskConfirmation';
+export * from './components/CarouselProvider';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
@@ -46,6 +46,7 @@ export * from './hooks/useScreen';
 export * from './hooks/useTopAppbar';
 export * from './hooks/useBottomAppbar';
 export * from './hooks/useBottomNavigation';
+export * from './hooks/useAskConfirmation';
 
 // logic
 export * from './logic/core.validations';
