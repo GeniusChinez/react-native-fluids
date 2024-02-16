@@ -16,6 +16,7 @@ export interface AnswerOptionProps extends PropsWithChildren<{}> {
   alignText?: 'center' | 'left';
   incorrect?: boolean;
   correct?: boolean;
+  alwaysCheck?: boolean;
 }
 export function AnswerOption(props: AnswerOptionProps) {
   const {
@@ -27,6 +28,7 @@ export function AnswerOption(props: AnswerOptionProps) {
     alignText,
     correct,
     incorrect,
+    alwaysCheck,
   } = props;
   const theme = useTheme();
   const { isDarkMode } = theme;
@@ -100,7 +102,7 @@ export function AnswerOption(props: AnswerOptionProps) {
             children
           )}
         </View>
-        {(incorrect || correct) && isSelected && (
+        {(incorrect || correct || alwaysCheck) && isSelected && (
           <Icon
             strokeWidth={3}
             darkColor={
@@ -121,7 +123,7 @@ export function AnswerOption(props: AnswerOptionProps) {
                   : theme.color.Primary[700]
                 : theme.color.Gray[700]
             }
-            name={correct ? 'Check' : 'X'}
+            name={incorrect ? 'X' : 'Check'}
             size={22}
           />
         )}
@@ -135,28 +137,43 @@ export interface AnswerPickerProps {
   layout?: 'rows' | 'columns';
   alignAnswers?: 'center' | 'left';
   defaultOption?: string;
+  defaultOptions?: string[];
   options: { label: string; value: string }[];
   handleChange?: (v: string) => void;
   incorrect?: boolean;
   correct?: boolean;
+  multiSelect?: boolean;
+  alwaysCheck?: boolean;
 }
 export function AnswerPicker(props: AnswerPickerProps) {
   const {
     layout = 'rows',
     defaultOption,
+    defaultOptions,
     options,
     handleChange,
     alignAnswers,
     correct,
     incorrect,
+    multiSelect,
+    alwaysCheck,
   } = props;
   const [selectedOption, setSelectedOption] = useState(defaultOption);
+  const [selectedOptions, setSelectedOptions] = useState([
+    ...(defaultOptions || []),
+  ]);
 
   useEffect(() => {
     if (defaultOption) {
       setSelectedOption(defaultOption);
     }
   }, [defaultOption]);
+
+  useEffect(() => {
+    if (defaultOptions) {
+      setSelectedOptions(defaultOptions);
+    }
+  }, [defaultOptions]);
 
   return (
     <Box
@@ -172,17 +189,39 @@ export function AnswerPicker(props: AnswerPickerProps) {
           total={options.length}
           key={optionIndex}
           layout={layout || 'rows'}
-          isSelected={selectedOption === option.value}
+          alwaysCheck={alwaysCheck}
+          isSelected={
+            selectedOption === option.value ||
+            selectedOptions.includes(option.value)
+          }
           handleSelect={() => {
-            setSelectedOption(option.value);
+            if (multiSelect) {
+              setSelectedOptions((prev) => {
+                if (prev.includes(option.value)) {
+                  return prev.filter((v) => v !== option.value);
+                }
+                return [...prev, option.value];
+              });
+            } else {
+              setSelectedOption(option.value);
+            }
+
             if (handleChange) {
               handleChange(option.value);
             }
           }}
           incorrect={
-            (incorrect && selectedOption === option.value) || undefined
+            (incorrect &&
+              (selectedOption === option.value ||
+                selectedOptions.includes(option.value))) ||
+            undefined
           }
-          correct={(correct && selectedOption === option.value) || undefined}
+          correct={
+            (correct &&
+              (selectedOption === option.value ||
+                selectedOptions.includes(option.value))) ||
+            undefined
+          }
         >
           {option.label}
         </AnswerOption>

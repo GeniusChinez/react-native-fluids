@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { Alert } from 'react-native';
 import {
@@ -293,9 +294,11 @@ function Example() {
         <AnswerPicker
           // incorrect
           // correct
+          alwaysCheck
           layout="rows"
+          multiSelect
           alignAnswers="center"
-          handleChange={(x) => Alert.alert(x)}
+          // handleChange={(x) => Alert.alert(x)}
           options={[
             {
               label: 'Continue',
