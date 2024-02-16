@@ -16,11 +16,9 @@ export function FluidsProvider(props: FluidsProviderProps) {
           flex: 1,
         }}
       >
-        <BottomSheetsProvider>
-          <ThemeProvider {...themeNativeProviderProps}>
-            {children}
-          </ThemeProvider>
-        </BottomSheetsProvider>
+        <ThemeProvider {...themeNativeProviderProps}>
+          <BottomSheetsProvider>{children}</BottomSheetsProvider>
+        </ThemeProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
   );

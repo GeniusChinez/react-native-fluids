@@ -7,7 +7,6 @@ import { TouchableOpacity } from 'react-native';
 import { Columns } from './Columns';
 import { View } from './View';
 import { useTheme } from 'theme-native';
-import { Separator } from './Separator';
 import { useBottomSheets } from './BottomSheetsProvider';
 
 export interface MenuLayoutItem {
@@ -29,6 +28,7 @@ function MenuItem(props: MenuLayoutItem) {
     disabled,
   } = props;
   const theme = useTheme();
+  const { isDarkMode } = theme;
 
   return (
     <TouchableOpacity onPress={onPress} disabled={disabled}>
@@ -37,22 +37,38 @@ function MenuItem(props: MenuLayoutItem) {
         alignY="center"
         w={'Full'}
         p={3}
+        py={4}
+        bg={isDarkMode ? theme.color.Stone[700] : theme.color.White}
         gap={4}
         rounded="Md"
         style={{
           opacity: disabled ? 0.5 : 1,
+          borderBottomColor: isDarkMode
+            ? theme.color.Stone[600]
+            : theme.color.Gray[100],
+          borderBottomWidth: theme.borderWidth.Default,
         }}
       >
         {!!icon && iconPos === 'left' && (
-          <Icon size={19} color={theme.color.Gray[800]} {...icon} />
+          <Icon
+            size={19}
+            color={theme.color.Gray[800]}
+            darkColor={theme.color.Gray[300]}
+            {...icon}
+          />
         )}
-        <View grows>
+        <Rows grows alignY="center">
           <Text color={theme.color.Gray[800]} {...labelProps}>
             {label}
           </Text>
-        </View>
+        </Rows>
         {!!icon && iconPos === 'right' && (
-          <Icon size={19} color={theme.color.Gray[800]} {...icon} />
+          <Icon
+            size={19}
+            color={theme.color.Gray[800]}
+            darkColor={theme.color.Gray[300]}
+            {...icon}
+          />
         )}
       </Columns>
     </TouchableOpacity>
@@ -117,7 +133,7 @@ export function MenuLayout(props: MenuLayoutProps) {
                 close();
               }}
             />
-            <Separator w={'Full'} />
+            {/* <Separator w={'Full'} /> */}
           </Fragment>
         ))}
       </Rows>
