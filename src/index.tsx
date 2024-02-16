@@ -47,6 +47,7 @@ export * from './hooks/useTopAppbar';
 export * from './hooks/useBottomAppbar';
 export * from './hooks/useBottomNavigation';
 export * from './hooks/useAskConfirmation';
+export * from './hooks/useMediaQuery';
 
 // logic
 export * from './logic/core.validations';

@@ -280,7 +280,7 @@ function Example() {
   return (
     <Screen {...screen}>
       <Rows alignY="center" grows p={4} gap={10} alignX="center">
-        <View style={{ maxWidth: '80%' }}>
+        <View style={{ maxWidth: '80%' }} sm={{ bg: 'red' }}>
           <Text
             color={theme.color.Gray[500]}
             weight="Bold"

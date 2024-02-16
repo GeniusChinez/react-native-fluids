@@ -3,10 +3,11 @@ import React from 'react';
 import { Text as ReactNativeText } from 'react-native';
 import type { TextProps as ReactNativeTextProps } from 'react-native';
 import { useTheme, type FontSize, type FontWeight } from 'theme-native';
+import { useResponsiveProps } from '../hooks/useResponsiveProps';
 
 export type TextVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'p';
 
-export interface TextProps extends ReactNativeTextProps {
+export interface RawTextProps extends ReactNativeTextProps {
   size?: keyof typeof FontSize;
   color?: string;
   darkColor?: string;
@@ -24,6 +25,14 @@ export interface TextProps extends ReactNativeTextProps {
   isJustified?: boolean;
 }
 
+export type TextProps = {
+  sm?: RawTextProps;
+  md?: RawTextProps;
+  lg?: RawTextProps;
+  xl?: RawTextProps;
+  xl2?: RawTextProps;
+} & RawTextProps;
+
 export const variantSizeMap: Record<TextVariant, keyof typeof FontSize> = {
   h1: 'xl6',
   h2: 'xl5',
@@ -36,6 +45,8 @@ export const variantSizeMap: Record<TextVariant, keyof typeof FontSize> = {
 };
 
 export function Text(props: TextProps) {
+  const actualProps = useResponsiveProps<RawTextProps>(props);
+
   const {
     color,
     darkColor,
@@ -51,9 +62,9 @@ export function Text(props: TextProps) {
     isRightAligned,
     isJustified,
     ...restOfProps
-  } = props;
-  const { isDarkMode } = useTheme();
+  } = actualProps;
 
+  const { isDarkMode } = useTheme();
   const theme = useTheme();
 
   return (

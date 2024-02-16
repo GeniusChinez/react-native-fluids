@@ -4,8 +4,9 @@ import Animated from 'react-native-reanimated';
 // import { View as ReactNativeView } from 'react-native';
 // import type { ViewProps as ReactNativeTextProps } from 'react-native';
 import { BorderRadius, Height, Spacing, Width, useTheme } from 'theme-native';
+import { useResponsiveProps } from '../hooks/useResponsiveProps';
 
-export interface ViewProps extends ComponentProps<typeof Animated.View> {
+export interface RawViewProps extends ComponentProps<typeof Animated.View> {
   bg?: string;
   darkBg?: string;
 
@@ -38,7 +39,17 @@ export interface ViewProps extends ComponentProps<typeof Animated.View> {
   rounded?: keyof typeof BorderRadius;
 }
 
+export type ViewProps = {
+  sm?: RawViewProps;
+  md?: RawViewProps;
+  lg?: RawViewProps;
+  xl?: RawViewProps;
+  xl2?: RawViewProps;
+} & RawViewProps;
+
 export function View(props: ViewProps) {
+  const actualProps = useResponsiveProps<RawViewProps>(props);
+
   const {
     bg = 'transparent',
     darkBg = 'transparent',
@@ -72,10 +83,9 @@ export function View(props: ViewProps) {
     rounded,
 
     ...restOfProps
-  } = props;
+  } = actualProps;
 
   const theme = useTheme();
-
   const { isDarkMode, spacing, width, height, borderRadius } = theme;
 
   return (
