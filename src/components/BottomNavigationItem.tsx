@@ -34,6 +34,7 @@ export function BottomNavigationItem(props: BottomNavigationItemProps) {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
+          maxWidth: theme.width[20],
         }}
         onPressIn={(e) => {
           if (onPress) {

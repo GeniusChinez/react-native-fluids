@@ -56,8 +56,8 @@ export function TextField(props: TextFieldProps) {
       style={{
         flexDirection: 'column',
         alignContent: 'stretch',
-        rowGap: 4,
       }}
+      gap={4}
       grows={grows}
       w="Full"
     >

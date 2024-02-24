@@ -38,6 +38,7 @@ export * from './components/AnswerPicker';
 export * from './components/PlatformSpecific';
 export * from './components/BottomSheetsProvider';
 export * from './components/CarouselProvider';
+export * from './components/Responsive';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
@@ -48,6 +49,8 @@ export * from './hooks/useBottomAppbar';
 export * from './hooks/useBottomNavigation';
 export * from './hooks/useAskConfirmation';
 export * from './hooks/useMediaQuery';
+export * from './hooks/useResponsiveProps';
+export * from './hooks/useResponsivePropsWithoutStyle';
 
 // logic
 export * from './logic/core.validations';

@@ -1,8 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { type ComponentProps } from 'react';
 import Animated from 'react-native-reanimated';
-// import { View as ReactNativeView } from 'react-native';
-// import type { ViewProps as ReactNativeTextProps } from 'react-native';
 import { BorderRadius, Height, Spacing, Width, useTheme } from 'theme-native';
 import { useResponsiveProps } from '../hooks/useResponsiveProps';
 
@@ -40,11 +38,12 @@ export interface RawViewProps extends ComponentProps<typeof Animated.View> {
 }
 
 export type ViewProps = {
-  sm?: RawViewProps;
-  md?: RawViewProps;
-  lg?: RawViewProps;
-  xl?: RawViewProps;
-  xl2?: RawViewProps;
+  xs?: Partial<RawViewProps>;
+  sm?: Partial<RawViewProps>;
+  md?: Partial<RawViewProps>;
+  lg?: Partial<RawViewProps>;
+  xl?: Partial<RawViewProps>;
+  xl2?: Partial<RawViewProps>;
 } & RawViewProps;
 
 export function View(props: ViewProps) {

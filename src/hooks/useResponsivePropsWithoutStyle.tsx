@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useMediaQuery } from './useMediaQuery';
 import type { ResponsiveProps } from '../components/Responsive';
 
-export function useResponsiveProps<PropsT extends { style?: any }>(
+export function useResponsivePropsWithoutStyle<PropsT>(
   props: ResponsiveProps<PropsT>
 ) {
   const {
@@ -12,18 +12,16 @@ export function useResponsiveProps<PropsT extends { style?: any }>(
     lg: lgProps,
     xl: xlProps,
     xl2: xl2Props,
-    style: style_,
     ...usefulProps
   } = props;
 
   const { xs, sm, md, lg, xl, xl2 } = useMediaQuery();
   return useMemo(() => {
-    let result = { ...usefulProps, style: style_ };
+    let result = { ...usefulProps };
     if (xs) {
       result = {
         ...result,
         ...xsProps,
-        style: { ...(result.style as any), ...(xsProps?.style as any) },
       };
     }
     if (sm) {
@@ -31,7 +29,6 @@ export function useResponsiveProps<PropsT extends { style?: any }>(
         ...result,
         ...xsProps,
         ...smProps,
-        style: { ...(result.style as any), ...(smProps?.style as any) },
       };
     }
     if (md) {
@@ -40,7 +37,6 @@ export function useResponsiveProps<PropsT extends { style?: any }>(
         ...xsProps,
         ...smProps,
         ...mdProps,
-        style: { ...(result.style as any), ...(mdProps?.style as any) },
       };
     }
     if (lg) {
@@ -50,7 +46,6 @@ export function useResponsiveProps<PropsT extends { style?: any }>(
         ...smProps,
         ...mdProps,
         ...lgProps,
-        style: { ...(result.style as any), ...(lgProps?.style as any) },
       };
     }
     if (xl) {
@@ -61,7 +56,6 @@ export function useResponsiveProps<PropsT extends { style?: any }>(
         ...mdProps,
         ...lgProps,
         ...xlProps,
-        style: { ...(result.style as any), ...(xlProps?.style as any) },
       };
     }
     if (xl2) {
@@ -73,7 +67,6 @@ export function useResponsiveProps<PropsT extends { style?: any }>(
         ...lgProps,
         ...xlProps,
         ...xl2Props,
-        style: { ...(result.style as any), ...(xl2Props?.style as any) },
       };
     }
     return result as PropsT;
@@ -84,7 +77,6 @@ export function useResponsiveProps<PropsT extends { style?: any }>(
     mdProps,
     sm,
     smProps,
-    style_,
     usefulProps,
     xl,
     xl2,

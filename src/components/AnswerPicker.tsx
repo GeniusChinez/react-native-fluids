@@ -7,6 +7,8 @@ import { TouchableOpacity } from 'react-native';
 import { Columns } from './Columns';
 import { Icon } from './Icon';
 import { View } from './View';
+import { useResponsivePropsWithoutStyle } from '../hooks/useResponsivePropsWithoutStyle';
+import type { ResponsiveProps } from './Responsive';
 
 export interface AnswerOptionProps extends PropsWithChildren<{}> {
   layout: 'rows' | 'columns';
@@ -36,7 +38,7 @@ export function AnswerOption(props: AnswerOptionProps) {
   return (
     <TouchableOpacity
       style={{
-        width: layout === 'rows' ? '100%' : undefined,
+        width: layout === 'rows' ? '100%' : 'auto',
         flexBasis: layout === 'columns' ? `${(1 / total) * 100}%` : undefined,
         borderWidth: theme.borderWidth[2],
         borderColor: isDarkMode
@@ -133,7 +135,7 @@ export function AnswerOption(props: AnswerOptionProps) {
 }
 
 // ...
-export interface AnswerPickerProps {
+export type AnswerPickerProps = ResponsiveProps<{
   layout?: 'rows' | 'columns';
   alignAnswers?: 'center' | 'left';
   defaultOption?: string;
@@ -144,8 +146,11 @@ export interface AnswerPickerProps {
   correct?: boolean;
   multiSelect?: boolean;
   alwaysCheck?: boolean;
-}
-export function AnswerPicker(props: AnswerPickerProps) {
+}>;
+
+export function AnswerPicker(props_: AnswerPickerProps) {
+  const props = useResponsivePropsWithoutStyle(props_);
+
   const {
     layout = 'rows',
     defaultOption,
@@ -179,6 +184,10 @@ export function AnswerPicker(props: AnswerPickerProps) {
     <Box
       {...(layout === 'rows' ? { rows: true } : { columns: true })}
       gap={layout === 'columns' ? 3 : 2}
+      sm={{
+        gap: layout === 'columns' ? 3 : 2,
+        alignX: layout === 'columns' ? 'center' : undefined,
+      }}
       w="Full"
       alignX={layout === 'columns' ? 'space-around' : undefined}
       alignY={'stretch'}

@@ -8,6 +8,7 @@ import { Icon, type IconType } from './Icon';
 import { LoadingIcon } from './LoadingIcon';
 import { MenuLayout, type MenuLayoutProps } from './MenuLayout';
 import { useBottomSheets } from './BottomSheetsProvider';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 export type ButtonVariant = 'solid' | 'outline' | 'ghost';
 export type ColorVariant =
@@ -45,6 +46,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   isDisabled?: boolean;
   isLoading?: boolean;
 
+  isFullWidth?: boolean;
   isCompact?: boolean;
   isVeryCompact?: boolean;
 
@@ -63,6 +65,7 @@ export function Button(props: ButtonProps) {
     children,
     shape = 'pill',
     icon,
+    isFullWidth,
     iconPos = 'left',
     variant = 'solid',
     color: color_ = 'Primary',
@@ -125,6 +128,8 @@ export function Button(props: ButtonProps) {
     return 'white';
   }, [color, darkColor, darkTextColor, isDarkMode, textColor, variant]);
 
+  const { sm } = useMediaQuery();
+
   return (
     <>
       <TouchableOpacity
@@ -137,6 +142,10 @@ export function Button(props: ButtonProps) {
           width: isIconButton
             ? theme.fontSize[textSize || 'md'] *
               (isCompact ? 2.5 : isVeryCompact ? 2 : 3.3)
+            : isFullWidth
+            ? '100%'
+            : sm
+            ? 'auto'
             : '100%',
           opacity: isDisabled || isLoading ? 0.7 : 1,
           borderWidth: theme.borderWidth.Default,

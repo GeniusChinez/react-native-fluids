@@ -278,17 +278,18 @@ function Example() {
   });
 
   useLightMode();
+
   return (
     <Screen {...screen}>
-      <Rows alignY="center" grows p={4} gap={10} alignX="center">
-        <View style={{ maxWidth: '80%' }} sm={{ bg: 'red' }}>
+      <Rows alignY="center" grows p={4} gap={10} alignX="center" sm={{ p: 12 }}>
+        <View style={{ maxWidth: '80%' }}>
           <Text
             color={theme.color.Gray[500]}
             weight="Bold"
             size="xl"
             isCenterAligned
           >
-            What do you do when you say something gay:
+            When you say something gay:
           </Text>
         </View>
         <AnswerPicker
@@ -296,6 +297,7 @@ function Example() {
           // correct
           alwaysCheck
           layout="rows"
+          sm={{ layout: 'columns' }}
           multiSelect
           alignAnswers="center"
           // handleChange={(x) => Alert.alert(x)}

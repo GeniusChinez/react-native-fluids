@@ -4,23 +4,17 @@ import { Rows, type RowsProps } from './Rows';
 import { Columns, type ColumnsProps } from './Columns';
 import { View, type ViewProps } from './View';
 import { useResponsiveProps } from '../hooks/useResponsiveProps';
+import type { ResponsiveProps } from './Responsive';
 
-export type RawBoxProps =
+export type BoxProps = ResponsiveProps<
   | ({ surface: true } & SurfaceProps)
   | ({ rows: true } & RowsProps)
   | ({ columns: true } & ColumnsProps)
-  | ViewProps;
-
-export type BoxProps = {
-  sm?: RawBoxProps;
-  md?: RawBoxProps;
-  lg?: RawBoxProps;
-  xl?: RawBoxProps;
-  xl2?: RawBoxProps;
-} & RawBoxProps;
+  | ViewProps
+>;
 
 export function Box(props: BoxProps) {
-  const actualProps = useResponsiveProps<RawBoxProps>(props);
+  const actualProps = useResponsiveProps(props);
 
   return (
     <>
