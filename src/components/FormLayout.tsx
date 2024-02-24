@@ -4,10 +4,11 @@ import { Rows, type RowsProps } from './Rows';
 import { FieldList, type FieldListProps } from './FieldList';
 import { FormError } from './FormError';
 import { useIsSubmitting } from './ActionContextProvider';
+import { Box, type BoxProps } from './Box';
 
 export interface FormLayoutProps extends RowsProps {
   actions?: React.ReactNode;
-  actionsContainerProps?: RowsProps;
+  actionsContainerProps?: BoxProps;
   fieldListProps?: FieldListProps;
   showFormError?: boolean;
   blurWhenProcessing?: boolean;
@@ -18,7 +19,7 @@ export function FormLayout(props: FormLayoutProps) {
     actions,
     children,
     fieldListProps,
-    actionsContainerProps,
+    actionsContainerProps = { rows: true },
     showFormError = true,
     blurWhenProcessing,
     style,
@@ -38,9 +39,9 @@ export function FormLayout(props: FormLayoutProps) {
       <FieldList {...fieldListProps}>{children}</FieldList>
       {showFormError && <FormError />}
       {!!actions && (
-        <Rows gap={2} {...actionsContainerProps}>
+        <Box gap={2} {...actionsContainerProps}>
           {actions}
-        </Rows>
+        </Box>
       )}
     </Rows>
   );
