@@ -4,7 +4,8 @@ import { Rows, type RowsProps } from './Rows';
 import { FieldList, type FieldListProps } from './FieldList';
 import { FormError } from './FormError';
 import { useIsSubmitting } from './ActionContextProvider';
-import { Box, type BoxProps } from './Box';
+import { type BoxProps } from './Box';
+import { ButtonContainer } from './ButtonContainer';
 
 export interface FormLayoutProps extends RowsProps {
   actions?: React.ReactNode;
@@ -29,6 +30,7 @@ export function FormLayout(props: FormLayoutProps) {
 
   return (
     <Rows
+      w="Full"
       gap={9}
       {...restOfProps}
       style={{
@@ -39,9 +41,7 @@ export function FormLayout(props: FormLayoutProps) {
       <FieldList {...fieldListProps}>{children}</FieldList>
       {showFormError && <FormError />}
       {!!actions && (
-        <Box gap={2} {...actionsContainerProps}>
-          {actions}
-        </Box>
+        <ButtonContainer {...actionsContainerProps}>{actions}</ButtonContainer>
       )}
     </Rows>
   );

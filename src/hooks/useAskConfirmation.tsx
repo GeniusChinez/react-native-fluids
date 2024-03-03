@@ -8,6 +8,7 @@ import type { ButtonProps } from '../components/Button';
 import { useTheme } from 'theme-native';
 import { Button } from '../components/Button';
 import { ButtonContainer } from '../components/ButtonContainer';
+import { Container } from '../components/Container';
 
 export interface AskConfirmationArgs {
   title?: string;
@@ -38,7 +39,13 @@ export function useAskConfirmation(args: AskConfirmationArgs) {
           entering={FadeInDown}
           exiting={FadeOutUp}
         >
-          <Rows gap={2} alignX="center">
+          <Container
+            w="Full"
+            rows
+            gap={2}
+            alignX="center"
+            md={{ style: { width: '80%' } }}
+          >
             <Text
               weight="Bold"
               size="lg"
@@ -55,7 +62,7 @@ export function useAskConfirmation(args: AskConfirmationArgs) {
               {subtitle || 'Use the buttons below to confirm'}
             </Text>
             {inject}
-          </Rows>
+          </Container>
           <ButtonContainer>
             <Button
               {...confirmButtonProps}
