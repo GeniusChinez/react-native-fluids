@@ -3,11 +3,11 @@ import { useCallback, useMemo } from 'react';
 import { useBottomSheets } from '../components/BottomSheetsProvider';
 import { Rows } from '../components/Rows';
 import { FadeInDown, FadeOutUp } from 'react-native-reanimated';
-import { Box } from '../components/Box';
 import { Text } from '../components/Text';
 import type { ButtonProps } from '../components/Button';
 import { useTheme } from 'theme-native';
 import { Button } from '../components/Button';
+import { ButtonContainer } from '../components/ButtonContainer';
 
 export interface AskConfirmationArgs {
   title?: string;
@@ -56,9 +56,10 @@ export function useAskConfirmation(args: AskConfirmationArgs) {
             </Text>
             {inject}
           </Rows>
-          <Box gap={2} rows>
+          <ButtonContainer>
             <Button
               {...confirmButtonProps}
+              isFullWidth
               text={confirmButtonProps?.text || 'Confirm'}
               onPress={(e) => {
                 if (confirmButtonProps?.onPress) {
@@ -70,6 +71,7 @@ export function useAskConfirmation(args: AskConfirmationArgs) {
             <Button
               color="Secondary"
               {...cancelButtonProps}
+              isFullWidth
               text={cancelButtonProps?.text || 'Cancel'}
               onPress={(e) => {
                 if (cancelButtonProps?.onPress) {
@@ -78,7 +80,7 @@ export function useAskConfirmation(args: AskConfirmationArgs) {
                 sheets.close();
               }}
             />
-          </Box>
+          </ButtonContainer>
         </Rows>
       ),
     });

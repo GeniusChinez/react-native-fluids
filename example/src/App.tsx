@@ -18,6 +18,7 @@ import {
   Rows,
   View,
   useLightMode,
+  useAskConfirmation,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -102,6 +103,7 @@ export function ExampleScreen2() {
 
 function Example() {
   const theme = useTheme();
+  const confirm = useAskConfirmation({});
   /**
    * - Code Input
    * - ...
@@ -113,6 +115,7 @@ function Example() {
         type: 'center-aligned',
         leadingIcon: {
           icon: 'ArrowLeft',
+          onPress: confirm.confirm,
         },
         headline: 'Create Account',
         // subheadline: '+123123123123',

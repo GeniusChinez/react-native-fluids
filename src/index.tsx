@@ -39,6 +39,8 @@ export * from './components/PlatformSpecific';
 export * from './components/BottomSheetsProvider';
 export * from './components/CarouselProvider';
 export * from './components/Responsive';
+export * from './components/ButtonContainer';
+export * from './components/Container';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
