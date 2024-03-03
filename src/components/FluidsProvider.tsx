@@ -4,6 +4,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider, type ThemeProviderProps } from 'theme-native';
 import { BottomSheetsProvider } from './BottomSheetsProvider';
+import { MenuProvider } from 'react-native-popup-menu';
 
 export interface FluidsProviderProps extends ThemeProviderProps {}
 
@@ -17,7 +18,9 @@ export function FluidsProvider(props: FluidsProviderProps) {
         }}
       >
         <ThemeProvider {...themeNativeProviderProps}>
-          <BottomSheetsProvider>{children}</BottomSheetsProvider>
+          <MenuProvider>
+            <BottomSheetsProvider>{children}</BottomSheetsProvider>
+          </MenuProvider>
         </ThemeProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>

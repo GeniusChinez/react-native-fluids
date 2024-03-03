@@ -3,11 +3,11 @@ import React, { Fragment } from 'react';
 import { Icon, type IconProps } from './Icon';
 import { Text, type TextProps } from './Text';
 import { Rows, type RowsProps } from './Rows';
-import { TouchableOpacity } from 'react-native';
 import { Columns } from './Columns';
 import { View } from './View';
 import { useTheme } from 'theme-native';
 import { useBottomSheets } from './BottomSheetsProvider';
+import { TouchableOpacity } from 'react-native';
 
 export interface MenuLayoutItem {
   icon?: IconProps;
@@ -18,7 +18,7 @@ export interface MenuLayoutItem {
   disabled?: boolean;
 }
 
-function MenuItem(props: MenuLayoutItem) {
+export function MenuItem(props: MenuLayoutItem) {
   const {
     icon,
     iconPos = 'left',
@@ -30,48 +30,56 @@ function MenuItem(props: MenuLayoutItem) {
   const theme = useTheme();
   const { isDarkMode } = theme;
 
+  const stuff = (
+    <Columns
+      alignX="space-between"
+      alignY="center"
+      w={'Full'}
+      p={3}
+      py={4}
+      bg={isDarkMode ? theme.color.Stone[700] : theme.color.White}
+      gap={4}
+      rounded="Md"
+      style={{
+        opacity: disabled ? 0.5 : 1,
+        borderBottomColor: isDarkMode
+          ? theme.color.Stone[600]
+          : theme.color.Gray[100],
+        borderBottomWidth: theme.borderWidth.Default,
+      }}
+    >
+      {!!icon && iconPos === 'left' && (
+        <Icon
+          size={19}
+          color={theme.color.Gray[800]}
+          darkColor={theme.color.Gray[300]}
+          {...icon}
+        />
+      )}
+      <Rows grows alignY="center">
+        <Text color={theme.color.Gray[800]} {...labelProps}>
+          {label}
+        </Text>
+      </Rows>
+      {!!icon && iconPos === 'right' && (
+        <Icon
+          size={19}
+          color={theme.color.Gray[800]}
+          darkColor={theme.color.Gray[300]}
+          {...icon}
+        />
+      )}
+    </Columns>
+  );
+
   return (
-    <TouchableOpacity onPress={onPress} disabled={disabled}>
-      <Columns
-        alignX="space-between"
-        alignY="center"
-        w={'Full'}
-        p={3}
-        py={4}
-        bg={isDarkMode ? theme.color.Stone[700] : theme.color.White}
-        gap={4}
-        rounded="Md"
-        style={{
-          opacity: disabled ? 0.5 : 1,
-          borderBottomColor: isDarkMode
-            ? theme.color.Stone[600]
-            : theme.color.Gray[100],
-          borderBottomWidth: theme.borderWidth.Default,
-        }}
-      >
-        {!!icon && iconPos === 'left' && (
-          <Icon
-            size={19}
-            color={theme.color.Gray[800]}
-            darkColor={theme.color.Gray[300]}
-            {...icon}
-          />
-        )}
-        <Rows grows alignY="center">
-          <Text color={theme.color.Gray[800]} {...labelProps}>
-            {label}
-          </Text>
-        </Rows>
-        {!!icon && iconPos === 'right' && (
-          <Icon
-            size={19}
-            color={theme.color.Gray[800]}
-            darkColor={theme.color.Gray[300]}
-            {...icon}
-          />
-        )}
-      </Columns>
-    </TouchableOpacity>
+    <>
+      {onPress ? (
+        <TouchableOpacity onPress={onPress}>{stuff}</TouchableOpacity>
+      ) : (
+        <View w={'Full'}>{stuff}</View>
+      )}
+    </>
   );
 }
 
@@ -98,8 +106,7 @@ export function MenuLayout(props: MenuLayoutProps) {
                 {group.label}
               </Text>
             )}
-            <View h={1} />
-            <Rows>
+            <Rows pb={2}>
               {group.items.map((item, index) => (
                 <Fragment key={index}>
                   <MenuItem
@@ -133,7 +140,6 @@ export function MenuLayout(props: MenuLayoutProps) {
                 close();
               }}
             />
-            {/* <Separator w={'Full'} /> */}
           </Fragment>
         ))}
       </Rows>

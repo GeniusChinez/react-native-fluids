@@ -41,6 +41,9 @@ export * from './components/CarouselProvider';
 export * from './components/Responsive';
 export * from './components/ButtonContainer';
 export * from './components/Container';
+export * from './components/Menu';
+export * from './components/MenuTrigger';
+export * from './components/PotentialMenuTrigger';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
@@ -53,6 +56,8 @@ export * from './hooks/useAskConfirmation';
 export * from './hooks/useMediaQuery';
 export * from './hooks/useResponsiveProps';
 export * from './hooks/useResponsivePropsWithoutStyle';
+export * from './hooks/useBottomSheetMenuLayoutProps';
+export * from './hooks/useMenuTriggerActions';
 
 // logic
 export * from './logic/core.validations';

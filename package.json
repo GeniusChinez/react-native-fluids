@@ -174,6 +174,7 @@
     "react-native-gesture-handler": "^2.14.1",
     "react-native-pager-view": "^6.2.3",
     "react-native-picker-select": "^9.0.1",
+    "react-native-popup-menu": "^0.16.1",
     "react-native-ratings": "^8.1.0",
     "react-native-reanimated": "^3.6.2",
     "react-native-safe-area-context": "^4.8.2",

@@ -6,9 +6,10 @@ import { FontSize, useTheme } from 'theme-native';
 import { Columns } from './Columns';
 import { Icon, type IconType } from './Icon';
 import { LoadingIcon } from './LoadingIcon';
-import { MenuLayout, type MenuLayoutProps } from './MenuLayout';
-import { useBottomSheets } from './BottomSheetsProvider';
 import { useMediaQuery } from '../hooks/useMediaQuery';
+import type { MenuTriggerProps } from './MenuTrigger';
+import { useMenuTriggerActions } from '../hooks/useMenuTriggerActions';
+import { PotentialMenuTrigger } from './PotentialMenuTrigger';
 
 export type ButtonVariant = 'solid' | 'outline' | 'ghost';
 export type ColorVariant =
@@ -24,7 +25,7 @@ export type ColorVariant =
   | 900
   | 950;
 
-export interface ButtonProps extends TouchableOpacityProps {
+export interface ButtonProps extends TouchableOpacityProps, MenuTriggerProps {
   shape?: 'pill' | 'square';
 
   text?: string;
@@ -49,14 +50,11 @@ export interface ButtonProps extends TouchableOpacityProps {
   isFullWidth?: boolean;
   isCompact?: boolean;
   isVeryCompact?: boolean;
-
-  menu?: { height?: number; inject?: React.ReactNode } & MenuLayoutProps;
   sheet?: { height?: number; children: React.ReactNode };
 }
 
 export function Button(props: ButtonProps) {
   const theme = useTheme();
-  const sheets = useBottomSheets();
 
   const {
     text,
@@ -81,8 +79,6 @@ export function Button(props: ButtonProps) {
     isLoading,
     isCompact,
     isVeryCompact,
-    menu,
-    sheet,
     ...restOfProps
   } = props;
 
@@ -91,6 +87,8 @@ export function Button(props: ButtonProps) {
   const isGhostButton = useMemo(() => variant === 'ghost', [variant]);
   const isOutlineButton = useMemo(() => variant === 'outline', [variant]);
   const isIconButton = useMemo(() => !children && !text, [children, text]);
+
+  const menuTriggerActions = useMenuTriggerActions(props);
 
   const color = useMemo(() => {
     if (typeof theme.color[color_] === 'string') {
@@ -130,146 +128,125 @@ export function Button(props: ButtonProps) {
 
   const { sm } = useMediaQuery();
 
-  return (
-    <>
-      <TouchableOpacity
-        {...restOfProps}
-        disabled={isDisabled || isLoading}
-        style={{
-          height:
-            theme.fontSize[textSize || 'md'] *
-            (isCompact ? 2.5 : isVeryCompact ? 2 : 3.3),
-          width: isIconButton
-            ? theme.fontSize[textSize || 'md'] *
-              (isCompact ? 2.5 : isVeryCompact ? 2 : 3.3)
-            : isFullWidth
-            ? '100%'
-            : sm
-            ? 'auto'
-            : '100%',
-          opacity: isDisabled || isLoading ? 0.7 : 1,
-          borderWidth: theme.borderWidth.Default,
-          borderColor: isOutlineButton ? color : theme.color.Transparent,
-          backgroundColor:
-            variant === 'ghost' || variant === 'outline'
-              ? theme.color.Transparent
-              : isDarkMode
-              ? darkColor
-              : color,
-          borderRadius:
-            shape === 'pill'
-              ? isIconButton
-                ? theme.borderRadius.Full
-                : theme.borderRadius['3xl']
-              : theme.borderRadius.Lg,
-        }}
-        onPress={(e) => {
-          if (restOfProps.onPress) {
-            restOfProps.onPress(e);
-          }
-
-          if (menu) {
-            sheets.open({
-              height: menu.height || 50,
-              scrollable: true,
-              content: (
-                <MenuLayout {...menu}>
-                  {menu.children}
-                  {menu.inject}
-                </MenuLayout>
-              ),
-            });
-          }
-
-          if (sheet) {
-            sheets.open({
-              height: sheet.height || 50,
-              content: sheet.children,
-            });
-          }
-        }}
+  const button = (weirdArgs?: any) => (
+    <TouchableOpacity
+      {...restOfProps}
+      disabled={isDisabled || isLoading}
+      style={{
+        height:
+          theme.fontSize[textSize || 'md'] *
+          (isCompact ? 2.5 : isVeryCompact ? 2 : 3.3),
+        width: isIconButton
+          ? theme.fontSize[textSize || 'md'] *
+            (isCompact ? 2.5 : isVeryCompact ? 2 : 3.3)
+          : isFullWidth
+          ? '100%'
+          : sm
+          ? 'auto'
+          : '100%',
+        opacity: isDisabled || isLoading ? 0.7 : 1,
+        borderWidth: theme.borderWidth.Default,
+        borderColor: isOutlineButton ? color : theme.color.Transparent,
+        backgroundColor:
+          variant === 'ghost' || variant === 'outline'
+            ? theme.color.Transparent
+            : isDarkMode
+            ? darkColor
+            : color,
+        borderRadius:
+          shape === 'pill'
+            ? isIconButton
+              ? theme.borderRadius.Full
+              : theme.borderRadius['3xl']
+            : theme.borderRadius.Lg,
+      }}
+      onPress={(e) => {
+        if (restOfProps.onPress) {
+          restOfProps.onPress(e);
+        }
+        menuTriggerActions.onPress(e, weirdArgs);
+      }}
+    >
+      <Columns
+        px={isIconButton ? undefined : 6}
+        alignX="center"
+        alignY="center"
+        grows
+        gap={2}
       >
-        <Columns
-          px={isIconButton ? undefined : 6}
-          alignX="center"
-          alignY="center"
-          grows
-          gap={2}
-        >
-          {isLoading && (
-            <LoadingIcon
-              color={finalTextColor}
-              strokeWidth={isGhostButton ? 3 : undefined}
-              size={textSize ? theme.fontSize[textSize] * 1.2 : undefined}
-            />
-          )}
-          {!isLoading && !!icon && iconPos === 'left' && (
-            <Icon
-              name={icon}
-              color={finalTextColor}
-              strokeWidth={isGhostButton ? 2.5 : undefined}
-              size={
-                textSize
-                  ? theme.fontSize[textSize] * (isIconButton ? 1.4 : 1.2)
-                  : undefined
-              }
-            />
-          )}
-          {!(isLoading && !!loadingText) && (
-            <>
-              {!!text && (
-                <Text
-                  color={finalTextColor}
-                  darkColor={finalTextColor}
-                  isCenterAligned
-                  weight={isGhostButton ? 'Semibold' : undefined}
-                  size={textSize}
-                >
-                  {text}
-                </Text>
-              )}
-              {!!children && typeof children === 'string' ? (
-                <Text
-                  color={finalTextColor}
-                  darkColor={finalTextColor}
-                  isCenterAligned
-                  weight={isGhostButton ? 'Semibold' : undefined}
-                  size={textSize}
-                >
-                  {children}
-                </Text>
-              ) : (
-                children
-              )}
-            </>
-          )}
-          {isLoading && !!loadingText && (
-            <Text
-              color={finalTextColor}
-              darkColor={finalTextColor}
-              isCenterAligned
-              weight={isGhostButton ? 'Semibold' : undefined}
-              size={textSize}
-            >
-              {loadingText}
-            </Text>
-          )}
-          {!isLoading && !!icon && iconPos === 'right' && (
-            <Icon
-              name={icon}
-              color={finalTextColor}
-              strokeWidth={isGhostButton ? 2.5 : undefined}
-              size={
-                textSize
-                  ? theme.fontSize[textSize] * (isIconButton ? 1.4 : 1.2)
-                  : undefined
-              }
-            />
-          )}
-        </Columns>
-      </TouchableOpacity>
-      {/* {!!menu && <SheetMenu {...menu} sheetRef={menuBottomSheet} />} */}
-      {/* {!!sheet && <BlankSheet {...sheet} sheetRef={bottomSheet} />} */}
-    </>
+        {isLoading && (
+          <LoadingIcon
+            color={finalTextColor}
+            strokeWidth={isGhostButton ? 3 : undefined}
+            size={textSize ? theme.fontSize[textSize] * 1.2 : undefined}
+          />
+        )}
+        {!isLoading && !!icon && iconPos === 'left' && (
+          <Icon
+            name={icon}
+            color={finalTextColor}
+            strokeWidth={isGhostButton ? 2.5 : undefined}
+            size={
+              textSize
+                ? theme.fontSize[textSize] * (isIconButton ? 1.4 : 1.2)
+                : undefined
+            }
+          />
+        )}
+        {!(isLoading && !!loadingText) && (
+          <>
+            {!!text && (
+              <Text
+                color={finalTextColor}
+                darkColor={finalTextColor}
+                isCenterAligned
+                weight={isGhostButton ? 'Semibold' : undefined}
+                size={textSize}
+              >
+                {text}
+              </Text>
+            )}
+            {!!children && typeof children === 'string' ? (
+              <Text
+                color={finalTextColor}
+                darkColor={finalTextColor}
+                isCenterAligned
+                weight={isGhostButton ? 'Semibold' : undefined}
+                size={textSize}
+              >
+                {children}
+              </Text>
+            ) : (
+              children
+            )}
+          </>
+        )}
+        {isLoading && !!loadingText && (
+          <Text
+            color={finalTextColor}
+            darkColor={finalTextColor}
+            isCenterAligned
+            weight={isGhostButton ? 'Semibold' : undefined}
+            size={textSize}
+          >
+            {loadingText}
+          </Text>
+        )}
+        {!isLoading && !!icon && iconPos === 'right' && (
+          <Icon
+            name={icon}
+            color={finalTextColor}
+            strokeWidth={isGhostButton ? 2.5 : undefined}
+            size={
+              textSize
+                ? theme.fontSize[textSize] * (isIconButton ? 1.4 : 1.2)
+                : undefined
+            }
+          />
+        )}
+      </Columns>
+    </TouchableOpacity>
   );
+
+  return <PotentialMenuTrigger {...props} button={button} />;
 }

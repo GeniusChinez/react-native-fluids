@@ -5,15 +5,16 @@ import { useTheme } from 'theme-native';
 import { StatusBar } from 'react-native';
 import { Rows } from './Rows';
 import { Columns } from './Columns';
-import { Button } from './Button';
+import { Button, type ButtonProps } from './Button';
 import type { IconType } from './Icon';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { MenuTriggerProps } from './MenuTrigger';
 // import { Platform } from 'react-native';
 
 export type AppbarIcon = {
   icon: IconType;
   onPress?: () => void;
-};
+} & MenuTriggerProps & { sheet?: ButtonProps['sheet'] };
 
 interface AppbarContent {
   textColor?: string;
@@ -89,8 +90,7 @@ function CenterAlignedTopAppbarContent(
       >
         {!!leadingIcon && (
           <Button
-            icon={leadingIcon.icon}
-            onPress={leadingIcon.onPress}
+            {...leadingIcon}
             textColor={textColor}
             darkTextColor={darkTextColor}
             variant="ghost"
@@ -116,8 +116,7 @@ function CenterAlignedTopAppbarContent(
       >
         {!!trailingIcon && (
           <Button
-            icon={trailingIcon.icon}
-            onPress={trailingIcon.onPress}
+            {...trailingIcon}
             textColor={textColor}
             darkTextColor={darkTextColor}
             variant="ghost"
@@ -156,8 +155,7 @@ function SmallTopAppbarContent(props: SmallTopAppbarContentProps) {
           }}
         >
           <Button
-            icon={leadingIcon.icon}
-            onPress={leadingIcon.onPress}
+            {...leadingIcon}
             textColor={textColor}
             darkTextColor={darkTextColor}
             variant="ghost"
@@ -179,9 +177,8 @@ function SmallTopAppbarContent(props: SmallTopAppbarContentProps) {
         <Columns alignX="right" gap={1} pr={2}>
           {trailingIcons.map((trailingIcon, trailingIconIndex) => (
             <Button
+              {...trailingIcon}
               key={trailingIconIndex}
-              icon={trailingIcon.icon}
-              onPress={trailingIcon.onPress}
               textColor={textColor}
               darkTextColor={darkTextColor}
               variant="ghost"
@@ -222,8 +219,7 @@ function MediumTopAppbarContent(props: MediumTopAppbarContentProps) {
             }}
           >
             <Button
-              icon={leadingIcon.icon}
-              onPress={leadingIcon.onPress}
+              {...leadingIcon}
               textColor={textColor}
               darkTextColor={darkTextColor}
               variant="ghost"
@@ -236,8 +232,7 @@ function MediumTopAppbarContent(props: MediumTopAppbarContentProps) {
             {trailingIcons.map((trailingIcon, trailingIconIndex) => (
               <Button
                 key={trailingIconIndex}
-                icon={trailingIcon.icon}
-                onPress={trailingIcon.onPress}
+                {...trailingIcon}
                 textColor={textColor}
                 darkTextColor={darkTextColor}
                 variant="ghost"
@@ -291,8 +286,7 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
         >
           {!!leadingIcon && (
             <Button
-              icon={leadingIcon.icon}
-              onPress={leadingIcon.onPress}
+              {...leadingIcon}
               textColor={textColor}
               darkTextColor={darkTextColor}
               variant="ghost"
@@ -303,9 +297,8 @@ function LargeTopAppbarContent(props: LargeTopAppbarContentProps) {
           <Columns alignX="right" gap={1} pr={2} grows>
             {trailingIcons.map((trailingIcon, trailingIconIndex) => (
               <Button
+                {...trailingIcon}
                 key={trailingIconIndex}
-                icon={trailingIcon.icon}
-                onPress={trailingIcon.onPress}
                 textColor={textColor}
                 darkTextColor={darkTextColor}
                 variant="ghost"

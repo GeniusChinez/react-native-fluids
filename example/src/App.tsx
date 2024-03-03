@@ -19,6 +19,7 @@ import {
   View,
   useLightMode,
   useAskConfirmation,
+  Button,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -118,6 +119,18 @@ function Example() {
           onPress: confirm.confirm,
         },
         headline: 'Create Account',
+        trailingIcon: {
+          icon: 'Camera',
+          menu: {
+            name: 'camera-stuff',
+            inplace: true,
+            items: [
+              {
+                label: 'Lihj',
+              },
+            ],
+          },
+        },
         // subheadline: '+123123123123',
         // trailingIcons: [
         //   {
@@ -151,6 +164,8 @@ function Example() {
           icon: 'Menu',
           label: 'More',
           menu: {
+            inplace: true,
+            name: 'what',
             items: [
               {
                 label: 'Freeze',
@@ -184,6 +199,7 @@ function Example() {
       primary: {
         icon: 'Menu',
         menu: {
+          name: 'primary-menu',
           height: 50,
           groups: [
             {
@@ -295,6 +311,53 @@ function Example() {
             When you say something gay:
           </Text>
         </View>
+        {/* <CustomMenu
+          items={[
+            {
+              label: 'Add User',
+              icon: {
+                name: 'UserPlus',
+              },
+              iconPos: 'left',
+            },
+            {
+              label: 'Manage Users',
+              icon: {
+                name: 'Users',
+              },
+              iconPos: 'left',
+            },
+          ]}
+        >
+          <Pressable>
+            <Text>whoa!</Text>
+          </Pressable>
+        </CustomMenu> */}
+        <Button
+          isFullWidth
+          menu={{
+            inplace: true,
+            name: 'add-user-button',
+            items: [
+              {
+                label: 'Add User',
+                icon: {
+                  name: 'UserPlus',
+                },
+                iconPos: 'left',
+              },
+              {
+                label: 'Manage Users',
+                icon: {
+                  name: 'Users',
+                },
+                iconPos: 'left',
+              },
+            ],
+          }}
+        >
+          Test thiss
+        </Button>
         <AnswerPicker
           // incorrect
           // correct
