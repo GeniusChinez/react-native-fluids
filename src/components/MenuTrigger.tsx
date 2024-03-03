@@ -6,5 +6,6 @@ export interface MenuTriggerProps {
     inject?: React.ReactNode;
     inplace?: boolean;
     name: string;
+    panToClose?: boolean;
   } & MenuLayoutProps;
 }

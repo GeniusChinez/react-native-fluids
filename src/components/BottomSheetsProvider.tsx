@@ -16,6 +16,7 @@ import { Dimensions } from 'react-native';
 export type BottomSheetArgs = {
   height?: number;
   scrollable?: boolean;
+  panToClose?: boolean;
   content: React.ReactNode;
 };
 
@@ -38,11 +39,13 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
   const [content, setContent] = useState<any>(null);
   const [height, setHeight] = useState(50);
   const [scrollable, setScrollable] = useState(false);
+  const [panToClose, setPanToClose] = useState(true);
 
   const close = useCallback(() => {
     if (ref?.current) {
       setContent(null);
       setScrollable(false);
+      setPanToClose(true);
       ref?.current.close();
     }
   }, [ref]);
@@ -56,6 +59,7 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
       setContent(args.content);
       setHeight(args.height || 50);
       setScrollable(args.scrollable || false);
+      setPanToClose(args.panToClose === undefined ? true : args.panToClose);
 
       ref.current.expand();
     },
@@ -109,7 +113,7 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
         }}
         ref={ref}
         index={-1}
-        enablePanDownToClose
+        enablePanDownToClose={panToClose}
         snapPoints={['1%', `${height || 50}%`]}
         backdropComponent={renderBackdrop}
         onChange={(pos) => {

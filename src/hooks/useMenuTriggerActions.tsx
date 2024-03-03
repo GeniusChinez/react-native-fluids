@@ -7,7 +7,11 @@ import type { GestureResponderEvent } from 'react-native';
 
 export function useMenuTriggerActions(
   args: MenuTriggerProps & {
-    sheet?: { height?: number; children: React.ReactNode };
+    sheet?: {
+      height?: number;
+      children: React.ReactNode;
+      panToClose?: boolean;
+    };
     onPress?: (event: GestureResponderEvent) => void;
   }
 ) {
@@ -28,6 +32,7 @@ export function useMenuTriggerActions(
           sheets.open({
             scrollable: true,
             height: menu.height || 50,
+            panToClose: menu.panToClose,
             content: (
               <MenuLayout {...menu} {...bottomSheetMenuLayoutProps}>
                 {menu.children}
@@ -41,6 +46,7 @@ export function useMenuTriggerActions(
       if (sheet) {
         sheets.open({
           height: sheet.height || 50,
+          panToClose: sheet.panToClose,
           content: sheet.children,
         });
       }
