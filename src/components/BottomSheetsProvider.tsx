@@ -113,7 +113,7 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
         }}
         ref={ref}
         index={-1}
-        enablePanDownToClose={panToClose}
+        enableContentPanningGesture={panToClose}
         snapPoints={['1%', `${height || 50}%`]}
         backdropComponent={renderBackdrop}
         onChange={(pos) => {
@@ -121,7 +121,7 @@ export function BottomSheetsProvider(props: BottomSheetsProviderProps) {
             close();
           }
         }}
-        animateOnMount
+        // animateOnMount
       >
         {scrollable ? (
           <BottomSheetScrollView>

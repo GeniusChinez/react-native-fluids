@@ -123,7 +123,8 @@ function Example() {
           icon: 'Camera',
           menu: {
             name: 'camera-stuff',
-            inplace: true,
+            // inplace: true,
+            panToClose: false,
             items: [
               {
                 label: 'Lihj',
