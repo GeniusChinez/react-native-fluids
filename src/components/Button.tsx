@@ -50,7 +50,7 @@ export interface ButtonProps extends TouchableOpacityProps, MenuTriggerProps {
   isFullWidth?: boolean;
   isCompact?: boolean;
   isVeryCompact?: boolean;
-  sheet?: { height?: number; children: React.ReactNode };
+  sheet?: { height?: number; children: React.ReactNode; panToClose?: boolean };
 }
 
 export function Button(props: ButtonProps) {
