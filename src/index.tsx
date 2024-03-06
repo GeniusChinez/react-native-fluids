@@ -44,6 +44,7 @@ export * from './components/Container';
 export * from './components/Menu';
 export * from './components/MenuTrigger';
 export * from './components/PotentialMenuTrigger';
+export * from './components/CustomTabs';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
