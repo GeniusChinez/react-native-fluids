@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, type FC } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { useTheme } from 'theme-native';
 import { View } from './View';
@@ -96,13 +96,13 @@ export function CustomTabButton(props: CustomTabButtonProps) {
       {!!icon && (
         <Icon
           name={icon}
-          color={isActive ? color : color_ || theme.color.Gray[400]}
+          color={isActive ? color : color_ || theme.color.Gray[600]}
           size={18}
         />
       )}
       <View>
         <Text
-          color={isActive ? color : color_ || theme.color.Gray[400]}
+          color={isActive ? color : color_ || theme.color.Gray[600]}
           numberOfLines={1}
         >
           {label}
@@ -113,7 +113,7 @@ export function CustomTabButton(props: CustomTabButtonProps) {
 }
 
 export interface CustomTabProps extends CustomTabButtonProps {
-  content: React.ReactNode;
+  element: FC;
 }
 
 export function CustomTab(_props: CustomTabProps) {}
@@ -178,7 +178,18 @@ export function CustomTabs(props_: ResponsiveProps<CustomTabsProps>) {
         />
       </Rows>
       <Rows grows pt={2}>
-        {activeTab ? tabs.find((tab) => tab.name === activeTab)?.content : null}
+        {activeTab
+          ? (() => {
+              const tab =
+                tabs.find((tab_) => tab_.name === activeTab) ||
+                (tabs.length ? tabs[0] : undefined);
+              if (tab) {
+                const Tab = tab.element;
+                return <Tab />;
+              }
+              return null;
+            })()
+          : null}
       </Rows>
     </Rows>
   );
