@@ -45,6 +45,7 @@ export interface ButtonProps extends TouchableOpacityProps, MenuTriggerProps {
   darkColorVariant?: ColorVariant;
 
   isDisabled?: boolean;
+  isDisabledWithStyle?: boolean;
   isLoading?: boolean;
 
   isFullWidth?: boolean;
@@ -76,6 +77,7 @@ export function Button(props: ButtonProps) {
     darkColor: darkColor_ = color_ === 'Secondary' ? 'Gray' : color_,
     disabled,
     isDisabled = disabled,
+    isDisabledWithStyle,
     isLoading,
     isCompact,
     isVeryCompact,
@@ -131,7 +133,7 @@ export function Button(props: ButtonProps) {
   const button = (weirdArgs?: any) => (
     <TouchableOpacity
       {...restOfProps}
-      disabled={isDisabled || isLoading}
+      disabled={isDisabled || isDisabledWithStyle || isLoading}
       style={{
         height:
           theme.fontSize[textSize || 'md'] *
@@ -161,6 +163,9 @@ export function Button(props: ButtonProps) {
             : theme.borderRadius.Lg,
       }}
       onPress={(e) => {
+        if (isDisabledWithStyle) {
+          return;
+        }
         if (restOfProps.onPress) {
           restOfProps.onPress(e);
         }
