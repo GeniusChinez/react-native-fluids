@@ -96,13 +96,13 @@ export function CustomTabButton(props: CustomTabButtonProps) {
       {!!icon && (
         <Icon
           name={icon}
-          color={isActive ? color : color_ || theme.color.Gray[600]}
+          color={isActive ? color : color_ || theme.color.Gray[400]}
           size={18}
         />
       )}
       <View>
         <Text
-          color={isActive ? color : color_ || theme.color.Gray[600]}
+          color={isActive ? color : color_ || theme.color.Gray[400]}
           numberOfLines={1}
         >
           {label}
