@@ -147,7 +147,7 @@ export function CustomTabs(props_: ResponsiveProps<CustomTabsProps>) {
     if (initialActiveTab) {
       setActiveTab(initialActiveTab);
     } else {
-      setActiveTab(tabs.length ? tabs[0].name : '');
+      setActiveTab((tabs.length ? tabs[0]?.name : '') || '');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialActiveTab]);
