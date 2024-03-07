@@ -20,6 +20,7 @@ import {
   useLightMode,
   useAskConfirmation,
   Button,
+  ActionContextProvider,
 } from 'react-native-fluids';
 
 export default function App() {
@@ -359,6 +360,19 @@ function Example() {
         >
           Test thiss
         </Button>
+        <ActionContextProvider
+          fieldErrors={{
+            search: ['What the heck?'],
+          }}
+        >
+          <TextField
+            placeholder="Search items"
+            name="search"
+            icon="RefreshCcw"
+            // numberOfLines={4}
+            // multiline
+          />
+        </ActionContextProvider>
         <AnswerPicker
           // incorrect
           // correct

@@ -9,8 +9,12 @@ import { useTheme } from 'theme-native';
 import { View } from './View';
 import { Text } from './Text';
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import { Icon, type IconType } from './Icon';
+import { Columns } from './Columns';
+import { Rows } from './Rows';
 
 export interface TextFieldProps extends TextInputProps {
+  icon?: IconType;
   name: string;
   id?: string;
   customRef?: React.RefObject<TextInput>;
@@ -38,6 +42,7 @@ export function TextField(props: TextFieldProps) {
     helper,
     grows,
     isBottomSheetInput,
+    icon,
     ...restOfProps
   } = props;
 
@@ -82,34 +87,22 @@ export function TextField(props: TextFieldProps) {
           )}
         </Text>
       )}
-      <InputComponent
-        id={id}
-        ref={isBottomSheetInput ? (undefined as any) : customRef}
-        placeholder={placeholder || label}
-        editable={editable && !disabled && !isSubmitting}
-        value={text}
-        onChangeText={(newText) => {
-          setText(newText);
-
-          if (notify) {
-            notify(newText);
-          }
-
-          if (onChange) {
-            onChange(newText);
-          }
-        }}
-        placeholderTextColor={
-          isDarkMode
-            ? errors?.length
-              ? theme.color.Danger[400]
-              : theme.color.Gray[500]
-            : errors?.length
-            ? theme.color.Danger[500]
-            : theme.color.Gray[500]
-        }
+      <Columns
+        alignY="center"
+        gap={2}
         style={{
           width: '100%',
+          backgroundColor: isDarkMode
+            ? theme.color.Gray[900]
+            : theme.color.Gray[100],
+          height: grows
+            ? undefined
+            : !!restOfProps.numberOfLines && !!restOfProps.multiline
+            ? undefined
+            : 55,
+          flex: grows ? 1 : undefined,
+          paddingLeft: 17,
+          paddingRight: 17,
           borderTopRightRadius: theme.borderRadius.Md,
           borderTopLeftRadius: theme.borderRadius.Md,
           borderColor: errors?.length
@@ -122,27 +115,89 @@ export function TextField(props: TextFieldProps) {
             !!restOfProps.numberOfLines && !!restOfProps.multiline
               ? 17
               : undefined,
-          paddingLeft: 17,
-          paddingRight: 17,
-          fontSize: theme.fontSize.base,
-          height: grows
-            ? undefined
-            : !!restOfProps.numberOfLines && !!restOfProps.multiline
-            ? undefined
-            : 55,
-          color: isDarkMode ? theme.color.White : theme.color.Black,
-          backgroundColor: isDarkMode
-            ? theme.color.Gray[900]
-            : theme.color.Gray[100],
-          // backgroundColor: isDarkMode ? theme.color.Black : theme.color.White,
-          textAlignVertical:
-            !!restOfProps.numberOfLines && !!restOfProps.multiline
-              ? 'top'
-              : 'center',
-          flex: grows ? 1 : undefined,
         }}
-        {...restOfProps}
-      />
+      >
+        {!!icon && (
+          <Rows
+            w="Fit"
+            alignY={restOfProps.multiline ? 'top' : 'center'}
+            h="Full"
+          >
+            <Icon
+              name={icon}
+              color={
+                isDarkMode
+                  ? errors?.length
+                    ? theme.color.Danger[400]
+                    : theme.color.Gray[500]
+                  : errors?.length
+                  ? theme.color.Danger[500]
+                  : theme.color.Gray[400]
+              }
+              size={20}
+            />
+          </Rows>
+        )}
+        <InputComponent
+          id={id}
+          ref={isBottomSheetInput ? (undefined as any) : customRef}
+          placeholder={placeholder || label}
+          editable={editable && !disabled && !isSubmitting}
+          value={text}
+          onChangeText={(newText) => {
+            setText(newText);
+
+            if (notify) {
+              notify(newText);
+            }
+
+            if (onChange) {
+              onChange(newText);
+            }
+          }}
+          placeholderTextColor={
+            isDarkMode
+              ? errors?.length
+                ? theme.color.Danger[400]
+                : theme.color.Gray[500]
+              : errors?.length
+              ? theme.color.Danger[500]
+              : theme.color.Gray[500]
+          }
+          style={{
+            // width: '100%',
+            // borderTopRightRadius: theme.borderRadius.Md,
+            // borderTopLeftRadius: theme.borderRadius.Md,
+            // borderColor: errors?.length
+            //   ? theme.color.Red[400]
+            //   : isDarkMode
+            //   ? theme.color.Slate[700]
+            //   : theme.color.Slate[300],
+            // borderBottomWidth: 2,
+            // paddingVertical:
+            //   !!restOfProps.numberOfLines && !!restOfProps.multiline
+            //     ? 17
+            //     : undefined,
+            // paddingLeft: 17,
+            // paddingRight: 17,
+            fontSize: theme.fontSize.base,
+            // height: grows
+            //   ? undefined
+            //   : !!restOfProps.numberOfLines && !!restOfProps.multiline
+            //   ? undefined
+            //   : 55,
+            color: isDarkMode ? theme.color.White : theme.color.Black,
+            backgroundColor: 'transparent',
+            textAlignVertical:
+              !!restOfProps.numberOfLines && !!restOfProps.multiline
+                ? 'top'
+                : 'center',
+            flex: 1,
+            // flex: grows ? 1 : undefined,
+          }}
+          {...restOfProps}
+        />
+      </Columns>
       {errors?.length && (
         <Text
           size="sm"
