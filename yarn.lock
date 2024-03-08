@@ -2591,7 +2591,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gorhom/portal@npm:1.0.14":
+"@gorhom/portal@npm:1.0.14, @gorhom/portal@npm:^1.0.14":
   version: 1.0.14
   resolution: "@gorhom/portal@npm:1.0.14"
   dependencies:
@@ -3521,6 +3521,16 @@ __metadata:
   dependencies:
     invariant: ^2.2.4
   checksum: 163d3e25b90ff5bfd734df89da0cb85c9550f84f5b8273d4d806a3702d6ad163bea58253e19534fa2ab1bb424d9079e2bfe9c2e7e6a6783610f477c35e980104
+  languageName: node
+  linkType: hard
+
+"@react-native-community/viewpager@npm:^5.0.11":
+  version: 5.0.11
+  resolution: "@react-native-community/viewpager@npm:5.0.11"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 35f02add82b740f017c1a9a35ead3b4baef06c22389afe7766a0986c6bc033c7b3139957c608e5d3f299b1667506dd300dc1f0c065467db0454a3d0cad5728ea
   languageName: node
   linkType: hard
 
@@ -15095,7 +15105,9 @@ __metadata:
     "@evilmartians/lefthook": ^1.5.0
     "@expo/webpack-config": 19.0.1
     "@gorhom/bottom-sheet": ^4
+    "@gorhom/portal": ^1.0.14
     "@react-native-community/datetimepicker": 7.6.1
+    "@react-native-community/viewpager": ^5.0.11
     "@react-native-picker/picker": ^2.6.1
     "@react-native/eslint-config": ^0.72.2
     "@release-it/conventional-changelog": ^5.0.0

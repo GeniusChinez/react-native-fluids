@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider, type ThemeProviderProps } from 'theme-native';
 import { BottomSheetsProvider } from './BottomSheetsProvider';
 import { MenuProvider } from 'react-native-popup-menu';
+import { PortalProvider } from '@gorhom/portal';
 
 export interface FluidsProviderProps extends ThemeProviderProps {}
 
@@ -18,9 +19,11 @@ export function FluidsProvider(props: FluidsProviderProps) {
         }}
       >
         <ThemeProvider {...themeNativeProviderProps}>
-          <MenuProvider>
-            <BottomSheetsProvider>{children}</BottomSheetsProvider>
-          </MenuProvider>
+          <PortalProvider>
+            <MenuProvider>
+              <BottomSheetsProvider>{children}</BottomSheetsProvider>
+            </MenuProvider>
+          </PortalProvider>
         </ThemeProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>

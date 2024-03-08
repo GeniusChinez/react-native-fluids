@@ -45,6 +45,7 @@ export * from './components/Menu';
 export * from './components/MenuTrigger';
 export * from './components/PotentialMenuTrigger';
 export * from './components/CustomTabs';
+export * from './components/FullScreenOverlay';
 
 // hooks
 export * from './hooks/useInfiniteAnimation';
