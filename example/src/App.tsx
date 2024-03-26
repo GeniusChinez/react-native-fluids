@@ -18,7 +18,6 @@ import {
   Rows,
   View,
   useLightMode,
-  useAskConfirmation,
   Button,
   ActionContextProvider,
 } from 'react-native-fluids';
@@ -105,45 +104,11 @@ export function ExampleScreen2() {
 
 function Example() {
   const theme = useTheme();
-  const confirm = useAskConfirmation({});
   /**
    * - Code Input
    * - ...
    */
   const screen = useScreen({
-    topAppbar: {
-      textColor: theme.color.Gray[700],
-      layout: {
-        type: 'center-aligned',
-        leadingIcon: {
-          icon: 'ArrowLeft',
-          onPress: confirm.confirm,
-        },
-        headline: 'Create Account',
-        trailingIcon: {
-          icon: 'Camera',
-          menu: {
-            name: 'camera-stuff',
-            // inplace: true,
-            panToClose: false,
-            items: [
-              {
-                label: 'Lihj',
-              },
-            ],
-          },
-        },
-        // subheadline: '+123123123123',
-        // trailingIcons: [
-        //   {
-        //     icon: 'Camera',
-        //   },
-        //   {
-        //     icon: 'User',
-        //   },
-        // ],
-      },
-    },
     bottomNavigation: {
       actions: [
         {
